@@ -1,5 +1,6 @@
 package main;
 
+import dataBase.ConexionContacto;
 import dataBase.MongoDatabaseConnection;
 import cultivo.*;
 import sector.*;
@@ -67,9 +68,11 @@ public class Main {
 
         Contacto contacto1 = new Contacto("Juan Perez", 1234567890, "juan@example.com", "@juan_telegram");
         Contacto contacto2 = new Contacto("Maria Rodriguez", 987654321, "maria@example.com", "@maria_telegram");
+        Contacto contacto3 = new Contacto("samir",12345678, "samir", "samir");
 
         contactoFacade.agregarContacto(contacto1);
         contactoFacade.agregarContacto(contacto2);
+        contactoFacade.agregarContacto(contacto3);
 
         List<Contacto> listaDeContactos = contactoFacade.obtenerListaDeContactos();
 
@@ -104,6 +107,10 @@ public class Main {
 
         MongoDatabaseConnection mongoDB = MongoDatabaseConnection.getInstance();
 
-
+        //agregar contactos
+        ConexionContacto conexionContacto = new ConexionContacto(mongoDB.getDatabase());
+        for(Contacto contacto: listaDeContactos){
+            conexionContacto.agregarContacto(contacto);
+        }
     }
 }

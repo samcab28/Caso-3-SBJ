@@ -11,8 +11,8 @@ public class MongoDatabaseConnection {
 
     private MongoDatabaseConnection() {
         // Cambia la URL de conexión a tu configuración de MongoDB Atlas
-        mongoClient = MongoClients.create("mongodb+srv://ConexionConJava :iQbzhJlzFopbkBWA@cluster0.jxgqi5n.mongodb.net/?retryWrites=true&w=majority");
-        database = (MongoDatabase) mongoClient.getDatabase("miBaseDeDatos");
+        mongoClient = MongoClients.create("mongodb+srv://samircabrera2528:Samir1234@cluster0.jxgqi5n.mongodb.net/?retryWrites=true&w=majority");
+        database = (MongoDatabase) mongoClient.getDatabase("Caso3-SBJ-DataBase");
     }
 
     public static MongoDatabaseConnection getInstance() {
@@ -22,10 +22,11 @@ public class MongoDatabaseConnection {
         return instance;
     }
 
+    public MongoDatabase getDatabase() {
+        return database;
+    }
 
 }
 
 
-//iQbzhJlzFopbkBWA
-
-//"mongodb+srv://ConexionConJava :iQbzhJlzFopbkBWA@cluster0.jxgqi5n.mongodb.net/?retryWrites=true&w=majority"v
+//KGJvE7nqNWYPy9CV

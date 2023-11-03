@@ -7,11 +7,11 @@ import java.util.List;
 public class Sector {
     private String nombre;
     private int lluviaMediaAnual;
-    private float temperaturaMedia;
+    private double temperaturaMedia;
     private int promedioLluvias;
     private int duracionPeriodoSeco;
 
-    public Sector(String nombre, int lluviaMediaAnual, float temperaturaMedia, int promedioLluvias, int duracionPeriodoSeco) {
+    public Sector(String nombre, int lluviaMediaAnual, double temperaturaMedia, int promedioLluvias, int duracionPeriodoSeco) {
         this.nombre = nombre;
         this.lluviaMediaAnual = lluviaMediaAnual;
         this.temperaturaMedia = temperaturaMedia;
@@ -37,7 +37,7 @@ public class Sector {
         this.lluviaMediaAnual = lluviaMediaAnual;
     }
 
-    public float getTemperaturaMedia() {
+    public double getTemperaturaMedia() {
         return temperaturaMedia;
     }
 

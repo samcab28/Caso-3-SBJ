@@ -17,12 +17,13 @@ public class Main {
     public static void main(String[] args) {
 
         MongoDatabaseConnection mongoDB = MongoDatabaseConnection.getInstance();
-        ConexionCultivo conexionCultivo = new ConexionCultivo(mongoDB.getDatabase());
 
+
+        //apartado de cultivos
+        ConexionCultivo conexionCultivo = new ConexionCultivo(mongoDB.getDatabase());
         CultivoFacade cultivoFacade = new CultivoFacade();
         List<Cultivo> listaDeCultivos = cultivoFacade.obtenerListaDeCultivos();
         conexionCultivo.obtenerTodosLosCultivos(listaDeCultivos);
-
 
         for (Cultivo cultivo : listaDeCultivos) {
             System.out.println("Nombre: " + cultivo.getNombre());
@@ -34,7 +35,38 @@ public class Main {
             System.out.println("--------------------");
         }
 
+        //apartado de contactos
+        ConexionContacto conexionContacto = new ConexionContacto(mongoDB.getDatabase());
+        ContactoFacade contactoFacade = new ContactoFacade();
+        List<Contacto> listaDeContactos = contactoFacade.obtenerListaDeContactos();
+        conexionContacto.obtenerTodosLosContactos(listaDeContactos);
+        for (Contacto contacto : listaDeContactos) {
+            System.out.println("Nombre: " + contacto.getNombre());
+            System.out.println("Teléfono: " + contacto.getTelefono());
+            System.out.println("Correo: " + contacto.getCorreo());
+            System.out.println("Usuario de Telegram: " + contacto.getUsuarioTelegram());
+            System.out.println("--------------------");
+        }
 
+
+        //apartado de sectores
+        ConexionSector conexionSector = new ConexionSector(mongoDB.getDatabase());
+        SectorFacade sectorFacade = new SectorFacade();
+        List<Sector> listaDeSectores = sectorFacade.obtenerListaDeSectores();
+        conexionSector.obtenerTodosLosSectores(listaDeSectores);
+        for (Sector sector : listaDeSectores) {
+            System.out.println("Nombre: " + sector.getNombre());
+            System.out.println("Lluvia Media Anual: " + sector.getLluviaMediaAnual());
+            System.out.println("Temperatura Media: " + sector.getTemperaturaMedia());
+            System.out.println("Promedio de Lluvias: " + sector.getPromedioLluvias());
+            System.out.println("Duración de Periodo Seco: " + sector.getDuracionPeriodoSeco());
+            System.out.println("--------------------");
+        }
+
+
+
+
+        //apartado de zonas
 
 
 

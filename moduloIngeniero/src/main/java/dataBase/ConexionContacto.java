@@ -1,12 +1,16 @@
 package dataBase;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import contacto.Contacto;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+
+import java.util.List;
 
 public class ConexionContacto {
     private static final String COLLECTION_NAME = "Contactos";
@@ -57,5 +61,22 @@ public class ConexionContacto {
         }
     }
 
+    public void obtenerTodosLosContactos(List<Contacto> listaContactos) {
+        // Realiza una consulta para obtener todos los documentos de la colección
+        FindIterable<Document> documentos = collection.find();
+
+        // Itera a través de los documentos y crea objetos Contacto a partir de ellos
+        MongoCursor<Document> cursor = documentos.iterator();
+        while (cursor.hasNext()) {
+            Document documento = cursor.next();
+            Contacto contacto = new Contacto(
+                    documento.getString("nombre"),
+                    documento.getLong("telefono"),
+                    documento.getString("correo"),
+                    documento.getString("usuarioTelegram")
+            );
+            listaContactos.add(contacto);
+        }
+    }
 
 }

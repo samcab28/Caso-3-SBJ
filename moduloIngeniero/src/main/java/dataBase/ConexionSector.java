@@ -1,12 +1,16 @@
 package dataBase;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import sector.Sector;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+
+import java.util.List;
 
 public class ConexionSector {
 
@@ -58,6 +62,28 @@ public class ConexionSector {
             System.out.println("No se encontró ningun sector con el nombre especificados.");
         }
     }
+
+
+    public void obtenerTodosLosSectores(List<Sector> listaSectores) {
+        // Realiza una consulta para obtener todos los documentos de la colección
+        FindIterable<Document> documentos = collection.find();
+
+        // Itera a través de los documentos y crea objetos Sector a partir de ellos
+        MongoCursor<Document> cursor = documentos.iterator();
+        while (cursor.hasNext()) {
+            Document documento = cursor.next();
+            Sector sector = new Sector(
+                    documento.getString("nombre"),
+                    documento.getInteger("lluviaMediaAnual"),
+                    documento.getDouble("temperaturaMedia"),
+                    documento.getInteger("promedioLluvias"),
+                    documento.getInteger("duracionPeriodoSeco")
+            );
+            listaSectores.add(sector);
+        }
+    }
+
+
 
 
 }

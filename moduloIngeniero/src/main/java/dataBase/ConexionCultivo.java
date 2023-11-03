@@ -37,7 +37,7 @@ public class ConexionCultivo {
             collection.insertOne(documentoCultivo);
         }
         else{
-            System.out.println("contacto ya esta registrado");
+            System.out.println("cultivo ya esta registrado");
         }
     }
 
@@ -51,9 +51,9 @@ public class ConexionCultivo {
         DeleteResult result = collection.deleteOne(filtro);
 
         if (result.getDeletedCount() > 0) {
-            System.out.println("Persona borrada con éxito de la base de datos.");
+            System.out.println("cultivo borrado con éxito de la base de datos.");
         } else {
-            System.out.println("No se encontró ninguna persona con el nombre y la edad especificados.");
+            System.out.println("No se encontró ningun cultivo especificados.");
         }
     }
 }

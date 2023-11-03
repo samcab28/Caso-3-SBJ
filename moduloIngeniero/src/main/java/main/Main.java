@@ -108,7 +108,7 @@ public class Main {
         }
 
         MongoDatabaseConnection mongoDB = MongoDatabaseConnection.getInstance();
-
+        /*
         //agregar contactos
         ConexionContacto conexionContacto = new ConexionContacto(mongoDB.getDatabase());
         for(Contacto contacto: listaDeContactos){
@@ -121,7 +121,15 @@ public class Main {
             conexionCultivo.agregarCultivo(cultivo);
         }
 
-
+        ConexionSector conexionSector = new ConexionSector(mongoDB.getDatabase());
+        for(Sector sector : listaDeSectores){
+            conexionSector.agregarSector(sector);
+        }
+        */
+        ConexionZona conexionZona = new ConexionZona(mongoDB.getDatabase());
+        for(Zona zona : listaDeZonas){
+            conexionZona.agregarZona(zona);
+        }
 
 
     }

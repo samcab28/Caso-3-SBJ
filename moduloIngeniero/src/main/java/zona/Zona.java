@@ -62,4 +62,20 @@ public class Zona {
     public void setSector(Sector sector) {
         this.sector = sector;
     }
+
+    public String getNombreCultivo() {
+        if (cultivo != null) {
+            return cultivo.getNombre();
+        } else {
+            return null;
+        }
+    }
+
+    public String getNombreSector() {
+        if (sector != null) {
+            return sector.getNombre(); // Suponiendo que la clase Sector tiene un método getNombre()
+        } else {
+            return null;
+        }
+    }
 }

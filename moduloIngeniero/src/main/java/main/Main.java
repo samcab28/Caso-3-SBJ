@@ -3,6 +3,7 @@ package main;
 import cultivo.*;
 import sector.*;
 import contacto.*;
+import zona.*;
 
 import java.util.List;
 
@@ -76,6 +77,26 @@ public class Main {
             System.out.println("--------------------");
         }
 
+
+        //codigo de prueba para zonas
+        ZonaFacade zonaFacade = new ZonaFacade();
+
+        Zona zona1 = new Zona("Zona 1", 50.0f, 30.0f, cultivo1, pacificoNorte);
+        Zona zona2 = new Zona("Zona 2", 40.0f, 20.0f, cultivo2, pacificoCentral);
+
+        zonaFacade.agregarZona(zona1);
+        zonaFacade.agregarZona(zona2);
+
+        List<Zona> listaDeZonas = zonaFacade.obtenerListaDeZonas();
+
+        for (Zona zona : listaDeZonas) {
+            System.out.println("Nombre: " + zona.getNombre());
+            System.out.println("Largo: " + zona.getLargo());
+            System.out.println("Ancho: " + zona.getAncho());
+            System.out.println("Cultivo: " + zona.getCultivo().getNombre());
+            System.out.println("Sector: " + zona.getSector().getNombre());
+            System.out.println("--------------------");
+        }
 
     }
 }

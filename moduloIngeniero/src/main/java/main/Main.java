@@ -2,6 +2,7 @@ package main;
 
 import cultivo.*;
 import sector.*;
+import contacto.*;
 
 import java.util.List;
 
@@ -51,6 +52,27 @@ public class Main {
             System.out.println("Temperatura Media: " + sector.getTemperaturaMedia());
             System.out.println("Promedio de Lluvias: " + sector.getPromedioLluvias());
             System.out.println("Duración de Periodo Seco: " + sector.getDuracionPeriodoSeco());
+            System.out.println("--------------------");
+        }
+
+
+
+        //codigo de prueba para contactos
+        ContactoFacade contactoFacade = new ContactoFacade();
+
+        Contacto contacto1 = new Contacto("Juan Perez", 1234567890, "juan@example.com", "@juan_telegram");
+        Contacto contacto2 = new Contacto("Maria Rodriguez", 987654321, "maria@example.com", "@maria_telegram");
+
+        contactoFacade.agregarContacto(contacto1);
+        contactoFacade.agregarContacto(contacto2);
+
+        List<Contacto> listaDeContactos = contactoFacade.obtenerListaDeContactos();
+
+        for (Contacto contacto : listaDeContactos) {
+            System.out.println("Nombre: " + contacto.getNombre());
+            System.out.println("Teléfono: " + contacto.getTelefono());
+            System.out.println("Correo: " + contacto.getCorreo());
+            System.out.println("Usuario de Telegram: " + contacto.getUsuarioTelegram());
             System.out.println("--------------------");
         }
 

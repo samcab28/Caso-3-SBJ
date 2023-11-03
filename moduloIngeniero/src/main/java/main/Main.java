@@ -1,15 +1,19 @@
 package main;
 
+import dataBase.MongoDatabaseConnection;
 import cultivo.*;
 import sector.*;
 import contacto.*;
 import zona.*;
+
+
 
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
+
 
         //codigo de prueba para cultivo
         CultivoFacade cultivoFacade = new CultivoFacade();
@@ -97,6 +101,9 @@ public class Main {
             System.out.println("Sector: " + zona.getSector().getNombre());
             System.out.println("--------------------");
         }
+
+        MongoDatabaseConnection mongoDB = MongoDatabaseConnection.getInstance();
+
 
     }
 }

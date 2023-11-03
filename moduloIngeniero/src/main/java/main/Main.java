@@ -6,6 +6,7 @@ import cultivo.*;
 import sector.*;
 import contacto.*;
 import zona.*;
+import dataBase.*;
 
 
 
@@ -69,6 +70,7 @@ public class Main {
         Contacto contacto1 = new Contacto("Juan Perez", 1234567890, "juan@example.com", "@juan_telegram");
         Contacto contacto2 = new Contacto("Maria Rodriguez", 987654321, "maria@example.com", "@maria_telegram");
         Contacto contacto3 = new Contacto("samir",12345678, "samir", "samir");
+        contactoFacade.agregarContacto(new Contacto("rodrigo",12345678, "rodrigo@gmail","rodrigoTelegram"));
 
         contactoFacade.agregarContacto(contacto1);
         contactoFacade.agregarContacto(contacto2);
@@ -112,5 +114,15 @@ public class Main {
         for(Contacto contacto: listaDeContactos){
             conexionContacto.agregarContacto(contacto);
         }
+
+        //agregar cultivos
+        ConexionCultivo conexionCultivo = new ConexionCultivo(mongoDB.getDatabase());
+        for(Cultivo cultivo : listaDeCultivos){
+            conexionCultivo.agregarCultivo(cultivo);
+        }
+
+
+
+
     }
 }

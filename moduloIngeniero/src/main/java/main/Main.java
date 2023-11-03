@@ -1,8 +1,59 @@
 package main;
 
+import cultivo.*;
+import sector.*;
+
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("pruebas ok");
+
+        //codigo de prueba para cultivo
+        CultivoFacade cultivoFacade = new CultivoFacade();
+
+        Cultivo cultivo1 = new Cultivo("Tomate", 15.0f, 30.0f, 10.0f, 60, 90);
+        Cultivo cultivo2 = new Cultivo("Maíz", 18.0f, 35.0f, 12.0f, 80, 120);
+
+        cultivoFacade.agregarCultivo(cultivo1);
+        cultivoFacade.agregarCultivo(cultivo2);
+
+        List<Cultivo> listaDeCultivos = cultivoFacade.obtenerListaDeCultivos();
+
+        for (Cultivo cultivo : listaDeCultivos) {
+            System.out.println("Nombre: " + cultivo.getNombre());
+            System.out.println("Temperatura Mínima: " + cultivo.getTempMinima());
+            System.out.println("Temperatura Máxima: " + cultivo.getTempMaxima());
+            System.out.println("Cantidad de Agua: " + cultivo.getCantidadAgua());
+            System.out.println("Días Mínimos de Cosecha: " + cultivo.getDiasMinCosecha());
+            System.out.println("Días Máximos de Cosecha: " + cultivo.getDiasMaxCosecha());
+            System.out.println("--------------------");
+        }
+
+        //codigo de de prueba para sectores climaticos de costa rica
+        SectorFacade sectorFacade = new SectorFacade();
+
+        Sector pacificoNorte = new Sector("Pacifico Norte",2321,26,115,4);
+        Sector pacificoCentral = new Sector("Pacifico Central",2434,28,111,5);
+        /*Sector pacificoSur = new Sector("Pacifico Sur",);
+        Sector zonaNorte = new Sector("Zona Norte",);
+        Sector valleCentral = new Sector("Valle Central",);
+        Sector vientreCaribe = new Sector("Vientre del Caribe",);*/
+
+        sectorFacade.agregarSector(pacificoNorte);
+        sectorFacade.agregarSector(pacificoCentral);
+
+        List<Sector> listaDeSectores = sectorFacade.obtenerListaDeSectores();
+
+        for (Sector sector : listaDeSectores) {
+            System.out.println("Nombre: " + sector.getNombre());
+            System.out.println("Lluvia Media Anual: " + sector.getLluviaMediaAnual());
+            System.out.println("Temperatura Media: " + sector.getTemperaturaMedia());
+            System.out.println("Promedio de Lluvias: " + sector.getPromedioLluvias());
+            System.out.println("Duración de Periodo Seco: " + sector.getDuracionPeriodoSeco());
+            System.out.println("--------------------");
+        }
+
+
     }
 }

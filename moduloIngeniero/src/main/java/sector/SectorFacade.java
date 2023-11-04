@@ -22,4 +22,14 @@ public class SectorFacade {
     public List<Sector> obtenerListaDeSectores() {
         return sectores;
     }
+
+    public Sector buscarSectorPorNombre(String nombreSector) {
+        for (Sector sector : sectores) {
+            if (sector.getNombre().equals(nombreSector)) {
+                return sector;
+            }
+        }
+        return null; // Devuelve null si no se encuentra el sector
+    }
+
 }

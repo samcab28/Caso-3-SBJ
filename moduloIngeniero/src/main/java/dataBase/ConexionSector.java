@@ -65,24 +65,31 @@ public class ConexionSector {
 
 
     public void obtenerTodosLosSectores(List<Sector> listaSectores) {
-        // Realiza una consulta para obtener todos los documentos de la colección
+        // Realiza una consulta para obtener todos los documentos de the collection
         FindIterable<Document> documentos = collection.find();
 
-        // Itera a través de los documentos y crea objetos Sector a partir de ellos
+        // Itera a través de los documentos and create Sector objects from them
         MongoCursor<Document> cursor = documentos.iterator();
         while (cursor.hasNext()) {
             Document documento = cursor.next();
             Sector sector = new Sector(
                     documento.getString("nombre"),
-                    documento.getInteger("lluviaMediaAnual"),
-                    documento.getDouble("temperaturaMedia"),
-                    documento.getInteger("promedioLluvias"),
-                    documento.getInteger("duracionPeriodoSeco")
+                    getIntegerValue(documento, "lluviaMediaAnual"),
+                    getIntegerValue(documento, "temperaturaMediaAnual"),
+                    getIntegerValue(documento, "promedioLluvias"),
+                    getIntegerValue(documento, "duracionPeriodoSeco")
             );
             listaSectores.add(sector);
         }
     }
 
+
+    private Integer getIntegerValue(Document document, String key) {
+        if (document.containsKey(key) && document.get(key) != null) {
+            return document.getInteger(key);
+        }
+        return 0; // Return a default value (you can change it to suit your needs)
+    }
 
 
 

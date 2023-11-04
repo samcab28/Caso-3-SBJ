@@ -20,4 +20,13 @@ public class CultivoFacade {
     public List<Cultivo> obtenerListaDeCultivos() {
         return cultivos;
     }
+
+    public Cultivo buscarCultivoPorNombre(String nombreCultivo) {
+        for (Cultivo cultivo : cultivos) {
+            if (cultivo.getNombre().equals(nombreCultivo)) {
+                return cultivo;
+            }
+        }
+        return null; // Devuelve null si no se encuentra el cultivo
+    }
 }

@@ -49,11 +49,16 @@ public class Main {
         }
 
 
-        //apartado de sectores
+        //apartado de sectores NO ESTA LISTO
+
         ConexionSector conexionSector = new ConexionSector(mongoDB.getDatabase());
         SectorFacade sectorFacade = new SectorFacade();
+
         List<Sector> listaDeSectores = sectorFacade.obtenerListaDeSectores();
+
+
         conexionSector.obtenerTodosLosSectores(listaDeSectores);
+
         for (Sector sector : listaDeSectores) {
             System.out.println("Nombre: " + sector.getNombre());
             System.out.println("Lluvia Media Anual: " + sector.getLluviaMediaAnual());
@@ -62,8 +67,6 @@ public class Main {
             System.out.println("Duración de Periodo Seco: " + sector.getDuracionPeriodoSeco());
             System.out.println("--------------------");
         }
-
-
 
 
         //apartado de zonas

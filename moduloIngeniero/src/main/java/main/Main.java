@@ -70,7 +70,18 @@ public class Main {
 
 
         //apartado de zonas
-
+        ConexionZona conexionZona = new ConexionZona(mongoDB.getDatabase());
+        ZonaFacade zonaFacade = new ZonaFacade();
+        List<Zona> listaDeZonas = zonaFacade.obtenerListaDeZonas();
+        conexionZona.obtenerTodosLasZonas(listaDeZonas,cultivoFacade,sectorFacade);
+        for (Zona zona : listaDeZonas) {
+            System.out.println("Nombre: " + zona.getNombre());
+            System.out.println("Largo: " + zona.getLargo());
+            System.out.println("Ancho: " + zona.getAncho());
+            System.out.println("Cultivo: " + zona.getCultivo().getNombre());
+            System.out.println("Sector: " + zona.getSector().getNombre());
+            System.out.println("--------------------");
+        }
 
 
     }

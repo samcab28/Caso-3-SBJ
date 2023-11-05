@@ -2,6 +2,7 @@ package main;
 
 import dataBase.*;
 import almacenamiento.*;
+import calculadora.*;
 
 import java.util.List;
 
@@ -56,6 +57,12 @@ public class Main {
             System.out.println("--------------------");
         }
 
-        
+
+
+        //calculo de dinerio necesario para el funcionamiento de: maiz que necesita 12 m cubicos de agua
+        // y zona uno que tiene dimensiones de:50*30
+
+        DineroFuncionamiento dineroFuncionamiento = new DineroFuncionamiento(listaDeCultivos.get(0).getCantidadAgua(), listaDeZonas.get(0).getAncho(), listaDeZonas.get(0).getLargo(),1500);
+        System.out.println("la cantidad de dinero necesaria es de: " + dineroFuncionamiento.calculo());
     }
 }

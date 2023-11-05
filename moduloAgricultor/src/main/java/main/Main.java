@@ -64,5 +64,8 @@ public class Main {
 
         DineroFuncionamiento dineroFuncionamiento = new DineroFuncionamiento(listaDeCultivos.get(0).getCantidadAgua(), listaDeZonas.get(0).getAncho(), listaDeZonas.get(0).getLargo(),1500);
         System.out.println("la cantidad de dinero necesaria es de: " + dineroFuncionamiento.calculo());
+
+        AguaNecesaria aguaNecesaria = new AguaNecesaria(listaDeCultivos.get(0).getCantidadAgua(), listaDeZonas.get(0).getAncho(), listaDeZonas.get(0).getLargo());
+        System.out.println("cantidad de agua necesaria: " + aguaNecesaria.calculo() + " litros");
     }
 }

@@ -23,5 +23,39 @@ public class Main {
             System.out.println("Días Máximos de Cosecha: " + cultivo.getDiasMaxCosecha());
             System.out.println("--------------------");
         }
+
+        ConexionSector conexionSector = new ConexionSector(mongoDB.getDatabase());
+        SectorFacade sectorFacade = new SectorFacade();
+
+        List<Sector> listaDeSectores = sectorFacade.obtenerListaDeSectores();
+
+
+        conexionSector.obtenerTodosLosSectores(listaDeSectores);
+
+        for (Sector sector : listaDeSectores) {
+            System.out.println("Nombre: " + sector.getNombre());
+            System.out.println("Lluvia Media Anual: " + sector.getLluviaMediaAnual());
+            System.out.println("Temperatura Media: " + sector.getTemperaturaMedia());
+            System.out.println("Promedio de Lluvias: " + sector.getPromedioLluvias());
+            System.out.println("Duración de Periodo Seco: " + sector.getDuracionPeriodoSeco());
+            System.out.println("--------------------");
+        }
+
+
+        //apartado de zonas
+        ConexionZona conexionZona = new ConexionZona(mongoDB.getDatabase());
+        ZonaFacade zonaFacade = new ZonaFacade();
+        List<Zona> listaDeZonas = zonaFacade.obtenerListaDeZonas();
+        conexionZona.obtenerTodosLasZonas(listaDeZonas,cultivoFacade,sectorFacade);
+        for (Zona zona : listaDeZonas) {
+            System.out.println("Nombre: " + zona.getNombre());
+            System.out.println("Largo: " + zona.getLargo());
+            System.out.println("Ancho: " + zona.getAncho());
+            System.out.println("Cultivo: " + zona.getCultivo().getNombre());
+            System.out.println("Sector: " + zona.getSector().getNombre());
+            System.out.println("--------------------");
+        }
+
+        
     }
 }

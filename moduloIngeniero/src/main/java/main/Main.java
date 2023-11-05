@@ -49,8 +49,6 @@ public class Main {
         }
 
 
-        //apartado de sectores NO ESTA LISTO
-
         ConexionSector conexionSector = new ConexionSector(mongoDB.getDatabase());
         SectorFacade sectorFacade = new SectorFacade();
 

@@ -12,13 +12,16 @@ public class Cultivo {
     private int diasMinCosecha;
     private int diasMaxCosecha;
 
-    public Cultivo(String nombre, float tempMinima, float tempMaxima, float cantidadAgua, int diasMinCosecha, int diasMaxCosecha) {
+    private float precioUnidad;
+
+    public Cultivo(String nombre, float tempMinima, float tempMaxima, float cantidadAgua, int diasMinCosecha, int diasMaxCosecha, float precioUnidad) {
         this.nombre = nombre;
         this.tempMinima = tempMinima;
         this.tempMaxima = tempMaxima;
         this.cantidadAgua = cantidadAgua;
         this.diasMinCosecha = diasMinCosecha;
         this.diasMaxCosecha = diasMaxCosecha;
+        this.precioUnidad = precioUnidad;
     }
 
     // Métodos getter y setter para acceder a los atributos
@@ -69,5 +72,13 @@ public class Cultivo {
 
     public void setDiasMaxCosecha(int diasMaxCosecha) {
         this.diasMaxCosecha = diasMaxCosecha;
+    }
+
+    public float getPrecioUnidad() {
+        return precioUnidad;
+    }
+
+    public void setPrecioUnidad(float precioUnidad) {
+        this.precioUnidad = precioUnidad;
     }
 }

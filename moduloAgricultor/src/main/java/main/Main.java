@@ -59,13 +59,21 @@ public class Main {
 
 
 
-        //calculo de dinerio necesario para el funcionamiento de: maiz que necesita 12 m cubicos de agua
-        // y zona uno que tiene dimensiones de:50*30
+        //calculo de dinerio necesario para el funcionamiento de: maiz y zona uno que tiene dimensiones
 
         DineroFuncionamiento dineroFuncionamiento = new DineroFuncionamiento(listaDeCultivos.get(0).getCantidadAgua(), listaDeZonas.get(0).getAncho(), listaDeZonas.get(0).getLargo(),1500);
         System.out.println("la cantidad de dinero necesaria es de: " + dineroFuncionamiento.calculo());
 
         AguaNecesaria aguaNecesaria = new AguaNecesaria(listaDeCultivos.get(0).getCantidadAgua(), listaDeZonas.get(0).getAncho(), listaDeZonas.get(0).getLargo());
         System.out.println("cantidad de agua necesaria: " + aguaNecesaria.calculo() + " litros");
+
+        Profit profit = new Profit(listaDeCultivos.get(0).getPrecioUnidad(),listaDeZonas.get(0).getAncho(), listaDeZonas.get(0).getLargo(),15);
+        System.out.println("el profit esperado del cultivo: " + profit.calculo());
+
+        Recomendacion recomendacion = new Recomendacion(profit.calculo(), dineroFuncionamiento.calculo());
+        System.out.println("recomendacion: " + recomendacion.calculoRecomendacion());
+
+        ProbabilidadExito probabilidadExito = new ProbabilidadExito(listaDeSectores.get(0).getTemperaturaMedia(), listaDeSectores.get(0).getLluviaMediaAnual(), listaDeCultivos.get(0).getTempMinima(), listaDeCultivos.get(0).getTempMaxima());
+        System.out.println("rango de probabilidad del cultivo: " + probabilidadExito.calculoProbabilidadExito());
     }
 }

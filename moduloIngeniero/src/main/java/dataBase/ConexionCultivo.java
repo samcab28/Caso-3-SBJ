@@ -36,7 +36,8 @@ public class ConexionCultivo {
                     .append("tempMaxima", cultivo.getTempMaxima())
                     .append("cantidadAgua",cultivo.getCantidadAgua())
                     .append("diasMinCosecha",cultivo.getDiasMinCosecha())
-                    .append("diasMaxCosecha",cultivo.getDiasMaxCosecha());
+                    .append("diasMaxCosecha",cultivo.getDiasMaxCosecha())
+                    .append("precioUnidad",cultivo.getPrecioUnidad());
 
             // Inserta el documento en la colección "contactos"
             collection.insertOne(documentoCultivo);
@@ -76,7 +77,8 @@ public class ConexionCultivo {
                     documento.getDouble("tempMaxima").floatValue(),
                     documento.getDouble("cantidadAgua").floatValue(),
                     documento.getInteger("diasMinCosecha"),
-                    documento.getInteger("diasMaxCosecha")
+                    documento.getInteger("diasMaxCosecha"),
+                    documento.getDouble("precioUnidad").floatValue()
             );
             listaCultivos.add(cultivo);
         }

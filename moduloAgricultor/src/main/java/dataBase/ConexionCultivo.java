@@ -37,11 +37,11 @@ public class ConexionCultivo {
                     documento.getDouble("tempMaxima").floatValue(),
                     documento.getDouble("cantidadAgua").floatValue(),
                     documento.getInteger("diasMinCosecha"),
-                    documento.getInteger("diasMaxCosecha")
+                    documento.getInteger("diasMaxCosecha"),
+                    documento.getDouble("precioUnidad").floatValue()
             );
             listaCultivos.add(cultivo);
         }
     }
-
 
 }

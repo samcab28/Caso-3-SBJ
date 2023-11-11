@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Nombre y Apellido</title>
+    <title>Borrar Usuario</title>
 </head>
 <body>
 
@@ -14,17 +14,17 @@
     <label for="apellido">Apellido:</label>
     <input type="text" id="apellido" name="apellido" required>
 
-    <button type="button" onclick="guardarDatos()">Guardar</button>
+    <button type="button" onclick="borrarUsuario()">Borrar</button>
 </form>
 
 <script>
-    function guardarDatos() {
+    function borrarUsuario() {
         var nombre = document.getElementById("nombre").value;
         var apellido = document.getElementById("apellido").value;
 
-        // Aquí puedes hacer una solicitud AJAX para guardar los datos en el servidor
+        // Aquí puedes hacer una solicitud AJAX para borrar los datos en el servidor
         // En este ejemplo, estoy utilizando la biblioteca fetch para realizar la solicitud
-        fetch('/guardarUsuario', {
+        fetch('/borrarUsuario', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -33,10 +33,14 @@
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Usuario guardado:', data);
-                // Puedes hacer cualquier otra acción que desees después de guardar el usuario
+                if (data) {
+                    console.log('Usuario borrado:', data);
+                } else {
+                    console.log('Usuario no encontrado.');
+                }
+                // Puedes hacer cualquier otra acción que desees después de borrar el usuario
             })
-            .catch(error => console.error('Error al guardar el usuario:', error));
+            .catch(error => console.error('Error al borrar el usuario:', error));
     }
 </script>
 

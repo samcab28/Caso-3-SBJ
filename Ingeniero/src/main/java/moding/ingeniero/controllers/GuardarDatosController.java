@@ -28,7 +28,7 @@ public class GuardarDatosController {
         return newUser;
     }
 
-    @RequestMapping("/inicio")
+    @RequestMapping("/guardar")
     public String mostrarPagina(Model model) {
         // Puedes agregar atributos al modelo si es necesario
         return "login2"; // Devuelve el nombre del archivo HTML sin la extensión

@@ -1,4 +1,9 @@
 package moding.ingeniero.repositorio;
 
-public interface SectorRepository {
+import moding.ingeniero.modelo.Sector;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface SectorRepository extends MongoRepository<Sector,String> {
 }

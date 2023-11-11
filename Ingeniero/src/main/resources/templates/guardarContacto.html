@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardar usuario</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<form>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" name="apellido" required>
+
+    <label for="correo">Correo:</label>
+    <input type="email" id="correo" name="correo" required>
+
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono" required>
+
+    <label for="usuarioTelegram">Usuario de Telegram:</label>
+    <input type="text" id="usuarioTelegram" name="usuarioTelegram" required>
+
+    <button type="button" onclick="guardarDatos()">Guardar</button>
+</form>
+
+<script>
+    function guardarDatos() {
+        var nombre = document.getElementById("nombre").value;
+        var apellido = document.getElementById("apellido").value;
+        var correo = document.getElementById("correo").value;
+        var telefono = document.getElementById("telefono").value;
+        var usuarioTelegram = document.getElementById("usuarioTelegram").value;
+
+        // Aquí puedes hacer una solicitud AJAX para guardar los datos en el servidor
+        // En este ejemplo, estoy utilizando la biblioteca fetch para realizar la solicitud
+        fetch('/guardarUsuario', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                firstName: nombre,
+                lastName: apellido,
+                email: correo,
+                phone: telefono,
+                telegram: usuarioTelegram
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Usuario guardado:', data);
+                // Puedes hacer cualquier otra acción que desees después de guardar el usuario
+            })
+            .catch(error => console.error('Error al guardar el usuario:', error));
+    }
+</script>
+
+</body>
+</html>

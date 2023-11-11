@@ -1,8 +1,8 @@
-package moding.ingeniero.repositories;
+package moding.ingeniero.repositorio;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
-import moding.ingeniero.models.User;
+import moding.ingeniero.modelo.User;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package moding.ingeniero;
 
-import moding.ingeniero.models.User;
-import moding.ingeniero.repositories.UserRepository;
+import moding.ingeniero.modelo.User;
+import moding.ingeniero.repositorio.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

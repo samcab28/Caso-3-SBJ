@@ -1,7 +1,7 @@
-package moding.ingeniero.controllers;
+package moding.ingeniero.controlador;
 
-import moding.ingeniero.models.User;
-import moding.ingeniero.repositories.UserRepository;
+import moding.ingeniero.modelo.User;
+import moding.ingeniero.repositorio.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

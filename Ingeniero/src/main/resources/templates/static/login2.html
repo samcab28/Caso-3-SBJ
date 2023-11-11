@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Nombre y Apellido</title>
+</head>
+<body>
+
+<form>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" name="apellido" required>
+
+    <button type="button" onclick="guardarDatos()">Guardar</button>
+</form>
+
+<script>
+    function guardarDatos() {
+        var nombre = document.getElementById("nombre").value;
+        var apellido = document.getElementById("apellido").value;
+
+        // Aquí puedes hacer una solicitud AJAX para guardar los datos en el servidor
+        // En este ejemplo, estoy utilizando la biblioteca fetch para realizar la solicitud
+        fetch('/guardarUsuario', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ firstName: nombre, lastName: apellido })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Usuario guardado:', data);
+                // Puedes hacer cualquier otra acción que desees después de guardar el usuario
+            })
+            .catch(error => console.error('Error al guardar el usuario:', error));
+    }
+</script>
+
+</body>
+</html>

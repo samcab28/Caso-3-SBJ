@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import moding.ingeniero.models.User;
 
 @Repository
-public interface UserRepository extends MongoRepository<User,String> {
+public interface UserRepository extends MongoRepository<User, String> {
+    User findByFirstNameAndLastName(String firstName, String lastName);
 }

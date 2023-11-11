@@ -2,8 +2,7 @@ package moding.ingeniero;
 
 import moding.ingeniero.modelo.Contacto;
 import moding.ingeniero.modelo.User;
-import moding.ingeniero.repositorio.ContactoRepository;
-import moding.ingeniero.repositorio.UserRepository;
+import moding.ingeniero.repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,10 +19,19 @@ public class IngenieroApplication implements CommandLineRunner {
 
     private final ContactoRepository contactoRepository;
 
+    private final SectorRepository sectorRepository;
+
+    private final CultivoRepository cultivoRepository;
+
+    private final ZonaRepository zonaRepository;
+
     @Autowired
-    public IngenieroApplication(UserRepository userRepository, ContactoRepository contactoRepository) {
+    public IngenieroApplication(UserRepository userRepository, ContactoRepository contactoRepository, SectorRepository sectorRepository, CultivoRepository cultivoRepository, ZonaRepository zonaRepository) {
         this.userRepository = userRepository;
         this.contactoRepository = contactoRepository;
+        this.sectorRepository = sectorRepository;
+        this.cultivoRepository = cultivoRepository;
+        this.zonaRepository = zonaRepository;
     }
 
     public static void main(String[] args) {

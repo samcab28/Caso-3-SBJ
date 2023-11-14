@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
+import java.util.List;
+
 @Controller
 public class LoginController {
 
@@ -21,6 +23,23 @@ public class LoginController {
     public String inicio(Model model){
         return "inicio";
     }
+
+    @PostMapping("/")
+    @ResponseBody
+    public String procesarLogin(@RequestParam String username, @RequestParam String password) {
+        List<Ingeniero> ingenieros = ingenieroRepository.findByCorreoAndPassword(username, password);
+        for(Ingeniero ingenieros1: ingenieroRepository.findAll()){
+            System.out.println("nombre: "+ingenieros1.getNombre()+"  correo " + ingenieros1.getCorreo() + " y contrasena: "+ingenieros1.getPassword());
+
+            if(username == ingenieros1.getCorreo() & password == ingenieros1.getPassword()){
+                System.out.println("login exitoso con el correo: " + ingenieros1.getCorreo() );
+                return "login exitoso";
+            }
+        }
+        System.out.println("login no exitoso");
+        return "login exitoso";
+    }
+
 
     @RequestMapping("/registro")
     public String registro(Model model) {
@@ -37,4 +56,3 @@ public class LoginController {
         return newIngeniero;
     }
 }
-

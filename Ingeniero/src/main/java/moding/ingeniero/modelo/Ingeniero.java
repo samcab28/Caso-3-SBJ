@@ -11,10 +11,10 @@ public class Ingeniero {
     private String id;
 
     @Field
-    private String Correo;
+    private String correo;
 
     @Field
-    private String Password;
+    private String password;
 
     @Field
     private String nombre;
@@ -22,17 +22,17 @@ public class Ingeniero {
     public Ingeniero(){}
 
     public Ingeniero(String correo, String Password,String Nombre){
-        this.Correo = correo;
-        this.Password = Password;
+        this.correo = correo;
+        this.password = Password;
         this.nombre=Nombre;
     }
 
     public String getCorreo() {
-        return Correo;
+        return correo;
     }
 
     public void setCorreo(String correo) {
-        Correo = correo;
+        this.correo = correo;
     }
 
     public String getId() {
@@ -44,11 +44,11 @@ public class Ingeniero {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getNombre() {
@@ -61,6 +61,6 @@ public class Ingeniero {
 
     @Override
     public String toString() {
-        return String.format("Ingeniero[id='%s',nombre='%s',correo='%s',password='%s']",id,nombre,Correo,Password);
+        return String.format("Ingeniero[id='%s',nombre='%s',correo='%s',password='%s']",id,nombre, correo, password);
     }
 }

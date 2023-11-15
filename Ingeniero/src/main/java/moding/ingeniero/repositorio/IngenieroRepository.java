@@ -10,5 +10,7 @@ import java.util.List;
 @Repository
 public interface IngenieroRepository extends MongoRepository<Ingeniero, String> {
     List<Ingeniero> findByCorreoAndPassword(String Correo, String Password);
+
+    boolean existsByCorreo(String correo);
 }
 

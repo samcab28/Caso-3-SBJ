@@ -19,6 +19,8 @@ public class IngePrueba {
         this.ingenieroController = ingenieroController;
     }
 
+
+    //funcion para hacer el registro
     @GetMapping("/registro")
     public String GuardarInge() {
         return "registro"; // Esto asume que tu página HTML se llama login2.html y está en la carpeta templates o static
@@ -27,12 +29,18 @@ public class IngePrueba {
     @PostMapping(path = "/registro", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity<String> create(@ModelAttribute Ingeniero ingeniero){
         System.out.println("Recibido: " + ingeniero.getNombre());
-        ingenieroController.agregar(ingeniero);
+        ingenieroController.agregarIngeniero(ingeniero);
         return new ResponseEntity<>("Feliz de crear el producto: " + ingeniero.getNombre(), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/volver")
+    public String volverLogin(){
+        return "inicio";
     }
 
 
 
+    //funcion para hacer el login
     @GetMapping("/")
     public String ShowInicioForm(){
         return "inicio";
@@ -40,7 +48,7 @@ public class IngePrueba {
 
     @PostMapping(path = "/", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String handleLogin(@RequestParam String username, @RequestParam String password){
-        if(ingenieroController.comprobar(username,password)){
+        if(ingenieroController.comprobarIngeniero(username,password)){
             return "login2";
         }
         return "inicio";

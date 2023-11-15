@@ -16,8 +16,6 @@ import java.util.List;
 @SpringBootApplication
 public class IngenieroApplication implements CommandLineRunner {
 
-    private final UserRepository userRepository;
-
     private final ContactoRepository contactoRepository;
 
     private final SectorRepository sectorRepository;
@@ -29,8 +27,7 @@ public class IngenieroApplication implements CommandLineRunner {
     private final IngenieroRepository ingenieroRepository;
 
     @Autowired
-    public IngenieroApplication(UserRepository userRepository, ContactoRepository contactoRepository, SectorRepository sectorRepository, CultivoRepository cultivoRepository, ZonaRepository zonaRepository, IngenieroRepository ingenieroRepository) {
-        this.userRepository = userRepository;
+    public IngenieroApplication( ContactoRepository contactoRepository, SectorRepository sectorRepository, CultivoRepository cultivoRepository, ZonaRepository zonaRepository, IngenieroRepository ingenieroRepository) {
         this.contactoRepository = contactoRepository;
         this.sectorRepository = sectorRepository;
         this.cultivoRepository = cultivoRepository;

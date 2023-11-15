@@ -1,23 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Iniciar sesion</title>
-    <link rel="stylesheet" type="text/css" href="estilosLogin.css"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to top, #A9FACD, #f8f8f8);
+            display: flex;
+        }
+
+        .login-container {
+            width: 75%;
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 10%;
+            padding: 5%;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0);
+            align-items: center;
+        }
+
+        .image-container {
+            margin-right: 20px;
+        }
+
+        .image-container img{
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            height: auto;
+        }
+
+        #miLabel {
+            color: rgb(0, 0, 0);
+            margin-bottom: 10px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="name"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1.5px solid #808080;
+            font-size: 20px;
+            border-radius: 7px;
+            margin-bottom: 4px;
+        }
+
+        #BotonLogin {
+            width: 49.3%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            font-size: medium;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        #BotonLogin:hover {
+            background-color: #40E68A;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #BotonRegistro {
+            width: 49.3%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            font-size: medium;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        #BotonRegistro:hover {
+            background-color: #40E68A;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik&display=swap">
 </head>
 <body>
+<div class="image-container">
+    <img src="https://bydauto.com.co/blog/wp-content/uploads/2022/10/gama-veh%C3%ADculos-electricos-byd.jpg" alt="Imagen de perfil">
+</div>
+
 <div class="login-container">
-    <h2>Iniciar sesion</h2>
     <form action="/" method="post">
-        <label for="username">Nombre de usuario:</label>
+        <h1 id="miLabel">Bienvenido a UDIACOS</h1>
+        <label for="username">Nombre completo:</label>
         <input type="text" id="username" name="username" required>
 
-        <label for="password">Password:</label>
+        <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" required>
 
-        <input type="submit" value="Iniciar sesion">
+        <input id="BotonLogin" type="submit" value="Iniciar sesión">
+
+
+        <p>No tienes una cuenta? <a href="/registro">Registrarse</a></p>
+
     </form>
 
-    <p>No tienes una cuenta? <a href="/registro">Registrarse</a></p>
 </div>
 </body>
 </html>

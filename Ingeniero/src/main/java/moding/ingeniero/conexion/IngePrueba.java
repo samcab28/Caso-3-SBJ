@@ -19,12 +19,12 @@ public class IngePrueba {
         this.ingenieroController = ingenieroController;
     }
 
-    @GetMapping("/login2")
-    public String showLoginForm() {
-        return "login2"; // Esto asume que tu página HTML se llama login2.html y está en la carpeta templates o static
+    @GetMapping("/registro")
+    public String GuardarInge() {
+        return "registro"; // Esto asume que tu página HTML se llama login2.html y está en la carpeta templates o static
     }
 
-    @PostMapping(path = "/login2", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(path = "/registro", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity<String> create(@ModelAttribute Ingeniero ingeniero){
         System.out.println("Recibido: " + ingeniero.getNombre());
         ingenieroController.agregar(ingeniero);
@@ -45,6 +45,7 @@ public class IngePrueba {
         }
         return "inicio";
     }
+
 
 
 

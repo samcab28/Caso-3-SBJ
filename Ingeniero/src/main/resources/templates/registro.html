@@ -59,7 +59,7 @@
             margin-bottom: 4px;
         }
 
-        #BotonLogin {
+        .button {
             width: 49.3%;
             padding: 12px;
             margin-top: 10px;
@@ -71,7 +71,7 @@
             cursor: pointer;
         }
 
-        #BotonLogin:hover {
+        .button:hover {
             background-color: #40E68A;
             color: #fff;
             cursor: pointer;
@@ -104,18 +104,19 @@
 </div>
 
 <div class="login-container">
-    <form action="/registro" method="post">
-        <h1 id="miLabel">Registro</h1>
-        <label for="email">Correo electronico:</label>
-        <input type="text" id="email" name="email" required>
+    <form action="/registro" method="post" enctype="application/x-www-form-urlencoded">
 
-        <label for="name">Nombre:</label>
-        <input type="name" id="name" name="name" required>
+        <label for="correo">Correo:</label>
+        <input type="text" id="correo" name="correo" required><br>
 
         <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" required><br>
 
-        <input id="BotonLogin" type="submit" value="Registrate">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+
+        <input class="button" type="submit" value="Guardar">
+
     </form>
     <form action="/volver" method="get">
         <input id="BotonVolver" type="submit" value="Volver">

@@ -40,6 +40,12 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version> <!-- O la versión más reciente disponible -->
+        </dependency>
+
     </dependencies>
 
     <build>

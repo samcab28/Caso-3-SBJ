@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to top, #A9FACD, #f8f8f8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #miLabel {
+            color: #000;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1.5px solid #808080;
+            font-size: 16px;
+            border-radius: 7px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        #BotonLogin,
+        #BotonVolver {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            font-size: 18px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        #BotonLogin {
+            background-color: #000000;
+            color: #fff;
+            border: none;
+        }
+
+        #BotonLogin:hover {
+            background-color: #40E68A;
+            color: #fff;
+        }
+
+        #BotonVolver {
+            background-color: #808080;
+            color: #fff;
+            border: none;
+        }
+
+        #BotonVolver:hover {
+            background-color: #A9A9A9;
+            color: #fff;
+        }
+    </style>
+    <title>Envío de Información</title>
+</head>
+<body>
+<div class="login-container">
+    <form action="/envioInformacion" method="post" enctype="application/x-www-form-urlencoded">
+        <h1 id="miLabel">Envío de Información</h1>
+
+        <label for="asunto">Asunto:</label>
+        <input type="text" id="asunto" name="asunto" placeholder="Ingrese el asunto">
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Ingrese su mensaje"></textarea>
+
+        <button id="BotonLogin">Enviar</button>
+
+    </form>
+    <form action="/volverEnvioInformacion" method="get">
+        <input id="BotonVolver" type="submit" value="Volver">
+    </form>
+</div>
+</body>
+</html>

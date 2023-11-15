@@ -4,8 +4,8 @@ import moding.ingeniero.modelo.Ingeniero;
 import moding.ingeniero.repositorio.IngenieroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,7 +41,6 @@ public class LoginController {
         return "login no exitoso";
     }
 
-
     @RequestMapping("/registro")
     public String registro(Model model) {
         model.addAttribute("nuevoIngeniero", new Ingeniero());
@@ -50,9 +49,15 @@ public class LoginController {
 
     @PostMapping("/registro")
     @ResponseBody
-    public Ingeniero guardarIngeniero(@ModelAttribute Ingeniero nuevoIngeniero) {
-        Ingeniero newIngeniero = ingenieroRepository.save(nuevoIngeniero);
-        System.out.println("Se guardó el ingeniero: " + newIngeniero);
-        return newIngeniero;
+    public Ingeniero guardarIngeniero(@RequestParam String email,@RequestParam String name, @RequestParam String password) {
+        Ingeniero newInge = new Ingeniero(email, password, name);
+        ingenieroRepository.save(newInge);
+        System.out.println("Se guardó el ingeniero: " + newInge);
+        return newInge;
+    }
+
+    @RequestMapping("/volver")
+    public String volver() {
+        return "inicio";
     }
 }

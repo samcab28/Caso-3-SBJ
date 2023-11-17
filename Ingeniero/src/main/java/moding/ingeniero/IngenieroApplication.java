@@ -7,10 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @SpringBootApplication
@@ -26,13 +22,16 @@ public class IngenieroApplication implements CommandLineRunner {
 
     private final IngenieroRepository ingenieroRepository;
 
+    private final InnovacionRepository innovacionRepository;
+
     @Autowired
-    public IngenieroApplication( ContactoRepository contactoRepository, SectorRepository sectorRepository, CultivoRepository cultivoRepository, ZonaRepository zonaRepository, IngenieroRepository ingenieroRepository) {
+    public IngenieroApplication(ContactoRepository contactoRepository, SectorRepository sectorRepository, CultivoRepository cultivoRepository, ZonaRepository zonaRepository, IngenieroRepository ingenieroRepository, InnovacionRepository innovacionRepository) {
         this.contactoRepository = contactoRepository;
         this.sectorRepository = sectorRepository;
         this.cultivoRepository = cultivoRepository;
         this.zonaRepository = zonaRepository;
         this.ingenieroRepository = ingenieroRepository;
+        this.innovacionRepository = innovacionRepository;
     }
 
     public static void main(String[] args) {
@@ -43,7 +42,7 @@ public class IngenieroApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
+
     }
-
-
+    
 }

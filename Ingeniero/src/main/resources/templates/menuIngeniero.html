@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to top, #A9FACD, #f8f8f8);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .agregar-ingeniero, .modificar-ingeniero, .eliminar-ingeniero {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            float: left;
+            margin-bottom: 20px;
+        }
+
+        .visualizacion-datos {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            float: right;
+        }
+
+        label {
+            color: rgb(0, 0, 0);
+            margin-bottom: 10px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 8px 0;
+            border: 1.5px solid #808080;
+            font-size: 20px;
+            border-radius: 7px;
+            margin-bottom: 4px;
+        }
+
+        button {
+            width: calc(49.3% - 20px);
+            padding: 12px;
+            margin-top: 10px;
+            font-size: medium;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        #BotonAgregarIngeniero, #BotonEliminarIngeniero, #BotonModificarIngeniero {
+            background-color: #000000;
+            color: #fff;
+            border: none;
+        }
+
+        #BotonAgregarIngeniero:hover, #BotonEliminarIngeniero:hover, #BotonModificarIngeniero:hover {
+            background-color: #40E68A;
+            color: #fff;
+        }
+
+        #tablaIngenieros {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #tablaIngenieros th, #tablaIngenieros td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="agregar-ingeniero">
+    <label>Agregar Ingeniero</label>
+    <input type="text" id="correoIngeniero" placeholder="Correo del Ingeniero">
+    <input type="text" id="passwordIngeniero" placeholder="Contraseña del Ingeniero">
+    <input type="text" id="nombreIngeniero" placeholder="Nombre del Ingeniero">
+    <button id="BotonAgregarIngeniero" onclick="agregarIngeniero()">Agregar</button>
+</div>
+
+<div class="modificar-ingeniero">
+    <label>Modificar Ingeniero</label>
+    <select id="seleccionModificar">
+        <option th:each="ingeniero : ${ingenieros}" th:value="${ingeniero.nombre}" th:text="${ingeniero.nombre}"></option>
+    </select>
+    <input type="text" id="nuevoCorreoIngeniero" placeholder="Nuevo Correo del Ingeniero">
+    <input type="text" id="nuevoPasswordIngeniero" placeholder="Nueva Contraseña del Ingeniero">
+    <input type="text" id="nuevoNombreIngeniero" placeholder="Nuevo Nombre del Ingeniero">
+    <button id="BotonModificarIngeniero" onclick="modificarIngeniero()">Modificar</button>
+</div>
+
+<div class="eliminar-ingeniero">
+    <label>Eliminar Ingeniero</label>
+    <select id="seleccionEliminar">
+        <option th:each="ingeniero : ${ingenieros}" th:value="${ingeniero.nombre}" th:text="${ingeniero.nombre}"></option>
+    </select>
+    <button id="BotonEliminarIngeniero" onclick="eliminarIngeniero()">Eliminar</button>
+</div>
+
+<div class="visualizacion-datos">
+    <label>Visualización de Ingenieros</label>
+    <table id="tablaIngenieros">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Contraseña</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Utilizar Thymeleaf para iterar sobre los ingenieros -->
+        <tr th:each="ingeniero : ${ingenieros}">
+            <td th:text="${ingeniero.nombre}"></td>
+            <td th:text="${ingeniero.correo}"></td>
+            <td th:text="${ingeniero.password}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<button id="BotonVolver" class="bottom-left" onclick="volver()">Volver</button>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Funciones JavaScript (agregarIngeniero, eliminarIngeniero, modificarIngeniero, volver) aquí
+    function agregarIngeniero() {
+        // Implementa la lógica para agregar un ingeniero
+    }
+
+    function eliminarIngeniero() {
+        // Implementa la lógica para eliminar un ingeniero
+    }
+
+    function modificarIngeniero() {
+        // Implementa la lógica para modificar un ingeniero
+    }
+
+    function volver() {
+        // Implementa la lógica para volver
+    }
+</script>
+</body>
+</html>

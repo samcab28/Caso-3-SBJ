@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to top, #A9FACD, #f8f8f8);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .agregar-cultivo, .modificar-cultivo, .eliminar-cultivo {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            float: left;
+            margin-bottom: 20px;
+        }
+
+        .visualizacion-datos {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            float: right;
+        }
+
+        label {
+            color: rgb(0, 0, 0);
+            margin-bottom: 10px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 8px 0;
+            border: 1.5px solid #808080;
+            font-size: 20px;
+            border-radius: 7px;
+            margin-bottom: 4px;
+        }
+
+        button {
+            width: calc(49.3% - 20px);
+            padding: 12px;
+            margin-top: 10px;
+            font-size: medium;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        #BotonLogin, #BotonRegistro, #BotonAgregar, #BotonEliminar, #BotonModificar {
+            background-color: #000000;
+            color: #fff;
+            border: none;
+        }
+
+        #BotonLogin:hover, #BotonRegistro:hover, #BotonAgregar:hover, #BotonEliminar:hover, #BotonModificar:hover {
+            background-color: #40E68A;
+            color: #fff;
+        }
+
+        #tablaCultivos {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #tablaCultivos th, #tablaCultivos td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="agregar-cultivo">
+    <label>Agregar Cultivo</label>
+    <input type="text" id="nombre" placeholder="Nombre del Cultivo">
+    <input type="text" id="tempMinima" placeholder="Temperatura Mínima">
+    <input type="text" id="tempMaxima" placeholder="Temperatura Máxima">
+    <input type="text" id="cantidadAgua" placeholder="Cantidad de Agua">
+    <input type="text" id="diasMinCosecha" placeholder="Días Mínimos de Cosecha">
+    <input type="text" id="diasMaxCosecha" placeholder="Días Máximos de Cosecha">
+    <input type="text" id="precioUnidad" placeholder="Precio por Unidad">
+    <input type="text" id="cantidadPorMetro2" placeholder="Cantidad por Metro Cuadrado">
+    <button id="BotonAgregar" onclick="agregarCultivo()">Agregar</button>
+</div>
+
+<div class="modificar-cultivo">
+    <label>Modificar Cultivo</label>
+    <select id="seleccionModificar">
+        <option th:each="cultivo : ${cultivos}" th:value="${cultivo.nombre}" th:text="${cultivo.nombre}"></option>
+    </select>
+    <input type="text" id="nuevoNombre" placeholder="Nuevo Nombre">
+    <input type="text" id="nuevaTempMinima" placeholder="Nueva Temperatura Mínima">
+    <input type="text" id="nuevaTempMaxima" placeholder="Nueva Temperatura Máxima">
+    <input type="text" id="nuevaCantidadAgua" placeholder="Nueva Cantidad de Agua">
+    <input type="text" id="nuevaDiasMinCosecha" placeholder="Nuevos Días Mínimos de Cosecha">
+    <input type="text" id="nuevaDiasMaxCosecha" placeholder="Nuevos Días Máximos de Cosecha">
+    <input type="text" id="nuevoPrecioUnidad" placeholder="Nuevo Precio por Unidad">
+    <input type="text" id="nuevaCantidadPorMetro2" placeholder="Nueva Cantidad por Metro Cuadrado">
+    <button id="BotonModificar" onclick="modificarCultivo()">Modificar</button>
+</div>
+
+<div class="eliminar-cultivo">
+    <label>Eliminar Cultivo</label>
+    <select id="seleccionEliminar">
+        <option th:each="cultivo : ${cultivos}" th:value="${cultivo.nombre}" th:text="${cultivo.nombre}"></option>
+    </select>
+    <button id="BotonEliminar" onclick="eliminarCultivo()">Eliminar</button>
+</div>
+
+<div class="visualizacion-datos">
+    <label>Visualización de Cultivos</label>
+    <table id="tablaCultivos">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Temperatura Mínima</th>
+            <th>Temperatura Máxima</th>
+            <th>Cantidad de Agua</th>
+            <th>Días Mínimos de Cosecha</th>
+            <th>Días Máximos de Cosecha</th>
+            <th>Precio por Unidad</th>
+            <th>Cantidad por Metro Cuadrado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Utilizar Thymeleaf para iterar sobre los cultivos -->
+        <tr th:each="cultivo : ${cultivos}">
+            <td th:text="${cultivo.nombre}"></td>
+            <td th:text="${cultivo.tempMinima}"></td>
+            <td th:text="${cultivo.tempMaxima}"></td>
+            <td th:text="${cultivo.cantidadAgua}"></td>
+            <td th:text="${cultivo.diasMinCosecha}"></td>
+            <td th:text="${cultivo.diasMaxCosecha}"></td>
+            <td th:text="${cultivo.precioUnidad}"></td>
+            <td th:text="${cultivo.cantidadPorMetro2}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<button id="BotonVolver" class="bottom-left" onclick="volver()">Volver</button>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Funciones JavaScript (agregarCultivo, eliminarCultivo, modificarCultivo, volver) aquí
+    function agregarCultivo() {
+        // Implementa la lógica para agregar un cultivo
+    }
+
+    function eliminarCultivo() {
+        // Implementa la lógica para eliminar un cultivo
+    }
+
+    function modificarCultivo() {
+        // Implementa la lógica para modificar un cultivo
+    }
+
+    function volver() {
+        // Implementa la lógica para volver
+    }
+</script>
+</body>
+</html>

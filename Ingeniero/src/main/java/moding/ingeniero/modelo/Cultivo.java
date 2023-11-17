@@ -23,7 +23,10 @@ public class Cultivo {
     @Field
     private double precioUnidad;
 
-    public Cultivo(String nombre, double tempMinima, double tempMaxima, double cantidadAgua, int diasMinCosecha, int diasMaxCosecha, double precioUnidad) {
+    @Field
+    private int cantidadPorMetro2;
+
+    public Cultivo(String nombre, double tempMinima, double tempMaxima, double cantidadAgua, int diasMinCosecha, int diasMaxCosecha, double precioUnidad, int cantidadPorMetro2) {
         this.nombre = nombre;
         this.tempMinima = tempMinima;
         this.tempMaxima = tempMaxima;
@@ -31,6 +34,7 @@ public class Cultivo {
         this.diasMinCosecha = diasMinCosecha;
         this.diasMaxCosecha = diasMaxCosecha;
         this.precioUnidad = precioUnidad;
+        this.cantidadPorMetro2= cantidadPorMetro2;
     }
 
     // Métodos getter y setter para acceder a los atributos
@@ -91,8 +95,16 @@ public class Cultivo {
         this.precioUnidad = precioUnidad;
     }
 
+    public int getCantidadPorMetro2() {
+        return cantidadPorMetro2;
+    }
+
+    public void setCantidadPorMetro2(int cantidadPorMetro2) {
+        this.cantidadPorMetro2 = cantidadPorMetro2;
+    }
+
     @Override
     public String toString() {
-        return String.format("Cultivo[id='%s',nombre='%s',tempMinima='%s',tempMaxima='%s',cantidadAgua='%s',diasMinCosecha='%s',diasMaxCosecha='%s',precioUnidad='%s']",id,nombre,tempMinima,tempMaxima,cantidadAgua,diasMinCosecha,diasMaxCosecha,precioUnidad);
+        return String.format("Cultivo[id='%s',nombre='%s',tempMinima='%s',tempMaxima='%s',cantidadAgua='%s',diasMinCosecha='%s',diasMaxCosecha='%s',precioUnidad='%s',cantidadPorMetro2='%s']",id,nombre,tempMinima,tempMaxima,cantidadAgua,diasMinCosecha,diasMaxCosecha,precioUnidad,cantidadPorMetro2);
     }
 }

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to top, #A9FACD, #f8f8f8);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .agregar-contacto, .modificar-contacto, .eliminar-contacto {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            float: left;
+            margin-bottom: 20px;
+        }
+
+        .visualizacion-datos {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            float: right;
+        }
+
+        label {
+            color: rgb(0, 0, 0);
+            margin-bottom: 10px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 8px 0;
+            border: 1.5px solid #808080;
+            font-size: 20px;
+            border-radius: 7px;
+            margin-bottom: 4px;
+        }
+
+        button {
+            width: calc(49.3% - 20px);
+            padding: 12px;
+            margin-top: 10px;
+            font-size: medium;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        #BotonAgregarContacto, #BotonEliminarContacto, #BotonModificarContacto {
+            background-color: #000000;
+            color: #fff;
+            border: none;
+        }
+
+        #BotonAgregarContacto:hover, #BotonEliminarContacto:hover, #BotonModificarContacto:hover {
+            background-color: #40E68A;
+            color: #fff;
+        }
+
+        #tablaContactos {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #tablaContactos th, #tablaContactos td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="agregar-contacto">
+    <label>Agregar Contacto</label>
+    <input type="text" id="nombreContacto" placeholder="Nombre del Contacto">
+    <input type="text" id="apellidoContacto" placeholder="Apellido del Contacto">
+    <input type="text" id="telefonoContacto" placeholder="Teléfono del Contacto">
+    <input type="text" id="correoContacto" placeholder="Correo del Contacto">
+    <input type="text" id="usuarioTelegramContacto" placeholder="Usuario Telegram del Contacto">
+    <button id="BotonAgregarContacto" onclick="agregarContacto()">Agregar</button>
+</div>
+
+<div class="modificar-contacto">
+    <label>Modificar Contacto</label>
+    <select id="seleccionModificar">
+        <option th:each="contacto : ${contactos}" th:value="${contacto.nombre}" th:text="${contacto.nombre}"></option>
+    </select>
+    <input type="text" id="nuevoNombre" placeholder="Nuevo Nombre">
+    <input type="text" id="nuevoApellido" placeholder="Nuevo Apellido">
+    <input type="text" id="nuevoTelefono" placeholder="Nuevo Teléfono">
+    <input type="text" id="nuevoCorreo" placeholder="Nuevo Correo">
+    <input type="text" id="nuevoUsuarioTelegram" placeholder="Nuevo Usuario Telegram">
+    <button id="BotonModificarContacto" onclick="modificarContacto()">Modificar</button>
+</div>
+
+<div class="eliminar-contacto">
+    <label>Eliminar Contacto</label>
+    <select id="seleccionEliminar">
+        <option th:each="contacto : ${contactos}" th:value="${contacto.nombre}" th:text="${contacto.nombre}"></option>
+    </select>
+    <button id="BotonEliminarContacto" onclick="eliminarContacto()">Eliminar</button>
+</div>
+
+<div class="visualizacion-datos">
+    <label>Visualización de Contactos</label>
+    <table id="tablaContactos">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Usuario Telegram</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Utilizar Thymeleaf para iterar sobre los contactos -->
+        <tr th:each="contacto : ${contactos}">
+            <td th:text="${contacto.nombre}"></td>
+            <td th:text="${contacto.apellido}"></td>
+            <td th:text="${contacto.telefono}"></td>
+            <td th:text="${contacto.correo}"></td>
+            <td th:text="${contacto.usuarioTelegram}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<button id="BotonVolver" class="bottom-left" onclick="volver()">Volver</button>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Funciones JavaScript (agregarContacto, eliminarContacto, modificarContacto, volver) aquí
+    function agregarContacto() {
+        // Implementa la lógica para agregar un contacto
+    }
+
+    function eliminarContacto() {
+        // Implementa la lógica para eliminar un contacto
+    }
+
+    function modificarContacto() {
+        // Implementa la lógica para modificar un contacto
+    }
+
+    function volver() {
+        // Implementa la lógica para volver
+    }
+</script>
+</body>
+</html>

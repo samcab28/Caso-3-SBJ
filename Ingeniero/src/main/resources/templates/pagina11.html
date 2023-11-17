@@ -107,10 +107,10 @@
 <div id="contenido">
     <div id="noticias">
         <h1>Noticias Agrícolas</h1>
-        <div th:each="noticia : ${noticias}">
-            <div class="noticia">
-                <p th:text="${noticia.nombre}"></p>
-                <a th:href="${noticia.linkPagina}" target="_blank">Leer más</a>
+        <div th:each="innovacion : ${innovaciones}">
+            <div class="innovacion">
+                <p th:text="${innovacion.nombre}"></p>
+                <a th:href="${innovacion.linkPagina}" target="_blank">Leer más</a>
             </div>
         </div>
     </div>

@@ -7,7 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/menu")
@@ -79,8 +82,24 @@ public class MenuConexion {
     @GetMapping("/pagina11")
     public String pagina11(Model model) {
         List<Innovacion> innovaciones = innovacionRepository.findAll();
-        model.addAttribute("innovaciones", innovaciones);
+
+        // Shuffle the list randomly
+        List<Innovacion> innovacionesAleatorias = shuffleList(innovaciones);
+
+        // Take the first 4 items (or less if the list has fewer than 4 items)
+        List<Innovacion> noticiasAleatorias = innovacionesAleatorias.stream()
+                .limit(4)
+                .collect(Collectors.toList());
+
+        model.addAttribute("innovaciones", noticiasAleatorias);
         return "pagina11";
+    }
+
+    // Helper method to shuffle a list
+    private <T> List<T> shuffleList(List<T> list) {
+        long seed = System.nanoTime();
+        Collections.shuffle(list, new Random(seed));
+        return list;
     }
 
     @GetMapping("/pagina12")

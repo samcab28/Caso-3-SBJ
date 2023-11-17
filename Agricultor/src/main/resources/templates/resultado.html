@@ -16,21 +16,20 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             text-align: center;
-            padding: 20px;
         }
 
-        .info-container, .contacto-container {
-            width: 48%;
+        .resultados-container {
+            width: 60%;
             box-sizing: border-box;
             padding: 20px;
             overflow-y: auto;
             margin-bottom: 20px;
+            text-align: left;
             border-radius: 10px;
             background-color: #fff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: left;
         }
 
         label {
@@ -41,26 +40,27 @@
             display: block;
             font-weight: bold;
             font-size: 18px;
+            margin-bottom: 8px;
         }
 
-        .contacto-container label {
+        .resultado {
             margin-bottom: 20px;
         }
 
-        .info-container p, .significado-container p {
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .contacto-container p {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 20px;
+        .resultado span {
+            display: inline-block;
+            font-size: 20px;
+            padding: 8px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 6px;
         }
 
         button {
             width: calc(100% - 20px);
             padding: 12px;
+            margin-top: 20px;
             font-size: medium;
             border-radius: 7px;
             cursor: pointer;
@@ -68,7 +68,6 @@
             color: #fff;
             border: none;
             transition: background-color 0.3s ease;
-            margin-top: 20px;
         }
 
         button:hover {
@@ -78,37 +77,52 @@
 </head>
 <body>
 
-<div class="info-container">
-    <label>Información sobre Udiacos</label>
-    <p>
-        Udiacos es una empresa comprometida con la innovación y la excelencia en la industria agropecuaria. Nos especializamos en proporcionar soluciones integrales para el cultivo y manejo eficiente de recursos.
-    </p>
-</div>
+<div class="resultados-container">
+    <div class="resultado">
+        <label>Resultado de Costo Esperado de Cultivo:</label>
+        <span id="resultadoCostoCultivo">-</span>
+    </div>
 
-<div class="contacto-container">
-    <label>Contacto</label>
-    <p>
-        Teléfono: <span id="telefonoContacto">+506 12345678</span>
-    </p>
-    <p>
-        Correo Electrónico: <span id="correoContacto">udiacos@gmail.com</span>
-    </p>
-</div>
+    <div class="resultado">
+        <label>Resultado de Costo Esperado de Profit:</label>
+        <span id="resultadoCostoProfit">-</span>
+    </div>
 
-<div class="significado-container" style="width: 100%; text-align: center;">
-    <label>El significado de Udiacos</label>
-    <p>
-        Udiacos es la abreviatura de "Union de Desarrollo e Investigación Agrícola Costarricense". Representamos la unión de esfuerzos para impulsar el desarrollo sostenible y la investigación en la agricultura costarricense.
-    </p>
-</div>
+    <div class="resultado">
+        <label>Resultado de Cantidad de Agua Esperada a Usar:</label>
+        <span id="resultadoCantidadAgua">-</span>
+    </div>
 
-<button onclick="volverAlMenu()">Volver al Menú Principal</button>
+    <div class="resultado">
+        <label>Resultado de Cantidad de Unidades a Cosechar:</label>
+        <span id="resultadoCantidadUnidades">-</span>
+    </div>
+
+    <div class="resultado">
+        <label>Resultado de Probabilidad de Cultivo:</label>
+        <span id="resultadoProbabilidad">-</span>
+    </div>
+
+    <button onclick="volverAlMenu()">Salir al Menú Principal</button>
+    <button onclick="volverACalcular()">Volver a Calcular</button>
+    <button onclick="imprimirPDF()">Imprimir PDF</button>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     function volverAlMenu() {
         // Lógica para redireccionar al menú principal
         window.location.href = "/menu";
+    }
+
+    function volverACalcular() {
+        // Lógica para redireccionar a la página de cálculos
+        window.location.href = "/pagina12";
+    }
+
+    function imprimirPDF() {
+        // Lógica para imprimir el contenido en un PDF
+        // Puedes utilizar librerías como jsPDF para generar el PDF
     }
 </script>
 </body>

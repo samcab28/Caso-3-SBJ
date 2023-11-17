@@ -1,5 +1,6 @@
 package moding.ingeniero.conexion;
 
+import moding.ingeniero.controller.InformacionController;
 import moding.ingeniero.modelo.*;
 import moding.ingeniero.repositorio.*;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cultivos")
+@RequestMapping("/menu")
 public class MenuConexion {
 
     private final CultivoRepository cultivoRepository;
@@ -21,6 +22,7 @@ public class MenuConexion {
     private final IngenieroRepository ingenieroRepository;
 
     private final InnovacionRepository innovacionRepository;
+
 
     public MenuConexion(CultivoRepository cultivoRepository, SectorRepository sectorRepository, ContactoRepository contactoRepository, IngenieroRepository ingenieroRepository, InnovacionRepository innovacionRepository) {
         this.cultivoRepository = cultivoRepository;
@@ -69,5 +71,7 @@ public class MenuConexion {
         model.addAttribute("innovaciones", innovaciones);
         return "menuInnovacion";
     }
+
+
 }
 

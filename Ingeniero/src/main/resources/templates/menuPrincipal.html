@@ -3,117 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Dinámico</title>
+    <title>Sección Ingeniería, UDIACOS</title>
     <style>
-        body {
-            display: flex;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        #menu {
-            width: 200px;
-            background-color: #333;
-            padding: 20px;
-            box-sizing: border-box;
-            color: #fff;
-            text-align: center;
-            position: fixed;
+        html, body {
             height: 100%;
-            overflow-y: auto;
+            margin: 0;
         }
 
-        #menu button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #555;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #menu button:hover {
-            background-color: #777;
-        }
-
-        #content {
-            flex: 1;
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to top, #A9FACD, #f8f8f8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
             padding: 20px;
             box-sizing: border-box;
-            margin-left: 220px; /* Ancho del menú más espacio adicional */
         }
 
-        h2 {
-            color: #333;
+        h1 {
+            color: #000;
+            margin-bottom: 20px;
         }
 
-        p {
-            color: #555;
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+            background: linear-gradient(to bottom, #40E68A, #209050);
+            color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Estilo específico para el contenido de cada página */
-        #content.page1 {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        button:hover {
+            background: linear-gradient(to bottom, #209050, #40E68A);
+            transform: scale(1.05);
         }
 
-        #content.page2 {
-            background-color: #f8f8f8;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        #content.page3 {
-            background-color: #e0f7fa;
-            border: 1px solid #b2ebf2;
-            border-radius: 5px;
+        #bottom-left-btn {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
         }
     </style>
 </head>
 <body>
 
-<div id="menu">
-    <form action="/pagina1" method="post" enctype="application/x-www-form-urlencoded">
-        <button onclick="cargarContenido('pagina1.html')">Página 1</button>
-    </form>
+<h1>Sección Ingeniería, UDIACOS</h1>
 
-    <form action="/pagina2" method="post" enctype="application/x-www-form-urlencoded">
-        <button onclick="cargarContenido('pagina2.html')">Página 2</button>
-    </form>
-
-    <form action="/pagina3" method="post" enctype="application/x-www-form-urlencoded">
-        <button onclick="cargarContenido('pagina3.html')">Página 3</button>
-    </form>
-
-    <form action="/pagina4" method="post" enctype="application/x-www-form-urlencoded">
-        <button onclick="cargarContenido('envioInfo.html')">Página 4</button>
-    </form>
+<div>
+    <button onclick="location.href='/menu/pagina1'">Cultivos</button>
+    <button onclick="location.href='/menu/pagina2'">Sectores</button>
+    <button onclick="location.href='/menu/pagina3'">Contactos</button>
+    <button onclick="location.href='/menu/pagina4'">Ingenieros</button>
+    <button onclick="location.href='/menu/pagina5'">Innovaciones</button>
+    <button onclick="location.href='/menu/pagina6'">Envio Informacion</button>
 </div>
 
-
-<div id="content">
-    <h2>¡Bienvenido!</h2>
-    <p>Selecciona una página en el menú a la izquierda.</p>
-</div>
-
-<script>
-    function cargarContenido(pagina) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("content").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", pagina, true);
-        xhttp.send();
-    }
-</script>
+<button id="bottom-left-btn" onclick="location.href='/'">Salir</button>
 
 </body>
 </html>

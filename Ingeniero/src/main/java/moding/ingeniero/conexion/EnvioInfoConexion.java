@@ -1,19 +1,15 @@
 package moding.ingeniero.conexion;
 
-
 import moding.ingeniero.controller.InformacionController;
-import moding.ingeniero.modelo.Ingeniero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/menu")
 public class EnvioInfoConexion {
 
     private final InformacionController informacionController;
@@ -23,9 +19,8 @@ public class EnvioInfoConexion {
         this.informacionController = informacionController;
     }
 
-    //funcion para el envio de informacion
-    @GetMapping("/envioInformacion")
-    public String envioInformacion(){
+    @GetMapping("/pagina6")
+    public String envioInformacionForm() {
         return "envioInfo";
     }
 
@@ -35,10 +30,8 @@ public class EnvioInfoConexion {
         return ResponseEntity.status(HttpStatus.OK).body("Mensaje enviado correctamente");
     }
 
-
-
     @GetMapping("/volverEnvioInformacion")
-    public String volverLogin(){
+    public String volverLogin() {
         return "inicio";
     }
 }

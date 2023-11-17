@@ -14,16 +14,13 @@ import java.util.Properties;
 public class InformacionController {
 
     private final ContactoRepository contactoRepository;
-
     private String direccionesCorreos;
 
-
     @Autowired
-    public InformacionController(ContactoRepository contactoRepository){
+    public InformacionController(ContactoRepository contactoRepository) {
         this.contactoRepository = contactoRepository;
         this.direccionesCorreos = direccionesCorreos();
     }
-
 
     public void cargaDatosEnvioInformacion(String asunto, String mensaje) {
         String Encabezado = asunto;
@@ -38,10 +35,10 @@ public class InformacionController {
 
     public void enviarCorreo(String Encabezado, String ContenidoCorreo) {
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com"); // SMTP Host
-        props.put("mail.smtp.port", "587"); // TLS Port
-        props.put("mail.smtp.auth", "true"); // Habilita la autenticación
-        props.put("mail.smtp.starttls.enable", "true"); // Habilita STARTTLS
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -72,7 +69,6 @@ public class InformacionController {
                     direcciones.append(contacto.getCorreo()).append(",");
                 }
             }
-            // Elimina la última coma si hay correos en la lista
             if (direcciones.length() > 0) {
                 direcciones.deleteCharAt(direcciones.length() - 1);
             }
@@ -82,6 +78,4 @@ public class InformacionController {
         System.out.println("Direcciones de correo: " + direcciones.toString());
         return direcciones.toString();
     }
-
-
 }

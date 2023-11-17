@@ -1,6 +1,5 @@
 package moding.ingeniero.conexion;
 
-import moding.ingeniero.controller.InformacionController;
 import moding.ingeniero.modelo.*;
 import moding.ingeniero.repositorio.*;
 import org.springframework.stereotype.Controller;
@@ -16,13 +15,9 @@ public class MenuConexion {
 
     private final CultivoRepository cultivoRepository;
     private final SectorRepository sectorRepository;
-
     private final ContactoRepository contactoRepository;
-
     private final IngenieroRepository ingenieroRepository;
-
     private final InnovacionRepository innovacionRepository;
-
 
     public MenuConexion(CultivoRepository cultivoRepository, SectorRepository sectorRepository, ContactoRepository contactoRepository, IngenieroRepository ingenieroRepository, InnovacionRepository innovacionRepository) {
         this.cultivoRepository = cultivoRepository;
@@ -34,12 +29,8 @@ public class MenuConexion {
 
     @GetMapping("/pagina1")
     public String pagina1(Model model) {
-        // Obtener los cultivos de la base de datos
         List<Cultivo> cultivos = cultivoRepository.findAll();
-
-        // Agregar los cultivos al modelo
         model.addAttribute("cultivos", cultivos);
-
         return "menuCultivo";
     }
 
@@ -49,7 +40,6 @@ public class MenuConexion {
         model.addAttribute("sectores", sectores);
         return "menuSector";
     }
-
 
     @GetMapping("/pagina3")
     public String pagina3(Model model) {
@@ -72,6 +62,13 @@ public class MenuConexion {
         return "menuInnovacion";
     }
 
+    @GetMapping("/pagina6")
+    public String pagina6() {
+        return "envioInfo";
+    }
 
+    @GetMapping("/volver")
+    public String volver() {
+        return "inicio";
+    }
 }
-

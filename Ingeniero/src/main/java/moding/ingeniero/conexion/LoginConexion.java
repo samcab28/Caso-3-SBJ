@@ -55,10 +55,15 @@ public class LoginConexion {
     }
 
 
-    // Puedes mantener el método searchPhrase si es necesario para otro propósito
+    @GetMapping("/volverMenu")
+    public String volverLoginMenu() {
+        return "menuPrincipal"; // Redirige a la página de inicio
+    }
+
+    /*
     @GetMapping("/{phrase}")
     public ResponseEntity<String> searchPhrase(@PathVariable("phrase") String pInputPhrase){
         ResponseEntity<String> result = new ResponseEntity<String>("Enviaste esta frase: " + pInputPhrase, HttpStatus.ACCEPTED);
         return result;
-    }
+    }*/
 }

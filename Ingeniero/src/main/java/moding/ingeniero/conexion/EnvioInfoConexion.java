@@ -19,7 +19,7 @@ public class EnvioInfoConexion {
         this.informacionController = informacionController;
     }
 
-    @GetMapping("/pagina6")
+    @GetMapping("/envioInformacionForm")  // Cambiando la URL para evitar ambigüedad
     public String envioInformacionForm() {
         return "envioInfo";
     }

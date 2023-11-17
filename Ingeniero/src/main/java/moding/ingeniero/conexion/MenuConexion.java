@@ -71,4 +71,38 @@ public class MenuConexion {
     public String volver() {
         return "inicio";
     }
+
+
+
+    //puebas de agricultores por ahora
+
+    @GetMapping("/pagina11")
+    public String pagina11(Model model) {
+        List<Innovacion> innovaciones = innovacionRepository.findAll();
+        model.addAttribute("innovaciones", innovaciones);
+        return "pagina11";
+    }
+
+    @GetMapping("/pagina12")
+    public String pagina12(Model model) {
+        List<Cultivo> cultivos = cultivoRepository.findAll();
+        List<Sector> sectores = sectorRepository.findAll();
+        List<Innovacion> innovaciones = innovacionRepository.findAll();
+
+        model.addAttribute("cultivos", cultivos);
+        model.addAttribute("sectores", sectores);
+        model.addAttribute("innovaciones", innovaciones);
+
+        return "pagina12";
+    }
+
+    @GetMapping("/pagina13")
+    public String pagina13(Model model) {
+        return "pagina13";
+    }
+
+    @GetMapping("/pagina14")
+    public String pagina14(Model model) {
+        return "pagina14";
+    }
 }

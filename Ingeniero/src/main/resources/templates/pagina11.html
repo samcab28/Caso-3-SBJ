@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unión de Desarrollo e Investigación Agrícola Costarricense - UDIACOS</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to top, #A9FACD, #f8f8f8); /* Degradado verde */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #descripcion {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            background: linear-gradient(to top, #1565C0, #1E88E5); /* Degradado azul */
+            color: #FFFFFF; /* Blanco */
+            font-size: 20px;
+        }
+
+        #contenido {
+            width: 80%;
+            margin: auto;
+            box-sizing: border-box;
+            display: flex; /* Utilizar un contenedor flexible para alinear elementos */
+            justify-content: space-between; /* Espacio entre los elementos */
+        }
+
+        #noticias {
+            width: 60%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            text-align: left;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Blanco translúcido */
+        }
+
+        #calculos {
+            width: 40%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Blanco translúcido */
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .noticia {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #FFFFFF; /* Blanco */
+        }
+
+        .noticia a {
+            text-decoration: none;
+            color: #40E68A; /* Verde */
+            font-weight: bold;
+        }
+
+        .noticia a:hover {
+            color: #30C374; /* Verde más oscuro */
+        }
+
+        button {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-top: 10px;
+            font-size: medium;
+            border-radius: 7px;
+            cursor: pointer;
+            border: none;
+            color: #FFFFFF; /* Blanco */
+        }
+
+        button#botonCalculos {
+            background-color: #000000; /* Negro */
+        }
+
+        button#botonContactoInformacion {
+            background-color: #1565C0; /* Azul principal agrícola */
+        }
+    </style>
+</head>
+<body>
+<div id="descripcion">
+    <p>Unión de Desarrollo e Investigación Agrícola Costarricense (UDIACOS) - ¡Impulsando la innovación en la agricultura!</p>
+</div>
+<div id="contenido">
+    <div id="noticias">
+        <h1>Noticias Agrícolas</h1>
+        <div th:each="noticia : ${noticias}">
+            <div class="noticia">
+                <p th:text="${noticia.nombre}"></p>
+                <a th:href="${noticia.linkPagina}" target="_blank">Leer más</a>
+            </div>
+        </div>
+    </div>
+    <div id="calculos">
+        <h1>UDIACOS</h1>
+        <button id="botonCalculos" onclick="realizarCalculos()">Realizar Cálculos</button>
+        <button id="botonContactoInformacion" onclick="irAContactoInformacion()">Contacto / Información</button>
+    </div>
+</div>
+
+<script>
+    function realizarCalculos() {
+        // Lógica para realizar cálculos
+        alert("Función de cálculos en construcción");
+    }
+
+    function irAContactoInformacion() {
+        // Lógica para ir a la página de contacto o información
+        alert("Redireccionando a la página de contacto o información");
+    }
+</script>
+</body>
+</html>

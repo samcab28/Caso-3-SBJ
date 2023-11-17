@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to top, #A9FACD, #f8f8f8);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .resultados-container {
+            width: 60%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            text-align: left;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            color: #000000;
+            margin-bottom: 10px;
+            line-height: 1.5;
+            text-align: center;
+            display: block;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .resultado {
+            margin-bottom: 20px;
+        }
+
+        .resultado span {
+            display: inline-block;
+            font-size: 20px;
+            padding: 8px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 6px;
+        }
+
+        button {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-top: 20px;
+            font-size: medium;
+            border-radius: 7px;
+            cursor: pointer;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #40E68A;
+        }
+    </style>
+</head>
+<body>
+
+<div class="resultados-container">
+    <div class="resultado">
+        <label>Resultado de Costo Esperado de Cultivo:</label>
+        <span id="resultadoCostoCultivo">-</span>
+    </div>
+
+    <div class="resultado">
+        <label>Resultado de Costo Esperado de Profit:</label>
+        <span id="resultadoCostoProfit">-</span>
+    </div>
+
+    <div class="resultado">
+        <label>Resultado de Cantidad de Agua Esperada a Usar:</label>
+        <span id="resultadoCantidadAgua">-</span>
+    </div>
+
+    <div class="resultado">
+        <label>Resultado de Cantidad de Unidades a Cosechar:</label>
+        <span id="resultadoCantidadUnidades">-</span>
+    </div>
+
+    <div class="resultado">
+        <label>Resultado de Probabilidad de Cultivo:</label>
+        <span id="resultadoProbabilidad">-</span>
+    </div>
+
+    <button onclick="volverAlMenu()">Salir al Menú Principal</button>
+    <button onclick="volverACalcular()">Volver a Calcular</button>
+    <button onclick="imprimirPDF()">Imprimir PDF</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function volverAlMenu() {
+        // Lógica para redireccionar al menú principal
+        window.location.href = "/menu";
+    }
+
+    function volverACalcular() {
+        // Lógica para redireccionar a la página de cálculos
+        window.location.href = "/pagina12";
+    }
+
+    function imprimirPDF() {
+        // Lógica para imprimir el contenido en un PDF
+        // Puedes utilizar librerías como jsPDF para generar el PDF
+    }
+</script>
+</body>
+</html>

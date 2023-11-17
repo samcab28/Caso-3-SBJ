@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(to top, #A9FACD, #f8f8f8);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .calculos-container, .seleccion-innovaciones {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            color: #000000;
+            margin-bottom: 10px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        select, input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 8px 0;
+            border: 1.5px solid #808080;
+            font-size: 20px;
+            border-radius: 7px;
+            margin-bottom: 4px;
+        }
+
+        button {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-top: 10px;
+            font-size: medium;
+            border-radius: 7px;
+            cursor: pointer;
+            background-color: #000000;
+            color: #fff;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #40E68A;
+            color: #fff;
+        }
+
+        #innovacionesContainer {
+            display: none;
+        }
+
+        .checkbox-container {
+            margin-top: 10px;
+        }
+
+        .checkbox-container label {
+            margin-right: 15px;
+        }
+
+        .seleccion-innovaciones button {
+            background-color: #000000;
+            color: #fff;
+        }
+
+        .seleccion-innovaciones button:hover {
+            background-color: #40E68A;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculos-container">
+    <label>Seleccione el Cultivo</label>
+    <select id="seleccionCultivo">
+        <option th:each="cultivo : ${cultivos}" th:value="${cultivo.nombre}" th:text="${cultivo.nombre}"></option>
+    </select>
+
+    <label>Seleccione el Sector</label>
+    <select id="seleccionSector">
+        <option th:each="sector : ${sectores}" th:value="${sector.nombre}" th:text="${sector.nombre}"></option>
+    </select>
+
+    <label>Dimensiones de la Zona</label>
+    <input type="text" id="anchoZona" placeholder="Ancho de la Zona">
+    <input type="text" id="largoZona" placeholder="Largo de la Zona">
+
+    <label>¿Desea agregar Innovaciones?</label>
+    <select id="seleccionInnovacion">
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+    </select>
+
+    <div id="innovacionesContainer" class="checkbox-container">
+        <label>Seleccione las Innovaciones</label>
+        <div th:each="innovacion : ${innovaciones}">
+            <input type="checkbox" th:id="'innovacion-' + ${innovacion.id}" th:name="innovacionesSeleccionadas"
+                   th:value="${innovacion.id}" onclick="actualizarInnovacionesSeleccionadas(this)">
+            <label th:for="'innovacion-' + ${innovacion.id}" th:text="${innovacion.nombre}"></label>
+        </div>
+        <input type="hidden" id="innovacionesSeleccionadas" name="innovacionesSeleccionadas">
+    </div>
+
+    <button id="botonCalcular" onclick="calcular()">Calcular</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Función JavaScript para mostrar u ocultar el contenedor de innovaciones
+    $('#seleccionInnovacion').change(function () {
+        if ($(this).val() === 'si') {
+            $('#innovacionesContainer').show();
+        } else {
+            $('#innovacionesContainer').hide();
+        }
+    });
+
+    // Función JavaScript para realizar los cálculos
+    function calcular() {
+        var cultivoSeleccionado = $('#seleccionCultivo').val();
+        var sectorSeleccionado = $('#seleccionSector').val();
+        var anchoZona = $('#anchoZona').val();
+        var largoZona = $('#largoZona').val();
+        var innovacionesSeleccionadas = [];
+
+        // Obtener las innovaciones seleccionadas
+        $('input[name^="innovacion"]:checked').each(function () {
+            innovacionesSeleccionadas.push($(this).val());
+        });
+
+        // Lógica de cálculos con los datos seleccionados
+        // ...
+
+        // Puedes agregar más lógica según tus necesidades
+    }
+</script>
+</body>
+</html>

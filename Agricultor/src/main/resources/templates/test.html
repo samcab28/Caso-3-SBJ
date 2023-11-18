@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicación HTML-Java</title>
+</head>
+<body>
+    <h1>Mi Página Web</h1>
+
+    <label for="mensaje">Mensaje:</label>
+    <input type="text" id="mensaje" name="mensaje" placeholder="Ingrese un mensaje">
+
+    <button onclick="llamarFuncionJava()">Enviar Mensaje</button>
+	
+	<a href="pagina14">Ir a Página 14</a>
+	<a href="pagina15">Ir a Página 15</a>
+	
+	<!-- Scripts -->
+    <script>
+        function llamarFuncionJava() {
+            var mensaje = document.getElementById("mensaje").value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("Respuesta desde Java: " + this.responseText);
+                }
+            };
+            xhttp.open("GET", "sendStr?mensaje=" + encodeURIComponent(mensaje), true);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
+
+

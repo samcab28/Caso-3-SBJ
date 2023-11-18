@@ -17,25 +17,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/menu")
 public class MenuConexion {
 
-    private final CultivoRepository cultivoRepository;
-    private final SectorRepository sectorRepository;
-    private final ContactoRepository contactoRepository;
-    private final IngenieroRepository ingenieroRepository;
-    private final InnovacionRepository innovacionRepository;
-
     MongoDataBaseConnection mongoDB = MongoDataBaseConnection.getInstance();
     ConexionCultivo conexionCultivo = ConexionCultivo.getInstance(mongoDB.getDatabase());
     ConexionSector conexionSector = ConexionSector.getInstance(mongoDB.getDatabase());
     ConexionInnovacion conexionInnovacion = ConexionInnovacion.getInstance(mongoDB.getDatabase());
+    ConexionIngeniero conexionIngeniero = ConexionIngeniero.getInstance(mongoDB.getDatabase());
 
-    public MenuConexion(CultivoRepository cultivoRepository, SectorRepository sectorRepository, ContactoRepository contactoRepository, IngenieroRepository ingenieroRepository, InnovacionRepository innovacionRepository) {
-        this.cultivoRepository = cultivoRepository;
-        this.sectorRepository = sectorRepository;
-        this.contactoRepository = contactoRepository;
-        this.ingenieroRepository = ingenieroRepository;
-        this.innovacionRepository = innovacionRepository;
-    }
-
+    ConexionContacto conexionContacto = ConexionContacto.getInstance(mongoDB.getDatabase());
     @GetMapping("/pagina1")
     public String pagina1(Model model) {
         Vector<Cultivo> cultivos = conexionCultivo.getCultivos();
@@ -52,14 +40,14 @@ public class MenuConexion {
 
     @GetMapping("/pagina3")
     public String pagina3(Model model) {
-        List<Contacto> contactos = contactoRepository.findAll();
+        Vector<Contacto> contactos = conexionContacto.getContactos();
         model.addAttribute("contactos", contactos);
         return "menuContacto";
     }
 
     @GetMapping("/pagina4")
     public String pagina4(Model model) {
-        List<Ingeniero> ingenieros = ingenieroRepository.findAll();
+        Vector<Ingeniero> ingenieros = conexionIngeniero.getIngenieros();
         model.addAttribute("ingenieros", ingenieros);
         return "menuIngeniero";
     }

@@ -22,8 +22,8 @@ public class MenuConexion {
     ConexionSector conexionSector = ConexionSector.getInstance(mongoDB.getDatabase());
     ConexionInnovacion conexionInnovacion = ConexionInnovacion.getInstance(mongoDB.getDatabase());
     ConexionIngeniero conexionIngeniero = ConexionIngeniero.getInstance(mongoDB.getDatabase());
-
     ConexionContacto conexionContacto = ConexionContacto.getInstance(mongoDB.getDatabase());
+    
     @GetMapping("/pagina1")
     public String pagina1(Model model) {
         Vector<Cultivo> cultivos = conexionCultivo.getCultivos();

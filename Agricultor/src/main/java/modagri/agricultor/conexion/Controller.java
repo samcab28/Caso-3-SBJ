@@ -75,7 +75,6 @@ public class Controller {
         
         //Cálculos.
         
-        
         cantidadAguaEstimada = calculo.aguaNecesaria(cultivoName, ancho, largo);
         probabilidadExito = calculo.probabilidadExito(sectorName, cultivoName, innovaciones);
         costoEsperado = calculo.dineroCosto(cantidadAguaEstimada, extras);
@@ -101,7 +100,7 @@ public class Controller {
         return datos;
     }
     
-    public float obtenerExtrasMonto (int innovaciones) {
+    private float obtenerExtrasMonto (int innovaciones) {
     	Random random = new Random();
     	float sumaExtras = 0;
     	int randomNumber;

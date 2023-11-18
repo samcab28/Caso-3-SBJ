@@ -1,8 +1,8 @@
 package moding.ingeniero.controller;
 
 import moding.ingeniero.modelo.Contacto;
-import moding.ingeniero.repositorio.ContactoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import moding.ingeniero.repositorio.ConexionContacto;
+import moding.ingeniero.repositorio.MongoDataBaseConnection;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -12,13 +12,12 @@ import java.util.Properties;
 
 @Service
 public class InformacionController {
-
-    private final ContactoRepository contactoRepository;
+    MongoDataBaseConnection mongoDB = MongoDataBaseConnection.getInstance();
+    ConexionContacto conexionContacto = ConexionContacto.getInstance(mongoDB.getDatabase());
     private String direccionesCorreos;
 
-    @Autowired
-    public InformacionController(ContactoRepository contactoRepository) {
-        this.contactoRepository = contactoRepository;
+
+    public InformacionController() {
         this.direccionesCorreos = direccionesCorreos();
     }
 
@@ -64,7 +63,7 @@ public class InformacionController {
     private String direccionesCorreos() {
         StringBuilder direcciones = new StringBuilder();
         try {
-            for (Contacto contacto : contactoRepository.findAll()) {
+            for (Contacto contacto : conexionContacto.getContactos()) {
                 if (contacto.getCorreo() != null && !contacto.getCorreo().isEmpty()) {
                     direcciones.append(contacto.getCorreo()).append(",");
                 }

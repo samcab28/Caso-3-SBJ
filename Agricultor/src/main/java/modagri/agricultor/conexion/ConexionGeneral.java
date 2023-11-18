@@ -71,7 +71,7 @@ public class ConexionGeneral {
 
     @GetMapping("/volverMenu")
     public String volver() {
-        return "redirect:/";
+        return "inicio";
     }
 
 }

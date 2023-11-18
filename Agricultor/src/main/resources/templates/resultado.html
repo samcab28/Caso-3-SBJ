@@ -24,27 +24,28 @@
             width: 60%;
             box-sizing: border-box;
             padding: 20px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-            text-align: left;
+            margin: 20px auto;
+            text-align: center; 
             border-radius: 10px;
             background-color: #fff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .resultado {
+            margin-bottom: 20px;
+            text-align: center; 
         }
 
         label {
             color: #000000;
             margin-bottom: 10px;
             line-height: 1.5;
-            text-align: center;
-            display: block;
             font-weight: bold;
             font-size: 18px;
             margin-bottom: 8px;
-        }
-
-        .resultado {
-            margin-bottom: 20px;
         }
 
         .resultado span {
@@ -79,31 +80,31 @@
 
 <div class="resultados-container">
     <div class="resultado">
-        <label>Resultado de Costo Esperado de Cultivo:</label>
+        <label>Costo Esperado en total (incluyendo innovaciones):</label>
         <span id="resultadoCostoCultivo">-</span>
     </div>
 
     <div class="resultado">
-        <label>Resultado de Costo Esperado de Profit:</label>
+        <label>Ganancias en bruto:</label>
         <span id="resultadoCostoProfit">-</span>
     </div>
 
     <div class="resultado">
-        <label>Resultado de Cantidad de Agua Esperada a Usar:</label>
+        <label>Cantidad de Agua Estimada a Usar:</label>
         <span id="resultadoCantidadAgua">-</span>
     </div>
 
     <div class="resultado">
-        <label>Resultado de Cantidad de Unidades a Cosechar:</label>
+        <label>Cantidad Estimada de Unidades a Cosechar:</label>
         <span id="resultadoCantidadUnidades">-</span>
     </div>
 
     <div class="resultado">
-        <label>Resultado de Probabilidad de Cultivo:</label>
+        <label>Probabilidad de Cultivo Exitoso:</label>
         <span id="resultadoProbabilidad">-</span>
     </div>
 
-    <button id="BotonVolver" class="bottom-left" onclick="location.href='/volverMenu'">Volver al Menú Principal</button>
+    <button id="BotonVolver" class="bottom-left" onclick="volverAlMenu()">Volver al Menú Principal</button>
 
     <button onclick="location.href='/calculo'">Volver a Calcular</button>
     <button onclick="imprimirPDF()">Imprimir PDF</button>
@@ -112,12 +113,10 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     function volverAlMenu() {
-        // Lógica para redireccionar al menú principal
-        window.location.href = "/menu";
+        window.location.href = "/volverMenu";
     }
 
     function volverACalcular() {
-        // Lógica para redireccionar a la página de cálculos
         window.location.href = "/pagina12";
     }
 
@@ -125,6 +124,29 @@
         // Lógica para imprimir el contenido en un PDF
         // Puedes utilizar librerías como jsPDF para generar el PDF
     }
+	
+    $(document).ready(function () {
+        $.ajax({
+            url: '/obtenerDatos', 
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                $('#resultadoCostoCultivo').text("₡ " + data.resultadoCostoCultivo);
+                $('#resultadoCostoProfit').text("₡ " + data.resultadoCostoProfit);
+                $('#resultadoCantidadAgua').text(data.resultadoCantidadAgua + " litros");
+                $('#resultadoCantidadUnidades').text(data.resultadoCantidadUnidades + " unidades");
+                $('#resultadoProbabilidad').text(data.resultadoProbabilidad + "%");
+            },
+            error: function (error) {
+                console.error('Error al obtener datos:', error);
+            }
+            
+            
+        });
+        
+        
+    });
 </script>
 </body>
 </html>
+

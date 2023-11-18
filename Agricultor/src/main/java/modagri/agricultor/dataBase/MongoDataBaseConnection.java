@@ -10,7 +10,7 @@ public class MongoDataBaseConnection {
     private MongoClient mongoClient;
     private MongoDatabase database;
 
-    private MongoDataBaseConnection() {
+    public MongoDataBaseConnection() {
         mongoClient = MongoClients.create("mongodb+srv://samircabrera2528:Samir1234@cluster0.jxgqi5n.mongodb.net/?retryWrites=true&w=majority");
         database = (MongoDatabase) mongoClient.getDatabase("Caso3-SBJ-DataBase");
     }

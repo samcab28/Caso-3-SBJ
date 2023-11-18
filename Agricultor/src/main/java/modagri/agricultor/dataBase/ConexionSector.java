@@ -37,7 +37,7 @@ public class ConexionSector {
 
 
     // Getters
-    public static Vector<Sector> getSectores(){
+    public Vector<Sector> getSectores(){
         return listaSectores;
     }
 

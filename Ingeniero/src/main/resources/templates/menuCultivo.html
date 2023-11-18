@@ -231,10 +231,61 @@
             },
             complete: function () {
                 console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+                alert("CULTIVO AGREGADO EXITOSAMENTE");
                 location.reload();
             }
         });
     }
+    
+    function obtenerNombreCultivoSeleccionado() {
+	    var nombreCultivo = $('#seleccionEliminar').val();
+	
+	    if (!nombreCultivo) {
+	        alert("Por favor, seleccione un cultivo.");
+	        return null;
+	    }
+	
+	    
+	    return nombreCultivo;
+	}
+	
+	function eliminarCultivo() {
+	    // Obtener el nombre del cultivo seleccionado
+	    var nombreCultivo = obtenerNombreCultivoSeleccionado();
+	
+	    // Verificar si se obtuvo el nombre del cultivo
+	    if (nombreCultivo) {
+	        // Confirmar la eliminación con el usuario
+	        var confirmacion = confirm("¿Estás seguro de que deseas eliminar el cultivo '" + nombreCultivo + "'?");
+	        if (confirmacion) {
+	            // Crear un objeto con los datos a enviar al servidor
+	            var datos = {
+	                nombre: nombreCultivo
+	            };
+	
+	            // Enviar los datos al servidor a través de una solicitud AJAX
+	            $.ajax({
+	                type: "POST",
+	                url: "/eliminarCultivo",  // Reemplaza con la URL de tu servlet en Spring Boot
+	                data: JSON.stringify(datos),
+	                contentType: "application/json; charset=utf-8",
+	                dataType: "json",
+	                success: function (response) {
+	                    console.log(response);
+	                },
+	                error: function (error) {
+	                    console.error('Error al enviar datos:', error);
+	                },
+	                complete: function () {
+	                    console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+	                    // Puedes recargar la página o realizar otras acciones después de la eliminación.
+	                    location.reload();
+	                }
+	            });
+	        }
+	    }
+	}
+	
 </script>
 </body>
 </html>

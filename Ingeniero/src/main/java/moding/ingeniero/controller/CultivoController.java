@@ -43,5 +43,24 @@ public class CultivoController {
         
         
     }
+    
+    @PostMapping("/eliminarCultivo")
+    public ResponseEntity<String> eliminarCultivo(@RequestBody Cultivo cultivo) {
+        mongoDB = MongoDataBaseConnection.getInstance();
+        conexionCultivo = ConexionCultivo.getInstance(mongoDB.getDatabase());
+
+        try {
+            String nombreCultivo = cultivo.getNombre();
+
+            conexionCultivo.eliminarCultivo(nombreCultivo);
+
+            System.out.println("Se ha eliminado: " + nombreCultivo);
+
+            return ResponseEntity.ok("Cultivo eliminado exitosamente");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el cultivo");
+        }
+    }
 
 }

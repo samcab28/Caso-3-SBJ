@@ -14,6 +14,7 @@ public class Calculo {
 	float ancho;
 	float largo;
 	
+	
 	CultivoFacade cultivoFachada;
 	SectorFacade sectorFachada;
 	

@@ -286,6 +286,82 @@
 	    }
 	}
 	
+	function obtenerDatosModificar() {
+	    // Obtener el nombre del cultivo seleccionado
+	    var nombreCultivo = $('#seleccionModificar').val();
+	
+	    // Verificar si se seleccionó un cultivo
+	    if (!nombreCultivo) {
+	        alert("Por favor, seleccione un cultivo para modificar.");
+	        return null;
+	    }
+	
+	    // Obtener los nuevos valores desde los campos de entrada
+	    var nuevoNombre = $('#nuevoNombre').val().trim();
+	    var nuevaTempMinima = $('#nuevaTempMinima').val().trim();
+	    var nuevaTempMaxima = $('#nuevaTempMaxima').val().trim();
+	    var nuevaCantidadAgua = $('#nuevaCantidadAgua').val().trim();
+	    var nuevaDiasMinCosecha = $('#nuevaDiasMinCosecha').val().trim();
+	    var nuevaDiasMaxCosecha = $('#nuevaDiasMaxCosecha').val().trim();
+	    var nuevoPrecioUnidad = $('#nuevoPrecioUnidad').val().trim();
+	    var nuevaCantidadPorMetro2 = $('#nuevaCantidadPorMetro2').val().trim();
+	
+	    // Validar que los campos requeridos estén llenos
+	    if (!nuevoNombre) {
+	        alert("Por favor, ingrese un nuevo nombre para el cultivo.");
+	        return null;
+	    }
+	
+	    // Crear un objeto con los datos a enviar al servidor
+	    var datos = {
+	        nombre: nombreCultivo,
+	        nuevoNombre: nuevoNombre,
+	        nuevaTempMinima: nuevaTempMinima,
+	        nuevaTempMaxima: nuevaTempMaxima,
+	        nuevaCantidadAgua: nuevaCantidadAgua,
+	        nuevaDiasMinCosecha: nuevaDiasMinCosecha,
+	        nuevaDiasMaxCosecha: nuevaDiasMaxCosecha,
+	        nuevoPrecioUnidad: nuevoPrecioUnidad,
+	        nuevaCantidadPorMetro2: nuevaCantidadPorMetro2
+	    };
+	
+	    return datos;
+	}
+	
+	function modificarCultivo() {
+	    // Obtener los datos para la modificación
+	    var datos = obtenerDatosModificar();
+	
+	    // Verificar si se obtuvieron los datos
+	    if (datos) {
+	        // Confirmar la modificación con el usuario
+	        var confirmacion = confirm("¿Estás seguro de que deseas modificar el cultivo?");
+	        if (confirmacion) {
+	            // Enviar los datos al servidor a través de una solicitud AJAX
+	            $.ajax({
+	                type: "POST",
+	                url: "/modificarCultivo",  // Reemplaza con la URL de tu controlador en Spring Boot
+	                data: JSON.stringify(datos),
+	                contentType: "application/json; charset=utf-8",
+	                dataType: "json",
+	                success: function (response) {
+	                    console.log(response);
+	                },
+	                error: function (error) {
+	                    console.error('Error al enviar datos:', error);
+	                },
+	                complete: function () {
+	                    console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+	                    // Puedes recargar la página o realizar otras acciones después de la modificación.
+	                    location.reload();
+	                }
+	            });
+	        }
+	    }
+	}
+	
+	
+	
 </script>
 </body>
 </html>

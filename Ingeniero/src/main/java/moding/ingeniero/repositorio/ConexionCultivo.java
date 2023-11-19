@@ -103,5 +103,59 @@ public class ConexionCultivo {
 
         }
     }
+    
+    public void modificarCultivo(
+            String nombreActual,
+            String nuevoNombre,
+            String nuevaTempMinima,
+            String nuevaTempMaxima,
+            String nuevaCantidadAgua,
+            String nuevaDiasMinCosecha,
+            String nuevaDiasMaxCosecha,
+            String nuevoPrecioUnidad,
+            String nuevaCantidadPorMetro2) {
+
+        // Crear un filtro para identificar el cultivo que se va a modificar
+        Document filtro = new Document("nombre", nombreActual);
+
+        // Crear un documento con los campos a modificar
+        Document update = new Document();
+
+        if (!nuevoNombre.isEmpty()) {
+            update.append("nombre", nuevoNombre);
+            System.out.println("Se modificó nombre de: " + nombreActual + " a: " + nuevoNombre);
+        }
+        if (!nuevaTempMinima.isEmpty()) {
+            update.append("tempMinima", Double.parseDouble(nuevaTempMinima));
+            System.out.println("Se modificó tempMinima a: " + nuevaTempMinima);
+        }
+        if (!nuevaTempMaxima.isEmpty()) {
+            update.append("tempMaxima", Double.parseDouble(nuevaTempMaxima));
+            System.out.println("Se modificó tempMaxima a: " + nuevaTempMaxima);
+        }
+        if (!nuevaCantidadAgua.isEmpty()) {
+            update.append("cantidadAgua", Double.parseDouble(nuevaCantidadAgua));
+            System.out.println("Se modificó cantidadAgua a: " + nuevaCantidadAgua);
+        }
+        if (!nuevaDiasMinCosecha.isEmpty()) {
+            update.append("diasMinCosecha", Integer.parseInt(nuevaDiasMinCosecha));
+            System.out.println("Se modificó diasMinCosecha a: " + nuevaDiasMinCosecha);
+        }
+        if (!nuevaDiasMaxCosecha.isEmpty()) {
+            update.append("diasMaxCosecha", Integer.parseInt(nuevaDiasMaxCosecha));
+            System.out.println("Se modificó diasMaxCosecha a: " + nuevaDiasMaxCosecha);
+        }
+        if (!nuevoPrecioUnidad.isEmpty()) {
+            update.append("precioUnidad", Double.parseDouble(nuevoPrecioUnidad));
+            System.out.println("Se modificó precioUnidad a: " + nuevoPrecioUnidad);
+        }
+        if (!nuevaCantidadPorMetro2.isEmpty()) {
+            update.append("cantidadPorMetro2", Integer.parseInt(nuevaCantidadPorMetro2));
+            System.out.println("Se modificó cantidadPorMetro2 a: " + nuevaCantidadPorMetro2);
+        }
+
+        // Realizar la actualización en la base de datos
+        collection.updateOne(filtro, new Document("$set", update));
+    }
 }
 

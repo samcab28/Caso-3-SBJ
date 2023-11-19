@@ -64,8 +64,8 @@ public class InformacionController {
         StringBuilder direcciones = new StringBuilder();
         try {
             for (Contacto contacto : conexionContacto.getContactos()) {
-                if (contacto.getCorreo() != null && !contacto.getCorreo().isEmpty()) {
-                    direcciones.append(contacto.getCorreo()).append(",");
+                if (contacto.getCorreoContacto() != null && !contacto.getCorreoContacto().isEmpty()) {
+                    direcciones.append(contacto.getCorreoContacto()).append(",");
                 }
             }
             if (direcciones.length() > 0) {

@@ -23,7 +23,7 @@ public class ContactoFacade {
 
     public Contacto buscarContactoPorCorreo(String correoContacto) {
         for (Contacto contacto : contactos) {
-            if (contacto.getCorreo().equals(correoContacto)) {
+            if (contacto.getCorreoContacto().equals(correoContacto)) {
                 return contacto;
             }
         }

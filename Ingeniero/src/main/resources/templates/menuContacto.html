@@ -105,7 +105,7 @@
 <div class="modificar-contacto">
     <label>Modificar Contacto</label>
     <select id="seleccionModificar">
-        <option th:each="contacto : ${contactos}" th:value="${contacto.nombre}" th:text="${contacto.nombre}"></option>
+        <option th:each="contacto : ${contactos}" th:value="${contacto.nombreContacto}" th:text="${contacto.nombreContacto}"></option>
     </select>
     <input type="text" id="nuevoNombre" placeholder="Nuevo Nombre">
     <input type="text" id="nuevoApellido" placeholder="Nuevo Apellido">
@@ -118,7 +118,7 @@
 <div class="eliminar-contacto">
     <label>Eliminar Contacto</label>
     <select id="seleccionEliminar">
-        <option th:each="contacto : ${contactos}" th:value="${contacto.nombre}" th:text="${contacto.nombre}"></option>
+        <option th:each="contacto : ${contactos}" th:value="${contacto.correoContacto}" th:text="${contacto.correoContacto}"></option>
     </select>
     <button id="BotonEliminarContacto" onclick="eliminarContacto()">Eliminar</button>
 </div>
@@ -138,11 +138,11 @@
         <tbody>
         <!-- Utilizar Thymeleaf para iterar sobre los contactos -->
         <tr th:each="contacto : ${contactos}">
-            <td th:text="${contacto.nombre}"></td>
-            <td th:text="${contacto.apellido}"></td>
-            <td th:text="${contacto.telefono}"></td>
-            <td th:text="${contacto.correo}"></td>
-            <td th:text="${contacto.usuarioTelegram}"></td>
+            <td th:text="${contacto.nombreContacto}"></td>
+            <td th:text="${contacto.apellidoContacto}"></td>
+            <td th:text="${contacto.telefonoContacto}"></td>
+            <td th:text="${contacto.correoContacto}"></td>
+            <td th:text="${contacto.usuarioTelegramContacto}"></td>
         </tr>
         </tbody>
     </table>
@@ -151,7 +151,101 @@
 <button id="BotonVolver" class="bottom-left" onclick="location.href='/volverMenu'">Volver al Menú Principal</button>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
+    function agregarContacto() {
+        // Obtener los valores de los campos
+        var nombreContacto = $('#nombreContacto').val().trim();
+        var apellidoContacto = $('#apellidoContacto').val().trim();
+        var telefonoContacto = $('#telefonoContacto').val().trim();
+        var correoContacto = $('#correoContacto').val().trim();
+        var usuarioTelegramContacto = $('#usuarioTelegramContacto').val().trim();
+
+        // Validar que todos los campos estén llenos y no solo contengan espacios en blanco
+        if (!nombreContacto || !apellidoContacto || !telefonoContacto || !correoContacto || !usuarioTelegramContacto) {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        // Crear un objeto con los datos a enviar al servidor
+        var datos = {
+            nombreContacto: nombreContacto,
+            apellidoContacto: apellidoContacto,
+            telefonoContacto: telefonoContacto,
+            correoContacto: correoContacto,
+            usuarioTelegramContacto: usuarioTelegramContacto
+        };
+
+        // Enviar los datos al servidor a través de una solicitud AJAX
+        $.ajax({
+            type: "POST",
+            url: "/agregarContacto",  // Reemplaza con la URL de tu servlet en Spring Boot
+            data: JSON.stringify(datos),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Error al enviar datos:', error);
+            },
+            complete: function () {
+                console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+                alert("CONTACTO AGREGADO EXITOSAMENTE");
+                location.reload();
+            }
+        });
+    }
+
+
+    function obtenerNombreContactoSeleccionado() {
+        var nombreContacto = $('#seleccionEliminar').val();
+
+        if (!nombreContacto) {
+            alert("Por favor, seleccione un contacto.");
+            return null;
+        }
+
+        return nombreContacto;
+    }
+
+    function eliminarContacto() {
+        // Obtener el nombre del contacto seleccionado
+        var nombreContacto = obtenerNombreContactoSeleccionado();
+
+        // Verificar si se obtuvo el nombre del contacto
+        if (nombreContacto) {
+            // Confirmar la eliminación con el usuario
+            var confirmacion = confirm("¿Estás seguro de que deseas eliminar al contacto '" + nombreContacto + "'?");
+            if (confirmacion) {
+                // Crear un objeto con los datos a enviar al servidor
+                var datos = {
+                    nombreContacto: nombreContacto
+                };
+
+                // Enviar los datos al servidor a través de una solicitud AJAX
+                $.ajax({
+                    type: "POST",
+                    url: "/eliminarContacto",  // Reemplaza con la URL de tu servlet o controlador en Spring Boot
+                    data: JSON.stringify(datos),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        console.error('Error al enviar datos:', error);
+                    },
+                    complete: function () {
+                        console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+                        // Puedes recargar la página o realizar otras acciones después de la eliminación.
+                        location.reload();
+                    }
+                });
+            }
+        }
+    }
+
 
 </script>
 </body>

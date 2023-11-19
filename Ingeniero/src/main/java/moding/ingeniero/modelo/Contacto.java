@@ -4,9 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // Clase Contacto que representa un contacto
 @Document
 public class Contacto {
@@ -14,27 +11,27 @@ public class Contacto {
     private String id;
 
     @Field
-    private String nombre;
+    private String nombreContacto;
     @Field
-    private String apellido;
+    private String apellidoContacto;
 
     @Field
-    private String telefono;
+    private String telefonoContacto;
 
     @Field
-    private String correo;
+    private String correoContacto;
 
     @Field
-    private String usuarioTelegram;
+    private String usuarioTelegramContacto;
 
     public Contacto(){}
 
-    public Contacto(String nombre, String apellido,String telefono, String correo, String usuarioTelegram){
-        this.nombre= nombre;
-        this.apellido=apellido;
-        this.telefono=telefono;
-        this.correo=correo;
-        this.usuarioTelegram=usuarioTelegram;
+    public Contacto(String nombreContacto, String apellidoContacto, String telefonoContacto, String correoContacto, String usuarioTelegramContacto){
+        this.nombreContacto = nombreContacto;
+        this.apellidoContacto = apellidoContacto;
+        this.telefonoContacto = telefonoContacto;
+        this.correoContacto = correoContacto;
+        this.usuarioTelegramContacto = usuarioTelegramContacto;
     }
 
     // Métodos getter y setter para acceder a los atributos
@@ -48,48 +45,48 @@ public class Contacto {
         this.id = id;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getCorreoContacto() {
+        return correoContacto;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCorreoContacto(String correoContacto) {
+        this.correoContacto = correoContacto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreContacto() {
+        return nombreContacto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreContacto(String nombreContacto) {
+        this.nombreContacto = nombreContacto;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getTelefonoContacto() {
+        return telefonoContacto;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTelefonoContacto(String telefonoContacto) {
+        this.telefonoContacto = telefonoContacto;
     }
 
-    public String getUsuarioTelegram() {
-        return usuarioTelegram;
+    public String getUsuarioTelegramContacto() {
+        return usuarioTelegramContacto;
     }
 
-    public void setUsuarioTelegram(String usuarioTelegram) {
-        this.usuarioTelegram = usuarioTelegram;
+    public void setUsuarioTelegramContacto(String usuarioTelegramContacto) {
+        this.usuarioTelegramContacto = usuarioTelegramContacto;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidoContacto() {
+        return apellidoContacto;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidoContacto(String apellidoContacto) {
+        this.apellidoContacto = apellidoContacto;
     }
 
     @Override
     public String toString(){
-        return String.format("Contacto[id='%s',,nombre='%s',apellido='%s',telefono='%s',correo='%s',usuarioTelegram='%s']",id,nombre,apellido,telefono,correo,usuarioTelegram);
+        return String.format("Contacto[id='%s',,nombre='%s',apellido='%s',telefono='%s',correo='%s',usuarioTelegram='%s']",id, nombreContacto, apellidoContacto, telefonoContacto, correoContacto, usuarioTelegramContacto);
     }
 }

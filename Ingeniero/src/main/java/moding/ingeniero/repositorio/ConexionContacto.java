@@ -38,7 +38,7 @@ public class ConexionContacto {
 
     public Contacto getContacto(String correoContacto) {
         for (Contacto contacto : listaContactos) {
-            if (correoContacto.equals(contacto.getCorreo())) {
+            if (correoContacto.equals(contacto.getCorreoContacto())) {
                 return contacto;
             }
         }
@@ -48,11 +48,11 @@ public class ConexionContacto {
     // Methods
     public void agregarContacto(Contacto contactoNuevo) {
         listaContactos.add(contactoNuevo);
-        Document document = new Document("nombre", contactoNuevo.getNombre())
-                .append("apellido", contactoNuevo.getApellido())
-                .append("telefono", contactoNuevo.getTelefono())
-                .append("correo", contactoNuevo.getCorreo())
-                .append("usuarioTelegram", contactoNuevo.getUsuarioTelegram());
+        Document document = new Document("nombre", contactoNuevo.getNombreContacto())
+                .append("apellido", contactoNuevo.getApellidoContacto())
+                .append("telefono", contactoNuevo.getTelefonoContacto())
+                .append("correo", contactoNuevo.getCorreoContacto())
+                .append("usuarioTelegram", contactoNuevo.getUsuarioTelegramContacto());
 
         collection.insertOne(document);
     }
@@ -82,7 +82,7 @@ public class ConexionContacto {
         int indexContacto = 0;
 
         for (Contacto contacto : listaContactos) {
-            if (contacto.getCorreo().equals(correoContacto)) {
+            if (contacto.getCorreoContacto().equals(correoContacto)) {
                 listaContactos.remove(indexContacto);
                 break; // No need to continue once the element is removed
             }

@@ -24,11 +24,15 @@ import java.util.stream.Collectors;
 public class ConexionGeneral {
 
     MongoDataBaseConnection mongoDB = MongoDataBaseConnection.getInstance();
+
+    ConexionCultivo conexionCultivo = ConexionCultivo.getInstance(mongoDB.getDatabase());
+    ConexionSector conexionSector = ConexionSector.getInstance(mongoDB.getDatabase());
+    ConexionInnovacion conexionInnovacion = ConexionInnovacion.getInstance(mongoDB.getDatabase());
+
     private final Random random = new Random();
 
     @GetMapping("/")
     public String paginaInicio(Model model) {
-        ConexionInnovacion conexionInnovacion = ConexionInnovacion.getInstance(mongoDB.getDatabase());
         Vector<Innovacion> innovacionesAleatorias = conexionInnovacion.getInnovaciones();
         List<Innovacion> innovaciones = shuffleList(innovacionesAleatorias.stream().limit(4).collect(Collectors.toList()));
         model.addAttribute("innovaciones", innovaciones);
@@ -43,9 +47,6 @@ public class ConexionGeneral {
 
     @GetMapping("/calculo")
     public String paginaCalculo(Model model){
-        ConexionCultivo conexionCultivo = ConexionCultivo.getInstance(mongoDB.getDatabase());
-        ConexionSector conexionSector = ConexionSector.getInstance(mongoDB.getDatabase());
-        ConexionInnovacion conexionInnovacion = ConexionInnovacion.getInstance(mongoDB.getDatabase());
 
         Vector<Sector> sectores = conexionSector.getSectores();
         Vector<Cultivo> cultivos = conexionCultivo.getCultivos();

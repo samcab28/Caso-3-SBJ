@@ -227,6 +227,7 @@
                 console.log(response);
             },
             error: function (error) {
+				
                 console.error('Error al enviar datos:', error);
             },
             complete: function () {
@@ -353,7 +354,7 @@
 	                complete: function () {
 	                    console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
 	                    // Puedes recargar la página o realizar otras acciones después de la modificación.
-	                    location.reload();
+	                    window.location.reload();
 	                }
 	            });
 	        }

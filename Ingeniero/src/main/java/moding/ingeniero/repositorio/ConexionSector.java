@@ -2,6 +2,7 @@ package moding.ingeniero.repositorio;
 
 import java.util.Vector;
 
+import moding.ingeniero.modelo.Cultivo;
 import moding.ingeniero.modelo.Sector;
 import org.bson.Document;
 
@@ -64,6 +65,36 @@ public class ConexionSector {
 
             //System.out.println(cultivo.getNombre());
             listaSectores.add(sector);
+        }
+    }
+
+    public void agregarSector(Sector sectorNuevo) {
+        listaSectores.add(sectorNuevo);
+        Document document = new Document("nombre", sectorNuevo.getNombre())
+                .append("lluviaMediaAnual", sectorNuevo.getLluviaMediaAnual())
+                .append("temperaturaMedia", sectorNuevo.getTemperaturaMedia())
+                .append("promedioLluvias", sectorNuevo.getPromedioLluvias())
+                .append("duracionPeriodoSeco", sectorNuevo.getDuracionPeriodoSeco());
+
+        collection.insertOne(document);
+    }
+
+    public void eliminarSector(String sectorBorrado){
+        Document filter = new Document("nombre", sectorBorrado);
+        collection.deleteOne(filter);
+
+        int indexCultivo = 0;
+
+        for (Sector sector : listaSectores) {
+            if (sector.getNombre().equals(sectorBorrado)) {
+                listaSectores.remove(indexCultivo);
+            }
+
+            indexCultivo++;
+        }
+
+        for (Sector sector : listaSectores) {
+            System.out.println(sector.getNombre());
         }
     }
 }

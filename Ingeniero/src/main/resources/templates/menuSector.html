@@ -154,7 +154,98 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
+    function agregarSector() {
+        // Obtener los valores de los campos
+        var nombre = $('#nombre').val().trim();
+        var lluviaMediaAnual = $('#lluviaMediaAnual').val().trim();
+        var temperaturaMedia = $('#temperaturaMedia').val().trim();
+        var promedioLluvias = $('#promedioLluvias').val().trim();
+        var duracionPeriodoSeco = $('#duracionPeriodoSeco').val().trim();
 
+        // Validar que todos los campos estén llenos y no solo contengan espacios en blanco
+        if (!nombre || !lluviaMediaAnual || !temperaturaMedia || !promedioLluvias || !duracionPeriodoSeco) {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        // Crear un objeto con los datos a enviar al servidor
+        var datos = {
+            nombre: nombre,
+            lluviaMediaAnual: lluviaMediaAnual,
+            temperaturaMedia: temperaturaMedia,
+            promedioLluvias: promedioLluvias,
+            duracionPeriodoSeco: duracionPeriodoSeco
+        };
+
+        // Enviar los datos al servidor a través de una solicitud AJAX
+        $.ajax({
+            type: "POST",
+            url: "/agregarSector",  // Reemplaza con la URL de tu servlet o controlador en Spring Boot
+            data: JSON.stringify(datos),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Error al enviar datos:', error);
+            },
+            complete: function () {
+                console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+                alert("SECTOR AGREGADO EXITOSAMENTE");
+                location.reload();
+            }
+        });
+    }
+
+    function obtenerNombreSectorSeleccionado() {
+        var nombreSector = $('#seleccionEliminar').val();
+
+        if (!nombreSector) {
+            alert("Por favor, seleccione un sector.");
+            return null;
+        }
+
+        return nombreSector;
+    }
+
+    function eliminarSector() {
+        // Obtener el nombre del sector seleccionado
+        var nombreSector = obtenerNombreSectorSeleccionado();
+
+        // Verificar si se obtuvo el nombre del sector
+        if (nombreSector) {
+            // Confirmar la eliminación con el usuario
+            var confirmacion = confirm("¿Estás seguro de que deseas eliminar el sector '" + nombreSector + "'?");
+            if (confirmacion) {
+                // Crear un objeto con los datos a enviar al servidor
+                var datos = {
+                    nombre: nombreSector
+                };
+
+                // Enviar los datos al servidor a través de una solicitud AJAX
+                $.ajax({
+                    type: "POST",
+                    url: "/eliminarSector",  // Reemplaza con la URL de tu servlet o controlador en Spring Boot
+                    data: JSON.stringify(datos),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        console.error('Error al enviar datos:', error);
+                    },
+                    complete: function () {
+                        console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+                        // Puedes recargar la página o realizar otras acciones después de la eliminación.
+                        location.reload();
+                    }
+                });
+            }
+        }
+    }
 </script>
+
 </body>
 </html>

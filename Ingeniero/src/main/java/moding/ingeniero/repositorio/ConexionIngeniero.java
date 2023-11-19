@@ -8,6 +8,8 @@ import com.mongodb.client.MongoDatabase;
 import moding.ingeniero.modelo.Ingeniero;
 import org.bson.Document;
 
+import java.util.Iterator;
+import java.util.UUID;
 import java.util.Vector;
 
 public class ConexionIngeniero {
@@ -39,7 +41,7 @@ public class ConexionIngeniero {
 
     public Ingeniero getIngeniero(String correoIngeniero) {
         for (Ingeniero ingeniero : listaIngenieros) {
-            if (correoIngeniero.equals(ingeniero.getCorreo())) {
+            if (correoIngeniero.equals(ingeniero.getCorreoIngeniero())) {
                 return ingeniero;
             }
         }
@@ -49,9 +51,10 @@ public class ConexionIngeniero {
     // Methods
     public void agregarIngeniero(Ingeniero ingenieroNuevo) {
         listaIngenieros.add(ingenieroNuevo);
-        Document document = new Document("correo", ingenieroNuevo.getCorreo())
-                .append("password", ingenieroNuevo.getPassword())
-                .append("nombre", ingenieroNuevo.getNombre());
+        Document document = new Document("_id", UUID.randomUUID().toString())
+                .append("correo", ingenieroNuevo.getCorreoIngeniero())
+                .append("password", ingenieroNuevo.getPasswordIngeniero())
+                .append("nombre", ingenieroNuevo.getNombreIngeniero());
 
         collection.insertOne(document);
     }
@@ -75,11 +78,10 @@ public class ConexionIngeniero {
     public void eliminarIngeniero(String correoIngeniero) {
         Document filter = new Document("correo", correoIngeniero);
         collection.deleteOne(filter);
-
         int indexIngeniero = 0;
 
         for (Ingeniero ingeniero : listaIngenieros) {
-            if (ingeniero.getCorreo().equals(correoIngeniero)) {
+            if (ingeniero.getCorreoIngeniero().equals(correoIngeniero)) {
                 listaIngenieros.remove(indexIngeniero);
                 break; // No need to continue once the element is removed
             }
@@ -87,4 +89,6 @@ public class ConexionIngeniero {
             indexIngeniero++;
         }
     }
+
+
 }

@@ -103,7 +103,7 @@
 <div class="modificar-ingeniero">
     <label>Modificar Ingeniero</label>
     <select id="seleccionModificar">
-        <option th:each="ingeniero : ${ingenieros}" th:value="${ingeniero.nombre}" th:text="${ingeniero.nombre}"></option>
+        <option th:each="ingeniero : ${ingenieros}" th:value="${ingeniero.nombreIngeniero}" th:text="${ingeniero.nombreIngeniero}"></option>
     </select>
     <input type="text" id="nuevoCorreoIngeniero" placeholder="Nuevo Correo del Ingeniero">
     <input type="text" id="nuevoPasswordIngeniero" placeholder="Nueva Contraseña del Ingeniero">
@@ -114,7 +114,7 @@
 <div class="eliminar-ingeniero">
     <label>Eliminar Ingeniero</label>
     <select id="seleccionEliminar">
-        <option th:each="ingeniero : ${ingenieros}" th:value="${ingeniero.nombre}" th:text="${ingeniero.nombre}"></option>
+        <option th:each="ingeniero : ${ingenieros}" th:value="${ingeniero.correoIngeniero}" th:text="${ingeniero.correoIngeniero}"></option>
     </select>
     <button id="BotonEliminarIngeniero" onclick="eliminarIngeniero()">Eliminar</button>
 </div>
@@ -132,9 +132,9 @@
         <tbody>
         <!-- Utilizar Thymeleaf para iterar sobre los ingenieros -->
         <tr th:each="ingeniero : ${ingenieros}">
-            <td th:text="${ingeniero.nombre}"></td>
-            <td th:text="${ingeniero.correo}"></td>
-            <td th:text="${ingeniero.password}"></td>
+            <td th:text="${ingeniero.nombreIngeniero}"></td>
+            <td th:text="${ingeniero.correoIngeniero}"></td>
+            <td th:text="${ingeniero.passwordIngeniero}"></td>
         </tr>
         </tbody>
     </table>
@@ -143,8 +143,97 @@
 <button id="BotonVolver" class="bottom-left" onclick="location.href='/volverMenu'">Volver al Menú Principal</button>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
 
+<script>
+    function agregarIngeniero() {
+        // Obtener los valores de los campos
+        var correoIngeniero = $('#correoIngeniero').val().trim();
+        var passwordIngeniero = $('#passwordIngeniero').val().trim();
+        var nombreIngeniero = $('#nombreIngeniero').val().trim();
+
+        // Validar que todos los campos estén llenos y no solo contengan espacios en blanco
+        if (!correoIngeniero || !passwordIngeniero || !nombreIngeniero) {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        // Crear un objeto con los datos a enviar al servidor
+        var datos = {
+            correoIngeniero: correoIngeniero,
+            passwordIngeniero: passwordIngeniero,
+            nombreIngeniero: nombreIngeniero
+        };
+
+        // Enviar los datos al servidor a través de una solicitud AJAX
+        $.ajax({
+            type: "POST",
+            url: "/agregarIngeniero",  // Reemplaza con la URL de tu servlet en Spring Boot
+            data: JSON.stringify(datos),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Error al enviar datos:', error);
+            },
+            complete: function () {
+                console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+                alert("INGENIERO AGREGADO EXITOSAMENTE");
+                location.reload();
+            }
+        });
+    }
+
+    function obtenerCorreoIngenieroSeleccionado() {
+        var correoIngeniero = $('#seleccionEliminar').val();
+
+        if (!nombreIngeniero) {
+            alert("Por favor, seleccione un ingeniero.");
+            return null;
+        }
+
+        return correoIngeniero;
+    }
+
+    function eliminarIngeniero() {
+        // Obtener el nombre del ingeniero seleccionado
+        var correoIngeniero = obtenerCorreoIngenieroSeleccionado();
+
+        // Verificar si se obtuvo el nombre del ingeniero
+        if (correoIngeniero) {
+            // Confirmar la eliminación con el usuario
+            var confirmacion = confirm("¿Estás seguro de que deseas eliminar al ingeniero '" + correoIngeniero + "'?");
+            if (confirmacion) {
+                // Crear un objeto con los datos a enviar al servidor
+                var datos = {
+                    correoIngeniero: correoIngeniero
+                };
+
+                // Enviar los datos al servidor a través de una solicitud AJAX
+                $.ajax({
+                    type: "POST",
+                    url: "/eliminarIngeniero",  // Reemplaza con la URL de tu servlet en Spring Boot
+                    data: JSON.stringify(datos),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        console.error('Error al enviar datos:', error);
+                    },
+                    complete: function () {
+                        console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+                        // Puedes recargar la página o realizar otras acciones después de la eliminación.
+                        location.reload();
+                    }
+                });
+            }
+        }
+    }
 </script>
+
+
 </body>
 </html>

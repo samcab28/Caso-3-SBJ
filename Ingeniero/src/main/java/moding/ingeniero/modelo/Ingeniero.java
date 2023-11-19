@@ -11,28 +11,28 @@ public class Ingeniero {
     private String id;
 
     @Field
-    private String correo;
+    private String correoIngeniero;
 
     @Field
-    private String password;
+    private String passwordIngeniero;
 
     @Field
-    private String nombre;
+    private String nombreIngeniero;
 
     public Ingeniero(){}
 
-    public Ingeniero(String correo, String Password,String Nombre){
-        this.correo = correo;
-        this.password = Password;
-        this.nombre=Nombre;
+    public Ingeniero(String correoIngeniero, String passwordIngeniero, String nombreIngeniero){
+        this.correoIngeniero = correoIngeniero;
+        this.passwordIngeniero = passwordIngeniero;
+        this.nombreIngeniero = nombreIngeniero;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getCorreoIngeniero() {
+        return correoIngeniero;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCorreoIngeniero(String correoIngeniero) {
+        this.correoIngeniero = correoIngeniero;
     }
 
     public String getId() {
@@ -43,24 +43,24 @@ public class Ingeniero {
         this.id = id;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordIngeniero() {
+        return passwordIngeniero;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordIngeniero(String passwordIngeniero) {
+        this.passwordIngeniero = passwordIngeniero;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreIngeniero() {
+        return nombreIngeniero;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreIngeniero(String nombreIngeniero) {
+        this.nombreIngeniero = nombreIngeniero;
     }
 
     @Override
     public String toString() {
-        return String.format("Ingeniero[id='%s',nombre='%s',correo='%s',password='%s']",id,nombre, correo, password);
+        return String.format("Ingeniero[id='%s',nombre='%s',correo='%s',password='%s']",id, nombreIngeniero, correoIngeniero, passwordIngeniero);
     }
 }

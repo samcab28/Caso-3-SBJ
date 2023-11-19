@@ -24,7 +24,7 @@ public class IngenieroFacade {
 
     public Ingeniero buscarIngenieroPorCorreo(String correoIngeniero) {
         for (Ingeniero ingeniero : ingenieros) {
-            if (ingeniero.getCorreo().equals(correoIngeniero)) {
+            if (ingeniero.getCorreoIngeniero().equals(correoIngeniero)) {
                 return ingeniero;
             }
         }

@@ -60,13 +60,13 @@
             cursor: pointer;
         }
 
-        #BotonLogin, #BotonRegistro, #BotonAgregar, #BotonEliminar, #BotonModificar {
+        #BotonLogin, #BotonRegistro, #BotonAgregar, #BotonEliminar, #BotonModificar, #BotonActualizar {
             background-color: #000000;
             color: #fff;
             border: none;
         }
 
-        #BotonLogin:hover, #BotonRegistro:hover, #BotonAgregar:hover, #BotonEliminar:hover, #BotonModificar:hover {
+        #BotonLogin:hover, #BotonRegistro:hover, #BotonAgregar:hover, #BotonEliminar:hover, #BotonModificar:hover, #BotonActualizar:hover {
             background-color: #40E68A;
             color: #fff;
         }
@@ -87,6 +87,16 @@
             position: absolute;
             bottom: 8px;
             left: 16px;
+        }
+
+        /* Estilo para el mensaje de advertencia */
+        #warningMessage {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ffeeba;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            display: none;
         }
     </style>
 </head>
@@ -162,9 +172,197 @@
 
 <button id="BotonVolver" class="bottom-left" onclick="location.href='/volverMenu'">Volver al Menú Principal</button>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
+<!-- Botón de actualizar -->
+<button id="BotonActualizar" class="bottom-left" onclick="actualizar()">Actualizar</button>
 
+<!-- Elemento de advertencia -->
+<div class="alert alert-warning" role="alert" id="warningMessage" style="display: none;">
+    ¡Advertencia! Este es un mensaje de advertencia.
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    function actualizar() {
+        location.reload();
+    }
+
+    function agregarCultivo() {
+        // Obtener los valores de los campos
+        var nombre = $('#nombre').val().trim();
+        var tempMinima = $('#tempMinima').val().trim();
+        var tempMaxima = $('#tempMaxima').val().trim();
+        var cantidadAgua = $('#cantidadAgua').val().trim();
+        var diasMinCosecha = $('#diasMinCosecha').val().trim();
+        var diasMaxCosecha = $('#diasMaxCosecha').val().trim();
+        var precioUnidad = $('#precioUnidad').val().trim();
+        var cantidadPorMetro2 = $('#cantidadPorMetro2').val().trim();
+
+        // Validar que todos los campos estén llenos y no solo contengan espacios en blanco
+        if (!nombre || !tempMinima || !tempMaxima || !cantidadAgua || !diasMinCosecha || !diasMaxCosecha || !precioUnidad || !cantidadPorMetro2) {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        // Crear un objeto con los datos a enviar al servidor
+        var datos = {
+            nombre: nombre,
+            tempMinima: tempMinima,
+            tempMaxima: tempMaxima,
+            cantidadAgua: cantidadAgua,
+            diasMinCosecha: diasMinCosecha,
+            diasMaxCosecha: diasMaxCosecha,
+            precioUnidad: precioUnidad,
+            cantidadPorMetro2: cantidadPorMetro2
+        };
+
+        // Enviar los datos al servidor a través de una solicitud AJAX
+        $.ajax({
+            type: "POST",
+            url: "/agregarCultivo",  // Reemplaza con la URL de tu servlet en Spring Boot
+            data: JSON.stringify(datos),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+				
+                console.error('Error al enviar datos:', error);
+            },
+            complete: function () {
+                console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+                alert("CULTIVO AGREGADO EXITOSAMENTE");
+                location.reload();
+            }
+        });
+    }
+    
+    function obtenerNombreCultivoSeleccionado() {
+	    var nombreCultivo = $('#seleccionEliminar').val();
+	
+	    if (!nombreCultivo) {
+	        alert("Por favor, seleccione un cultivo.");
+	        return null;
+	    }
+	
+	    
+	    return nombreCultivo;
+	}
+	
+	function eliminarCultivo() {
+	    // Obtener el nombre del cultivo seleccionado
+	    var nombreCultivo = obtenerNombreCultivoSeleccionado();
+	
+	    // Verificar si se obtuvo el nombre del cultivo
+	    if (nombreCultivo) {
+	        // Confirmar la eliminación con el usuario
+	        var confirmacion = confirm("¿Estás seguro de que deseas eliminar el cultivo '" + nombreCultivo + "'?");
+	        if (confirmacion) {
+	            // Crear un objeto con los datos a enviar al servidor
+	            var datos = {
+	                nombre: nombreCultivo
+	            };
+	
+	            // Enviar los datos al servidor a través de una solicitud AJAX
+	            $.ajax({
+	                type: "POST",
+	                url: "/eliminarCultivo",  // Reemplaza con la URL de tu servlet en Spring Boot
+	                data: JSON.stringify(datos),
+	                contentType: "application/json; charset=utf-8",
+	                dataType: "json",
+	                success: function (response) {
+	                    console.log(response);
+	                },
+	                error: function (error) {
+	                    console.error('Error al enviar datos:', error);
+	                },
+	                complete: function () {
+	                    console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+	                    // Puedes recargar la página o realizar otras acciones después de la eliminación.
+	                    location.reload();
+	                }
+	            });
+	        }
+	    }
+	}
+	
+	function obtenerDatosModificar() {
+	    // Obtener el nombre del cultivo seleccionado
+	    var nombreCultivo = $('#seleccionModificar').val();
+	
+	    // Verificar si se seleccionó un cultivo
+	    if (!nombreCultivo) {
+	        alert("Por favor, seleccione un cultivo para modificar.");
+	        return null;
+	    }
+	
+	    // Obtener los nuevos valores desde los campos de entrada
+	    var nuevoNombre = $('#nuevoNombre').val().trim();
+	    var nuevaTempMinima = $('#nuevaTempMinima').val().trim();
+	    var nuevaTempMaxima = $('#nuevaTempMaxima').val().trim();
+	    var nuevaCantidadAgua = $('#nuevaCantidadAgua').val().trim();
+	    var nuevaDiasMinCosecha = $('#nuevaDiasMinCosecha').val().trim();
+	    var nuevaDiasMaxCosecha = $('#nuevaDiasMaxCosecha').val().trim();
+	    var nuevoPrecioUnidad = $('#nuevoPrecioUnidad').val().trim();
+	    var nuevaCantidadPorMetro2 = $('#nuevaCantidadPorMetro2').val().trim();
+	
+	    // Validar que los campos requeridos estén llenos
+	    if (!nuevoNombre) {
+	        alert("Por favor, ingrese un nuevo nombre para el cultivo.");
+	        return null;
+	    }
+	
+	    // Crear un objeto con los datos a enviar al servidor
+	    var datos = {
+	        nombre: nombreCultivo,
+	        nuevoNombre: nuevoNombre,
+	        nuevaTempMinima: nuevaTempMinima,
+	        nuevaTempMaxima: nuevaTempMaxima,
+	        nuevaCantidadAgua: nuevaCantidadAgua,
+	        nuevaDiasMinCosecha: nuevaDiasMinCosecha,
+	        nuevaDiasMaxCosecha: nuevaDiasMaxCosecha,
+	        nuevoPrecioUnidad: nuevoPrecioUnidad,
+	        nuevaCantidadPorMetro2: nuevaCantidadPorMetro2
+	    };
+	
+	    return datos;
+	}
+	
+	function modificarCultivo() {
+	    // Obtener los datos para la modificación
+	    var datos = obtenerDatosModificar();
+	
+	    // Verificar si se obtuvieron los datos
+	    if (datos) {
+	        // Confirmar la modificación con el usuario
+	        var confirmacion = confirm("¿Estás seguro de que deseas modificar el cultivo?");
+	        if (confirmacion) {
+	            // Enviar los datos al servidor a través de una solicitud AJAX
+	            $.ajax({
+	                type: "POST",
+	                url: "/modificarCultivo",  // Reemplaza con la URL de tu controlador en Spring Boot
+	                data: JSON.stringify(datos),
+	                contentType: "application/json; charset=utf-8",
+	                dataType: "json",
+	                success: function (response) {
+	                    console.log(response);
+	                },
+	                error: function (error) {
+	                    console.error('Error al enviar datos:', error);
+	                },
+	                complete: function () {
+	                    console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
+	                    // Puedes recargar la página o realizar otras acciones después de la modificación.
+	                    window.location.reload();
+	                }
+	            });
+	        }
+	    }
+	}
+	
+	
+	
 </script>
 </body>
 </html>

@@ -32,7 +32,7 @@ public class ConexionCultivo {
     }
 
     // Getters
-    public static Vector<Cultivo> getCultivos(){
+    public Vector<Cultivo> getCultivos(){
         return listaCultivos;
     }
 

@@ -23,28 +23,24 @@
             max-width: 400px;
             margin: 0 auto;
             margin-top: 10%;
-            padding: 5%; /* Ajusta este valor según sea necesario */
+            padding: 5%;
             border-radius: 5px;
             background-color: rgba(0, 0, 0, 0);
             align-items: center;
         }
 
-        .image-container {
-            margin-right: 20px;
-        }
-
-        .image-container img {
-            width: 90.5%;
-            height: 100%;
-            max-width: 100%;
-            height: auto;
-        }
-
         #miLabel {
             color: rgb(0, 0, 0);
             margin-bottom: 10px;
-            line-height: 1.5; /* Ajusta este valor según sea necesario */
+            line-height: 1.5;
             text-align: center;
+            font-size: 2em; /* Tamaño considerable y más grande */
+        }
+
+        p {
+            font-size: 1.5em; /* Tamaño considerable y más grande */
+            text-align: center;
+            margin-bottom: 20px; /* Espaciado inferior adicional */
         }
 
         input[type="text"],
@@ -98,13 +94,14 @@
     <title>Registro</title>
 </head>
 <body>
-<div class="image-container">
-    <img src="/static/images/Create_a_logo_with_a_title_called_UDIACOS_that_h.jpg" alt="Imagen de perfil">
-
-</div>
-
 <div class="login-container">
-    <form action="/registro" method="post" enctype="application/x-www-form-urlencoded">
+    <p id="miLabel">
+        <strong>Bienvenido a Registro</strong>
+    </p>
+    <p>
+        <strong>Se parte de nuestro grupo de ingenieros, que se comprometen al desarrollo de la agricultura costarricense.</strong>
+    </p>
+    <form id="registroForm" action="/registro" method="post" enctype="application/x-www-form-urlencoded">
 
         <label for="correo">Correo:</label>
         <input type="text" id="correo" name="correo" required><br>
@@ -115,13 +112,55 @@
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required><br>
 
-        <input class="button" type="submit" value="Guardar">
+        <input class="button" type="button" value="Guardar" onclick="agregarIngeniero()">
 
     </form>
     <form action="/volver" method="get">
         <input id="BotonVolver" type="submit" value="Volver">
     </form>
-
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    function agregarIngeniero() {
+        // Obtener los valores de los campos
+        var correoIngeniero = $('#correo').val().trim();
+        var passwordIngeniero = $('#password').val().trim();
+        var nombreIngeniero = $('#nombre').val().trim();
+
+        // Validar que todos los campos estén llenos y no solo contengan espacios en blanco
+        if (!correoIngeniero || !passwordIngeniero || !nombreIngeniero) {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        // Crear un objeto con los datos a enviar al servidor
+        var datos = {
+            correoIngeniero: correoIngeniero,
+            passwordIngeniero: passwordIngeniero,
+            nombreIngeniero: nombreIngeniero
+        };
+
+        // Enviar los datos al servidor a través de una solicitud AJAX
+        $.ajax({
+            type: "POST",
+            url: "/agregarIngeniero",  // Reemplaza con la URL de tu servlet en Spring Boot
+            data: JSON.stringify(datos),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                // Puedes realizar acciones adicionales después de agregar el ingeniero.
+                alert("INGENIERO AGREGADO EXITOSAMENTE");
+
+            },
+            error: function (error) {
+                console.error('Error al enviar datos:', error);
+            }
+        });
+    }
+</script>
+
 </body>
 </html>

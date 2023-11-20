@@ -90,5 +90,15 @@ public class ConexionIngeniero {
         }
     }
 
+    public boolean loginIngeniero(String passwordInge, String correoInge){
+        for(Ingeniero ingenieroComp: listaIngenieros){
+            if(correoInge.equals(ingenieroComp.getCorreoIngeniero()) && passwordInge.equals(ingenieroComp.getPasswordIngeniero())){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 }

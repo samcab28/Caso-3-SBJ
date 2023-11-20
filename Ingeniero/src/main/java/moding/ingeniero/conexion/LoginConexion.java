@@ -2,6 +2,8 @@ package moding.ingeniero.conexion;
 
 import moding.ingeniero.controller.IngenieroController;
 import moding.ingeniero.modelo.Ingeniero;
+import moding.ingeniero.repositorio.ConexionIngeniero;
+import moding.ingeniero.repositorio.MongoDataBaseConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 public class LoginConexion {
 
     private final IngenieroController ingenieroController;
-
+    MongoDataBaseConnection mongoDB;
+    private ConexionIngeniero conexionIngeniero;
+    private boolean resultadoLoginExitoso = false;
     @Autowired
     public LoginConexion(IngenieroController ingenieroController) {
         this.ingenieroController = ingenieroController;
@@ -23,16 +27,8 @@ public class LoginConexion {
     //funcion para hacer el registro
     @GetMapping("/registro")
     public String GuardarInge() {
-        return "registro"; // Esto asume que tu página HTML se llama login2.html y está en la carpeta templates o static
+        return "registro";
     }
-
-    /*
-    @PostMapping(path = "/registro", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<String> create(@ModelAttribute Ingeniero ingeniero){
-        System.out.println("Recibido: " + ingeniero.getNombre());
-        ingenieroController.agregarIngeniero(ingeniero);
-        return new ResponseEntity<>("Feliz de crear el producto: " + ingeniero.getNombre(), HttpStatus.CREATED);
-    }*/
 
     @GetMapping("/volver")
     public String volverLogin(){
@@ -40,31 +36,39 @@ public class LoginConexion {
     }
 
 
-
-    //funcion para hacer el login
     @GetMapping("/")
     public String ShowInicioForm(){
         return "inicio";
     }
 
-    @PostMapping(path = "/", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String handleLogin(@RequestParam String username, @RequestParam String password){
-        if(ingenieroController.comprobarIngeniero(username,password)){
-            return "menuPrincipal";
-        }
-        return "inicio";
-    }
-
-
     @GetMapping("/volverMenu")
     public String volverLoginMenu() {
-        return "menuPrincipal"; // Redirige a la página de inicio
+        return "menuPrincipal";
     }
 
-    /*
-    @GetMapping("/{phrase}")
-    public ResponseEntity<String> searchPhrase(@PathVariable("phrase") String pInputPhrase){
-        ResponseEntity<String> result = new ResponseEntity<String>("Enviaste esta frase: " + pInputPhrase, HttpStatus.ACCEPTED);
-        return result;
-    }*/
+    @PostMapping("/loginIngeniero")
+    public String loginIngeniero(@RequestBody Ingeniero ingeniero) {
+        // Obtener la instancia de la conexión a la base de datos (mongoDB y conexionIngeniero)
+        mongoDB = MongoDataBaseConnection.getInstance();
+        conexionIngeniero = ConexionIngeniero.getInstance(mongoDB.getDatabase());
+
+        try {
+            // Lógica de autenticación
+            resultadoLoginExitoso = conexionIngeniero.loginIngeniero(ingeniero.getPasswordIngeniero(), ingeniero.getCorreoIngeniero());
+
+            if (resultadoLoginExitoso) {
+                System.out.println("login ok");
+                return "menuPrincipal";
+            } else {
+                System.out.println("login error");
+                return "inicio";
+            }
+        } catch (Exception e) {
+            System.out.println("Error en la autenticación: " + e.getMessage());
+            return "inicio";
+        }
+    }
+
+
+
 }

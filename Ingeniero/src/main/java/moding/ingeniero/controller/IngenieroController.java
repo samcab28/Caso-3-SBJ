@@ -3,10 +3,12 @@ package moding.ingeniero.controller;
 import moding.ingeniero.modelo.Ingeniero;
 import moding.ingeniero.repositorio.ConexionIngeniero;
 import moding.ingeniero.repositorio.MongoDataBaseConnection;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,32 +23,6 @@ public class IngenieroController {
 
     MongoDataBaseConnection mongoDB;
     private ConexionIngeniero conexionIngeniero;
-
-
-/*
-    public boolean agregarIngeniero(Ingeniero ingeniero) {
-        // Verifica si ya existe un ingeniero con el mismo correo
-        if (conexionIngeniero.getIngeniero(ingeniero.getCorreoIngeniero()) != null) {
-            System.out.println("El ingeniero ya existe con el correo: " + ingeniero.getCorreoIngeniero());
-            return false; // No se agrega el ingeniero
-        } else {
-            conexionIngeniero.agregarIngeniero(ingeniero);
-            System.out.println("Ingeniero agregado con éxito");
-            return true; // Ingeniero agregado con éxito
-        }
-    }*/
-
-    public boolean comprobarIngeniero(String correo, String password) {
-        Ingeniero ingenieroVerificar = conexionIngeniero.getIngeniero(correo);
-
-        if (ingenieroVerificar != null && password.equals(ingenieroVerificar.getPasswordIngeniero())) {
-            System.out.println("Login exitoso con el correo: " + ingenieroVerificar.getCorreoIngeniero());
-            return true;
-        } else {
-            System.out.println("Login no exitoso");
-            return false;
-        }
-    }
 
     @PostMapping("/agregarIngeniero")
     public ResponseEntity<Map<String, String>> agregarIngenieroHTML(@RequestBody Ingeniero ingeniero){
@@ -72,9 +48,6 @@ public class IngenieroController {
         }
     }
 
-
-
-
     @PostMapping("/eliminarIngeniero")
     public ResponseEntity<String> eliminarIngenieroHTML(@RequestBody Ingeniero ingeniero){
         mongoDB = MongoDataBaseConnection.getInstance();
@@ -89,4 +62,8 @@ public class IngenieroController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el ingeniero");
         }
     }
+
+
+
+
 }

@@ -3,6 +3,7 @@ package moding.ingeniero.controller;
 import moding.ingeniero.modelo.Ingeniero;
 import moding.ingeniero.repositorio.ConexionIngeniero;
 import moding.ingeniero.repositorio.MongoDataBaseConnection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class IngenieroController {
             System.out.println("Ingeniero agregado con éxito");
             return true; // Ingeniero agregado con éxito
         }
-    }
+    }*/
 
     public boolean comprobarIngeniero(String correo, String password) {
         Ingeniero ingenieroVerificar = conexionIngeniero.getIngeniero(correo);
@@ -45,7 +46,7 @@ public class IngenieroController {
             System.out.println("Login no exitoso");
             return false;
         }
-    }*/
+    }
 
     @PostMapping("/agregarIngeniero")
     public ResponseEntity<Map<String, String>> agregarIngenieroHTML(@RequestBody Ingeniero ingeniero){

@@ -39,7 +39,7 @@ public class ConexionInnovacion {
 
     public Innovacion getInnovacion(String nombreInnovacion) {
         for (Innovacion innovacion : listaInnovaciones) {
-            if (nombreInnovacion.equals(innovacion.getNombre())) {
+            if (nombreInnovacion.equals(innovacion.getNombreInnovacion())) {
                 return innovacion;
             }
         }
@@ -49,10 +49,10 @@ public class ConexionInnovacion {
     // Métodos
     public void agregarInnovacion(Innovacion innovacionNueva) {
         listaInnovaciones.add(innovacionNueva);
-        Document document = new Document("nombre", innovacionNueva.getNombre())
-                .append("linkPagina", innovacionNueva.getLinkPagina())
-                .append("descripcion", innovacionNueva.getDescripcion())
-                .append("costo", innovacionNueva.getCosto());
+        Document document = new Document("nombre", innovacionNueva.getNombreInnovacion())
+                .append("linkPagina", innovacionNueva.getLinkPaginaInnovacion())
+                .append("descripcion", innovacionNueva.getDescripcionInnovacion())
+                .append("costo", innovacionNueva.getCostoInnovacion());
 
         collection.insertOne(document);
     }
@@ -81,7 +81,7 @@ public class ConexionInnovacion {
         int indexInnovacion = 0;
 
         for (Innovacion innovacion : listaInnovaciones) {
-            if (innovacion.getNombre().equals(nombreInnovacion)) {
+            if (innovacion.getNombreInnovacion().equals(nombreInnovacion)) {
                 listaInnovaciones.remove(indexInnovacion);
                 break; // Se rompe el bucle ya que se ha eliminado la innovación
             }

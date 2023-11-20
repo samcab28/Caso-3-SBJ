@@ -14,12 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CultivoController {
 	
 	MongoDataBaseConnection mongoDB; 
-	
-    //ConexionSector conexionSector = ConexionSector.getInstance(mongoDB.getDatabase());
-    //ConexionInnovacion conexionInnovacion = ConexionInnovacion.getInstance(mongoDB.getDatabase());
-    //ConexionIngeniero conexionIngeniero = ConexionIngeniero.getInstance(mongoDB.getDatabase());
-    //ConexionContacto conexionContacto = ConexionContacto.getInstance(mongoDB.getDatabase());
-	
+
     private ConexionCultivo conexionCultivo;
 
     @PostMapping("/agregarCultivo")

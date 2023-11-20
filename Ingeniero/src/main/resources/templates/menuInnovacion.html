@@ -104,7 +104,7 @@
 <div class="modificar-innovacion">
     <label>Modificar Innovación</label>
     <select id="seleccionModificar">
-        <option th:each="innovacion : ${innovaciones}" th:value="${innovacion.nombre}" th:text="${innovacion.nombre}"></option>
+        <option th:each="innovacion : ${innovaciones}" th:value="${innovacion.nombreInnovacion}" th:text="${innovacion.nombreInnovacion}"></option>
     </select>
     <input type="text" id="nuevoNombreInnovacion" placeholder="Nuevo Nombre de la Innovación">
     <input type="text" id="nuevoLinkPaginaInnovacion" placeholder="Nuevo Link de la Página">
@@ -116,7 +116,7 @@
 <div class="eliminar-innovacion">
     <label>Eliminar Innovación</label>
     <select id="seleccionEliminar">
-        <option th:each="innovacion : ${innovaciones}" th:value="${innovacion.nombre}" th:text="${innovacion.nombre}"></option>
+        <option th:each="innovacion : ${innovaciones}" th:value="${innovacion.nombreInnovacion}" th:text="${innovacion.nombreInnovacion}"></option>
     </select>
     <button id="BotonEliminarInnovacion" onclick="eliminarInnovacion()">Eliminar</button>
 </div>
@@ -135,10 +135,10 @@
         <tbody>
         <!-- Utilizar Thymeleaf para iterar sobre las innovaciones -->
         <tr th:each="innovacion : ${innovaciones}">
-            <td th:text="${innovacion.nombre}"></td>
-            <td th:text="${innovacion.linkPagina}"></td>
-            <td th:text="${innovacion.descripcion}"></td>
-            <td th:text="${innovacion.costo}"></td>
+            <td th:text="${innovacion.nombreInnovacion}"></td>
+            <td th:text="${innovacion.linkPaginaInnovacion}"></td>
+            <td th:text="${innovacion.descripcionInnovacion}"></td>
+            <td th:text="${innovacion.costoInnovacion}"></td>
         </tr>
         </tbody>
     </table>
@@ -149,22 +149,100 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    // Funciones JavaScript (agregarInnovacion, eliminarInnovacion, modificarInnovacion, volver) aquí
     function agregarInnovacion() {
-        // Implementa la lógica para agregar una innovación
+        // Obtener los valores de los campos
+        var nombreInnovacion = $('#nombreInnovacion').val().trim();
+        var linkPaginaInnovacion = $('#linkPaginaInnovacion').val().trim();
+        var descripcionInnovacion = $('#descripcionInnovacion').val().trim();
+        var costoInnovacion = $('#costoInnovacion').val().trim();
+
+        // Validar que todos los campos estén llenos y no solo contengan espacios en blanco
+        if (!nombreInnovacion || !linkPaginaInnovacion || !descripcionInnovacion || !costoInnovacion) {
+            alert("Por favor, complete todos los campos.");
+            return;
+        }
+
+        // Crear un objeto con los datos a enviar al servidor
+        var datos = {
+            nombreInnovacion: nombreInnovacion,
+            linkPaginaInnovacion: linkPaginaInnovacion,
+            descripcionInnovacion: descripcionInnovacion,
+            costoInnovacion: costoInnovacion
+        };
+
+        // Enviar los datos al servidor a través de una solicitud AJAX
+        $.ajax({
+            type: "POST",
+            url: "/agregarInnovacion",  // Reemplaza con la URL de tu servlet o controlador en Spring Boot
+            data: JSON.stringify(datos),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Error al enviar datos:', error);
+            },
+            complete: function () {
+                alert("INNOVACIÓN AGREGADA EXITOSAMENTE");
+                // Puedes recargar la página o realizar otras acciones después de la adición.
+                location.reload();
+            }
+        });
+    }
+
+    function obtenerNombreInnovacionSeleccionada() {
+        var nombreInnovacion = $('#seleccionEliminar').val();
+
+        if (!nombreInnovacion) {
+            alert("Por favor, seleccione una innovación.");
+            return null;
+        }
+
+        return nombreInnovacion;
     }
 
     function eliminarInnovacion() {
-        // Implementa la lógica para eliminar una innovación
-    }
+        // Obtener el nombre de la innovación seleccionada
+        var nombreInnovacion = obtenerNombreInnovacionSeleccionada();
 
-    function modificarInnovacion() {
-        // Implementa la lógica para modificar una innovación
+        // Verificar si se obtuvo el nombre de la innovación
+        if (nombreInnovacion) {
+            // Confirmar la eliminación con el usuario
+            var confirmacion = confirm("¿Estás seguro de que deseas eliminar la innovación '" + nombreInnovacion + "'?");
+            if (confirmacion) {
+                // Crear un objeto con los datos a enviar al servidor
+                var datos = {
+                    nombreInnovacion: nombreInnovacion
+                };
+
+                // Enviar los datos al servidor a través de una solicitud AJAX
+                $.ajax({
+                    type: "POST",
+                    url: "/eliminarInnovacion",  // Reemplaza con la URL de tu servlet o controlador en Spring Boot
+                    data: JSON.stringify(datos),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (error) {
+                        console.error('Error al enviar datos:', error);
+                    },
+                    complete: function () {
+                        alert("INNOVACIÓN ELIMINADA EXITOSAMENTE");
+                        // Puedes recargar la página o realizar otras acciones después de la eliminación.
+                        location.reload();
+                    }
+                });
+            }
+        }
     }
 
     function volver() {
         // Implementa la lógica para volver
     }
 </script>
+
 </body>
 </html>

@@ -11,38 +11,38 @@ public class Innovacion {
 private String id;
 
 @Field
-private String nombre;
+private String nombreInnovacion;
 
 @Field
-private String linkPagina;
+private String linkPaginaInnovacion;
 
 @Field
-private String descripcion;
+private String descripcionInnovacion;
 
 @Field
-private double costo;
+private double costoInnovacion;
 
-public Innovacion(String nombre, String linkPagina, String descripcion, double costo){
-    this.nombre = nombre;
-    this.linkPagina = linkPagina;
-    this.descripcion = descripcion;
-    this.costo = costo;
+public Innovacion(String nombreInnovacion, String linkPaginaInnovacion, String descripcionInnovacion, double costoInnovacion){
+    this.nombreInnovacion = nombreInnovacion;
+    this.linkPaginaInnovacion = linkPaginaInnovacion;
+    this.descripcionInnovacion = descripcionInnovacion;
+    this.costoInnovacion = costoInnovacion;
 }
 
-public double getCosto() {
-    return costo;
+public double getCostoInnovacion() {
+    return costoInnovacion;
 }
 
-public void setCosto(double costo) {
-    this.costo = costo;
+public void setCostoInnovacion(double costoInnovacion) {
+    this.costoInnovacion = costoInnovacion;
 }
 
-public String getDescripcion() {
-    return descripcion;
+public String getDescripcionInnovacion() {
+    return descripcionInnovacion;
 }
 
-public void setDescripcion(String descripcion) {
-    this.descripcion = descripcion;
+public void setDescripcionInnovacion(String descripcionInnovacion) {
+    this.descripcionInnovacion = descripcionInnovacion;
 }
 
 public String getId() {
@@ -53,24 +53,24 @@ public void setId(String id) {
     this.id = id;
 }
 
-public String getLinkPagina() {
-    return linkPagina;
+public String getLinkPaginaInnovacion() {
+    return linkPaginaInnovacion;
 }
 
-public void setLinkPagina(String linkPagina) {
-    this.linkPagina = linkPagina;
+public void setLinkPaginaInnovacion(String linkPaginaInnovacion) {
+    this.linkPaginaInnovacion = linkPaginaInnovacion;
 }
 
-public String getNombre() {
-    return nombre;
+public String getNombreInnovacion() {
+    return nombreInnovacion;
 }
 
-public void setNombre(String nombre) {
-    this.nombre = nombre;
+public void setNombreInnovacion(String nombreInnovacion) {
+    this.nombreInnovacion = nombreInnovacion;
 }
 
 @Override
 public String toString() {
-    return String.format("Innovacion[id='%s',nombre='%s,linkPagina='%s',descripcion='%s',costo='%s']",id,nombre,linkPagina,descripcion,costo);
+    return String.format("Innovacion[id='%s',nombre='%s,linkPagina='%s',descripcion='%s',costo='%s']",id, nombreInnovacion, linkPaginaInnovacion, descripcionInnovacion, costoInnovacion);
 }
 }

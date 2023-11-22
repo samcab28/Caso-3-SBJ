@@ -1,6 +1,7 @@
 package moding.ingeniero.controller;
 
 
+import moding.ingeniero.controller.modificacionRequest.ModificacionContactoRequest;
 import moding.ingeniero.modelo.Contacto;
 import moding.ingeniero.repositorioConexion.ConexionContacto;
 import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
@@ -40,6 +41,19 @@ public class ContactoController {
             return ResponseEntity.ok("Contacto eliminado exitosamente");
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el Contacto");
+        }
+    }
+
+    @PostMapping("/modificarContacto")
+    public ResponseEntity<String> agregarContacto(@RequestBody ModificacionContactoRequest request){
+        mongoDB = MongoDataBaseConnection.getInstance();
+        conexionContacto = ConexionContacto.getInstance(mongoDB.getDatabase());
+        try{
+            conexionContacto.modificarContacto(request.getCorreoContacto(), request.getNuevoNombre(), request.getNuevoApellido(), request.getNuevoTelefono(), request.getCorreoContacto(), request.getNuevoUsuarioTelegram());
+            System.out.println("se ha modificado el contacto de correo: " + request.getCorreoContacto());
+            return ResponseEntity.ok("Contacto modificado exitosamente");
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al modificar el Contacto");
         }
     }
 }

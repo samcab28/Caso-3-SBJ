@@ -90,4 +90,50 @@ public class ConexionContacto {
             indexContacto++;
         }
     }
+
+    public void modificarContacto(
+            String correoContacto,
+            String nuevoNombre,
+            String nuevoApellido,
+            String nuevoTelefono,
+            String nuevoCorreo,
+            String nuevoUsuarioTelegram
+    ){
+        Document filtro = new Document("correo", correoContacto);
+
+        // Crear un documento con los campos a modificar
+        Document update = new Document();
+
+        if (!nuevoNombre.isEmpty()) {
+            update.append("nombre", nuevoNombre);
+            System.out.println("Se modificó nombre a: " + nuevoNombre);
+        }
+
+        if (!nuevoApellido.isEmpty()) {
+            update.append("apellido", nuevoApellido);
+            System.out.println("Se modificó apellido a: " + nuevoApellido);
+        }
+
+        if (!nuevoApellido.isEmpty()) {
+            update.append("apellido", nuevoApellido);
+            System.out.println("Se modificó apellido a: " + nuevoApellido);
+        }
+
+        if (!nuevoTelefono.isEmpty()) {
+            update.append("telefono", nuevoTelefono);
+            System.out.println("Se modificó telefono a: " + nuevoTelefono);
+        }
+
+        if (!correoContacto.isEmpty()) {
+            update.append("correo", nuevoCorreo);
+            System.out.println("Se modificó correo a: " + nuevoCorreo);
+        }
+
+        if (!nuevoUsuarioTelegram.isEmpty()) {
+            update.append("usuarioTelegram", nuevoUsuarioTelegram);
+            System.out.println("Se modificó usuario Telegram a: " + nuevoUsuarioTelegram);
+        }
+
+        collection.updateOne(filtro, new Document("$set", update));
+    }
 }

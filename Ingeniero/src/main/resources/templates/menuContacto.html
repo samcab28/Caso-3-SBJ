@@ -105,7 +105,7 @@
 <div class="modificar-contacto">
     <label>Modificar Contacto</label>
     <select id="seleccionModificar">
-        <option th:each="contacto : ${contactos}" th:value="${contacto.nombreContacto}" th:text="${contacto.nombreContacto}"></option>
+        <option th:each="contacto : ${contactos}" th:value="${contacto.correoContacto}" th:text="${contacto.correoContacto}"></option>
     </select>
     <input type="text" id="nuevoNombre" placeholder="Nuevo Nombre">
     <input type="text" id="nuevoApellido" placeholder="Nuevo Apellido">
@@ -244,6 +244,47 @@
                 });
             }
         }
+    }
+
+    function modificarContacto() {
+        // Obtener los valores de los campos de modificación
+        var correoContacto = $('#seleccionModificar').val();
+        var nuevoNombre = $('#nuevoNombre').val().trim();
+        var nuevoApellido = $('#nuevoApellido').val().trim();
+        var nuevoTelefono = $('#nuevoTelefono').val().trim();
+        var nuevoCorreo = $('#nuevoCorreo').val().trim();
+        var nuevoUsuarioTelegram = $('#nuevoUsuarioTelegram').val().trim();
+
+
+        // Crear un objeto con los datos a enviar al servidor
+        var datos = {
+            correoContacto: correoContacto,
+            nuevoNombre: nuevoNombre,
+            nuevoApellido: nuevoApellido,
+            nuevoTelefono: nuevoTelefono,
+            nuevoCorreo: nuevoCorreo,
+            nuevoUsuarioTelegram: nuevoUsuarioTelegram
+        };
+
+        // Enviar los datos al servidor a través de una solicitud AJAX
+        $.ajax({
+            type: "POST",
+            url: "/modificarContacto",  // Reemplaza con la URL de tu servlet o controlador en Spring Boot
+            data: JSON.stringify(datos),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Error al enviar datos de modificación:', error);
+            },
+            complete: function () {
+                console.log('La solicitud AJAX de modificación se ha completado, independientemente de si fue exitosa o no');
+                alert("CONTACTO MODIFICADO EXITOSAMENTE");
+                location.reload();
+            }
+        });
     }
 
 

@@ -48,10 +48,7 @@ public class CultivoController {
     
     @PostMapping("/modificarCultivo")
     public ResponseEntity<String> modificarCultivo(@RequestBody ModificacionCultivoRequest request) {
-        // Donde ModificacionCultivoRequest es una clase que defines para representar los datos de modificación
-        // Puedes ajustar esta clase según los datos que necesites para la modificación
-
-        // Realizar la lógica de modificación en tu servicio o repositorio
+        
         mongoDB = MongoDataBaseConnection.getInstance();
         conexionCultivo = ConexionCultivo.getInstance(mongoDB.getDatabase());
 

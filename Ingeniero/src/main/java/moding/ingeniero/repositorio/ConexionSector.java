@@ -97,4 +97,43 @@ public class ConexionSector {
             System.out.println(sector.getNombre());
         }
     }
+    
+    public void modificarSector(
+            String nombreActual,
+            String nuevoNombre,
+            String lluviaMediaAnual,
+            String temperaturaMedia,
+            String promedioLluvias,
+            String duracionPeriodoSeco) {
+
+        // Crear un filtro para identificar el sector que se va a modificar
+        Document filtro = new Document("nombre", nombreActual);
+
+        // Crear un documento con los campos a modificar
+        Document update = new Document();
+
+        if (!nuevoNombre.isEmpty()) {
+            update.append("nombre", nuevoNombre);
+            System.out.println("Se modificó nombre de: " + nombreActual + " a: " + nuevoNombre);
+        }
+        if (!lluviaMediaAnual.isEmpty()) {
+            update.append("lluviaMediaAnual", Double.parseDouble(lluviaMediaAnual));
+            System.out.println("Se modificó lluviaMediaAnual a: " + lluviaMediaAnual);
+        }
+        if (!temperaturaMedia.isEmpty()) {
+            update.append("temperaturaMedia", Double.parseDouble(temperaturaMedia));
+            System.out.println("Se modificó temperaturaMedia a: " + temperaturaMedia);
+        }
+        if (!promedioLluvias.isEmpty()) {
+            update.append("promedioLluvias", Double.parseDouble(promedioLluvias));
+            System.out.println("Se modificó promedioLluvias a: " + promedioLluvias);
+        }
+        if (!duracionPeriodoSeco.isEmpty()) {
+            update.append("duracionPeriodoSeco", Integer.parseInt(duracionPeriodoSeco));
+            System.out.println("Se modificó duracionPeriodoSeco a: " + duracionPeriodoSeco);
+        }
+
+        // Realizar la actualización en la base de datos
+        collection.updateOne(filtro, new Document("$set", update));
+    }
 }

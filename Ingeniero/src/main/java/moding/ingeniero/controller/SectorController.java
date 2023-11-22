@@ -1,6 +1,7 @@
 package moding.ingeniero.controller;
 
 import moding.ingeniero.modelo.Sector;
+import moding.ingeniero.repositorio.ConexionCultivo;
 import moding.ingeniero.repositorio.ConexionSector;
 import moding.ingeniero.repositorio.MongoDataBaseConnection;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,22 @@ public class SectorController {
 
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el el sector");
+        }
+    }
+    
+    @PostMapping("/modificarSector")
+    public ResponseEntity<String> modificarSector(@RequestBody ModificacionSectorRequest request) {
+    	
+        mongoDB = MongoDataBaseConnection.getInstance();
+        conexionSector = ConexionSector.getInstance(mongoDB.getDatabase());
+        try {
+        	conexionSector.modificarSector(request.getNombre(), request.getNuevoNombre(), request.getNuevaLluviaMediaAnual(),
+                request.getNuevaLluviaMediaAnual(), request.getNuevoPromedioLluvias(), request.getNuevaDuracionPeriodoSeco());
+        		
+            	System.out.println("Se ha modificado el sector: " + request.getNombre());
+            return ResponseEntity.ok("Sector modificado exitosamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al modificar el sector");
         }
     }
 }

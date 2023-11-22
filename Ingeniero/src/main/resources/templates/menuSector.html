@@ -245,6 +245,48 @@
             }
         }
     }
+    
+    function modificarSector() {
+	    // Obtener los valores de los campos de modificación
+	    var nombre = $('#seleccionModificar').val();
+	    var nuevoNombre = $('#nuevoNombre').val().trim();
+	    var nuevaLluviaMediaAnual = $('#nuevaLluviaMediaAnual').val().trim();
+	    var nuevaTemperaturaMedia = $('#nuevaTemperaturaMedia').val().trim();
+	    var nuevoPromedioLluvias = $('#nuevoPromedioLluvias').val().trim();
+	    var nuevaDuracionPeriodoSeco = $('#nuevaDuracionPeriodoSeco').val().trim();
+	
+	    // Crear un objeto con los datos a enviar al servidor
+	    var datos = {
+	        nombre: nombre,
+	        nuevoNombre: nuevoNombre,
+	        nuevaLluviaMediaAnual: nuevaLluviaMediaAnual,
+	        nuevaTemperaturaMedia: nuevaTemperaturaMedia,
+	        nuevoPromedioLluvias: nuevoPromedioLluvias,
+	        nuevaDuracionPeriodoSeco: nuevaDuracionPeriodoSeco
+	    };
+	
+	    // Enviar los datos al servidor a través de una solicitud AJAX
+	    $.ajax({
+	        type: "POST",
+	        url: "/modificarSector",  // Reemplaza con la URL de tu servlet o controlador en Spring Boot
+	        data: JSON.stringify(datos),
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+	        success: function (response) {
+	            console.log(response);
+	        },
+	        error: function (error) {
+	            console.error('Error al enviar datos de modificación:', error);
+	        },
+	        complete: function () {
+	            console.log('La solicitud AJAX de modificación se ha completado, independientemente de si fue exitosa o no');
+	            alert("SECTOR MODIFICADO EXITOSAMENTE");
+	            location.reload();
+	        }
+	    });
+}
+
+	
 </script>
 
 </body>

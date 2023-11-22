@@ -1,8 +1,8 @@
 package moding.ingeniero.controller;
 
 import moding.ingeniero.modelo.Contacto;
-import moding.ingeniero.repositorio.ConexionContacto;
-import moding.ingeniero.repositorio.MongoDataBaseConnection;
+import moding.ingeniero.repositorioConexion.ConexionContacto;
+import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;

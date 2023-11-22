@@ -1,8 +1,8 @@
 package moding.ingeniero.controller;
 
 import moding.ingeniero.modelo.Innovacion;
-import moding.ingeniero.repositorio.ConexionInnovacion;
-import moding.ingeniero.repositorio.MongoDataBaseConnection;
+import moding.ingeniero.repositorioConexion.ConexionInnovacion;
+import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

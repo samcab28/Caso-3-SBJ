@@ -1,8 +1,5 @@
 package moding.ingeniero;
 
-import moding.ingeniero.modelo.*;
-import moding.ingeniero.repositorio.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

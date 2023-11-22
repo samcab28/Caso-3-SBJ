@@ -1,4 +1,4 @@
-package moding.ingeniero.controller;
+package moding.ingeniero.controller.modificacionRequest;
 
 public class ModificacionSectorRequest {
 	

@@ -1,13 +1,10 @@
-package moding.ingeniero.conexion;
+package moding.ingeniero.manejoVentana;
 
 import moding.ingeniero.controller.IngenieroController;
 import moding.ingeniero.modelo.Ingeniero;
-import moding.ingeniero.repositorio.ConexionIngeniero;
-import moding.ingeniero.repositorio.MongoDataBaseConnection;
+import moding.ingeniero.repositorioConexion.ConexionIngeniero;
+import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

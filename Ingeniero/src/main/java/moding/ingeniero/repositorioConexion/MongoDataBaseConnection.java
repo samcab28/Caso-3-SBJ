@@ -1,4 +1,4 @@
-package moding.ingeniero.repositorio;
+package moding.ingeniero.repositorioConexion;
 
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoClient;

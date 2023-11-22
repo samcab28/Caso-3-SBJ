@@ -1,4 +1,4 @@
-package moding.ingeniero.repositorio;
+package moding.ingeniero.repositorioConexion;
 
 
 import com.mongodb.client.FindIterable;
@@ -8,7 +8,6 @@ import com.mongodb.client.MongoDatabase;
 import moding.ingeniero.modelo.Ingeniero;
 import org.bson.Document;
 
-import java.util.Iterator;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -99,6 +98,37 @@ public class ConexionIngeniero {
 
         return false;
     }
+
+    public void modificarIngeniero(
+        String correoIngeniero,
+        String nuevoCorreoIngeniero,
+        String nuevoPasswordIngeniero,
+        String nuevoNombreIngeniero){
+
+        Document filtro = new Document("correo", correoIngeniero);
+
+        // Crear un documento con los campos a modificar
+        Document update = new Document();
+
+        if (!nuevoCorreoIngeniero.isEmpty()) {
+            update.append("correo", nuevoCorreoIngeniero);
+            System.out.println("Se modificó nombre de: " + correoIngeniero + " a: " + nuevoCorreoIngeniero);
+        }
+        if (!nuevoPasswordIngeniero.isEmpty()) {
+            update.append("password", nuevoPasswordIngeniero);
+            System.out.println("Se modificó el password a: " + nuevoPasswordIngeniero);
+        }
+        if (!nuevoNombreIngeniero.isEmpty()) {
+            update.append("nombre", nuevoNombreIngeniero);
+            System.out.println("Se modificó el nombre a: " + nuevoNombreIngeniero);
+        }
+
+        // Realizar la actualización en la base de datos
+        collection.updateOne(filtro, new Document("$set", update));
+
+    }
+
+
 
 
 }

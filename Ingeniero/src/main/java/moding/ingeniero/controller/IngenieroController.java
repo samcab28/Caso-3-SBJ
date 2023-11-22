@@ -1,14 +1,13 @@
 package moding.ingeniero.controller;
 
+import moding.ingeniero.controller.modificacionRequest.ModificacionIngenieroRequest;
+import moding.ingeniero.controller.modificacionRequest.ModificacionSectorRequest;
 import moding.ingeniero.modelo.Ingeniero;
-import moding.ingeniero.repositorio.ConexionIngeniero;
-import moding.ingeniero.repositorio.MongoDataBaseConnection;
+import moding.ingeniero.repositorioConexion.ConexionIngeniero;
+import moding.ingeniero.repositorioConexion.ConexionSector;
+import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,7 +62,19 @@ public class IngenieroController {
         }
     }
 
+    @PostMapping("/modificarIngeniero")
+    public ResponseEntity<String> modificarIngeniero(@RequestBody ModificacionIngenieroRequest request) {
 
+        mongoDB = MongoDataBaseConnection.getInstance();
+        conexionIngeniero = ConexionIngeniero.getInstance(mongoDB.getDatabase());
 
+        try{
+            conexionIngeniero.modificarIngeniero(request.getCorreoIngeniero(), request.getNuevoCorreoIngeniero(),request.getNuevoPasswordIngeniero(),request.getNuevoNombreIngeniero());
 
+            System.out.println("se ha modificado el ingeniero de correo: " +request.getCorreoIngeniero());
+            return ResponseEntity.ok("Ingeniero modificado exitosamente");
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al modificar el Ingeniero");
+        }
+    }
 }

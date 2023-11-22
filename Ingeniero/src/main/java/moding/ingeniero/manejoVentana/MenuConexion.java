@@ -1,17 +1,13 @@
-package moding.ingeniero.conexion;
+package moding.ingeniero.manejoVentana;
 
 import moding.ingeniero.modelo.*;
-import moding.ingeniero.repositorio.*;
+import moding.ingeniero.repositorioConexion.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 import java.util.Vector;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/menu")

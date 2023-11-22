@@ -1,8 +1,9 @@
 package moding.ingeniero.controller;
 
+import moding.ingeniero.controller.modificacionRequest.ModificacionCultivoRequest;
 import moding.ingeniero.modelo.Cultivo;
-import moding.ingeniero.repositorio.ConexionCultivo;
-import moding.ingeniero.repositorio.MongoDataBaseConnection;
+import moding.ingeniero.repositorioConexion.ConexionCultivo;
+import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

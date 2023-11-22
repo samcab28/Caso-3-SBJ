@@ -1,4 +1,4 @@
-package moding.ingeniero.conexion;
+package moding.ingeniero.manejoVentana;
 
 import moding.ingeniero.controller.InformacionController;
 import org.springframework.beans.factory.annotation.Autowired;

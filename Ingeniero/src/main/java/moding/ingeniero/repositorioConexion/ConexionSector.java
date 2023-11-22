@@ -1,8 +1,7 @@
-package moding.ingeniero.repositorio;
+package moding.ingeniero.repositorioConexion;
 
 import java.util.Vector;
 
-import moding.ingeniero.modelo.Cultivo;
 import moding.ingeniero.modelo.Sector;
 import org.bson.Document;
 
@@ -58,15 +57,21 @@ public class ConexionSector {
             Document documento = cursor.next();
             Sector sector = new Sector(
                     documento.getString("nombre"),
-                    documento.getInteger("lluviaMediaAnual"),
-                    documento.getInteger("temperaturaMedia"),
-                    documento.getInteger("promedioLluvias"),
-                    documento.getInteger("duracionPeriodoSeco"));
+                    getIntegerFromDocument(documento, "lluviaMediaAnual"),
+                    getIntegerFromDocument(documento, "temperaturaMedia"),
+                    getIntegerFromDocument(documento, "promedioLluvias"),
+                    getIntegerFromDocument(documento, "duracionPeriodoSeco"));
 
             //System.out.println(cultivo.getNombre());
             listaSectores.add(sector);
         }
     }
+
+    private int getIntegerFromDocument(Document document, String fieldName) {
+        Number number = (Number) document.get(fieldName);
+        return (number != null) ? number.intValue() : 0; // or handle null as needed
+    }
+
 
     public void agregarSector(Sector sectorNuevo) {
         listaSectores.add(sectorNuevo);
@@ -97,7 +102,7 @@ public class ConexionSector {
             System.out.println(sector.getNombre());
         }
     }
-    
+
     public void modificarSector(
             String nombreActual,
             String nuevoNombre,
@@ -117,15 +122,15 @@ public class ConexionSector {
             System.out.println("Se modificó nombre de: " + nombreActual + " a: " + nuevoNombre);
         }
         if (!lluviaMediaAnual.isEmpty()) {
-            update.append("lluviaMediaAnual", Double.parseDouble(lluviaMediaAnual));
+            update.append("lluviaMediaAnual", Integer.parseInt(lluviaMediaAnual));
             System.out.println("Se modificó lluviaMediaAnual a: " + lluviaMediaAnual);
         }
         if (!temperaturaMedia.isEmpty()) {
-            update.append("temperaturaMedia", Double.parseDouble(temperaturaMedia));
+            update.append("temperaturaMedia", Integer.parseInt(temperaturaMedia));
             System.out.println("Se modificó temperaturaMedia a: " + temperaturaMedia);
         }
         if (!promedioLluvias.isEmpty()) {
-            update.append("promedioLluvias", Double.parseDouble(promedioLluvias));
+            update.append("promedioLluvias", Integer.parseInt(promedioLluvias));
             System.out.println("Se modificó promedioLluvias a: " + promedioLluvias);
         }
         if (!duracionPeriodoSeco.isEmpty()) {
@@ -136,4 +141,5 @@ public class ConexionSector {
         // Realizar la actualización en la base de datos
         collection.updateOne(filtro, new Document("$set", update));
     }
+
 }

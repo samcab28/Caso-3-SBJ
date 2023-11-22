@@ -184,6 +184,7 @@
 
 <script>
     function actualizar() {
+		borrarCookies();
         location.reload();
     }
 
@@ -234,6 +235,7 @@
                 console.log('La solicitud AJAX se ha completado, independientemente de si fue exitosa o no');
                 alert("CULTIVO AGREGADO EXITOSAMENTE");
                 location.reload();
+                actualizar();
             }
         });
     }
@@ -308,10 +310,7 @@
 	    var nuevaCantidadPorMetro2 = $('#nuevaCantidadPorMetro2').val().trim();
 	
 	    // Validar que los campos requeridos estén llenos
-	    if (!nuevoNombre) {
-	        alert("Por favor, ingrese un nuevo nombre para el cultivo.");
-	        return null;
-	    }
+	    
 	
 	    // Crear un objeto con los datos a enviar al servidor
 	    var datos = {
@@ -359,7 +358,25 @@
 	            });
 	        }
 	    }
+	    
+	   actualizar();
+	    
 	}
+	
+	function borrarCookies() {
+        // Obtener todas las cookies
+        var cookies = document.cookie.split(";");
+
+        // Recorrer todas las cookies y borrarlas una por una
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var nombre = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = nombre + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+        }
+
+        
+    }
 	
 	
 	

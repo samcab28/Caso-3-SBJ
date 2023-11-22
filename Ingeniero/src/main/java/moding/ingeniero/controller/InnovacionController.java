@@ -1,5 +1,6 @@
 package moding.ingeniero.controller;
 
+import moding.ingeniero.controller.modificacionRequest.ModificacionInnovacionRequest;
 import moding.ingeniero.modelo.Innovacion;
 import moding.ingeniero.repositorioConexion.ConexionInnovacion;
 import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
@@ -39,6 +40,19 @@ public class InnovacionController {
             return ResponseEntity.ok("Innovacion eliminada exitosamente");
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar la innovacion");
+        }
+    }
+
+    @PostMapping("/modificarInnovacion")
+    public ResponseEntity<String> modificarInnovacion(@RequestBody ModificacionInnovacionRequest request){
+        mongoDB = MongoDataBaseConnection.getInstance();
+        conexionInnovacion = ConexionInnovacion.getInstance(mongoDB.getDatabase());
+        try{
+            conexionInnovacion.modificarInnovacion(request.getNombreInnovacion(), request.getNuevoNombreInnovacion(), request.getNuevoLinkPaginaInnovacion(), request.getNuevaDescripcionInnovacion(), request.getNuevoCostoInnovacion());
+            System.out.println("se ha modificado la innovacion de nombre: " + request.getNuevoNombreInnovacion());
+            return ResponseEntity.ok("Innovacion modificada exitosamente");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al modificar la innovacion");
         }
     }
 }

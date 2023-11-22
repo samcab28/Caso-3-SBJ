@@ -89,4 +89,42 @@ public class ConexionInnovacion {
             indexInnovacion++;
         }
     }
+
+
+    public void modificarInnovacion(
+            String nombreInnovacion,
+            String nuevoNombreInnovacion,
+            String nuevoLinkPaginaInnovacion,
+            String nuevaDescripcionInnovacion,
+            String nuevoCostoInnovacion
+    ){
+        Document filtro = new Document("nombre", nombreInnovacion);
+
+        // Crear un documento con los campos a modificar
+        Document update = new Document();
+
+
+        //System.out.println(nombreInnovacion + nuevoNombreInnovacion + nuevoLinkPaginaInnovacion + nuevaDescripcionInnovacion + nuevoCostoInnovacion);
+        if (!nuevoNombreInnovacion.isEmpty()) {
+            update.append("nombre", nuevoNombreInnovacion);
+            System.out.println("Se modificó nombre a: " + nuevoNombreInnovacion);
+        }
+
+        if (!nuevoLinkPaginaInnovacion.isEmpty()) {
+            update.append("linkPagina", nuevoLinkPaginaInnovacion);
+            System.out.println("Se modificó link pagina a: " + nuevoLinkPaginaInnovacion);
+        }
+
+        if (!nuevaDescripcionInnovacion.isEmpty()) {
+            update.append("descripcion", nuevaDescripcionInnovacion);
+            System.out.println("Se modificó descripcion a: " + nuevaDescripcionInnovacion);
+        }
+
+        if (!nuevoCostoInnovacion.isEmpty()) {
+            update.append("costo", nuevoCostoInnovacion);
+            System.out.println("Se modificó costo a: " + nuevoCostoInnovacion);
+        }
+
+        collection.updateOne(filtro, new Document("$set", update));
+    }
 }

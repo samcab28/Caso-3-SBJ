@@ -239,9 +239,44 @@
         }
     }
 
-    function volver() {
-        // Implementa la lógica para volver
+    function modificarInnovacion() {
+        // Obtener los valores de los campos de modificación
+        var nombreInnovacion = $('#seleccionModificar').val();
+        var nuevoNombreInnovacion = $('#nuevoNombreInnovacion').val().trim();
+        var nuevoLinkPaginaInnovacion = $('#nuevoLinkPaginaInnovacion').val().trim();
+        var nuevaDescripcionInnovacion = $('#nuevaDescripcionInnovacion').val().trim();
+        var nuevoCostoInnovacion = $('#nuevoCostoInnovacion').val().trim();
+
+
+        // Crear un objeto con los datos a enviar al servidor
+        var datos = {
+            nombreInnovacion: nombreInnovacion,
+            nuevoNombreInnovacion: nuevoNombreInnovacion,
+            nuevoLinkPaginaInnovacion: nuevoLinkPaginaInnovacion,
+            nuevaDescripcionInnovacion: nuevaDescripcionInnovacion,
+            nuevoCostoInnovacion: nuevoCostoInnovacion
+        };
+
+        // Enviar los datos al servidor a través de una solicitud AJAX
+        $.ajax({
+            type: "POST",
+            url: "/modificarInnovacion",  // Reemplaza con la URL de tu servlet o controlador en Spring Boot
+            data: JSON.stringify(datos),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Error al enviar datos de modificación:', error);
+            },
+            complete: function () {
+                alert("INNOVACIÓN MODIFICADA EXITOSAMENTE");
+                location.reload();
+            }
+        });
     }
+
 </script>
 
 </body>

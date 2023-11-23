@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+
+	
     <style>
         html, body {
             height: 100%;
@@ -107,10 +113,11 @@
     <button id="BotonVolver" class="bottom-left" onclick="volverAlMenu()">Volver al Menú Principal</button>
 
     <button onclick="location.href='/calculo'">Volver a Calcular</button>
-    <button onclick="imprimirPDF()">Imprimir PDF</button>
+    
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 <script>
     function volverAlMenu() {
         window.location.href = "/volverMenu";
@@ -121,9 +128,13 @@
     }
 
     function imprimirPDF() {
-        // Lógica para imprimir el contenido en un PDF
-        // Puedes utilizar librerías como jsPDF para generar el PDF
+        // Crea un nuevo documento PDF con jsPDF
+        var doc = new jsPDF();
+
+        // Guarda el documento como PDF y lo descarga en el navegador
+        doc.save('pdf_vacio.pdf');
     }
+
 	
     $(document).ready(function () {
         $.ajax({
@@ -140,13 +151,11 @@
             error: function (error) {
                 console.error('Error al obtener datos:', error);
             }
-            
-            
         });
-        
-        
     });
+    
 </script>
+
 </body>
 </html>
 

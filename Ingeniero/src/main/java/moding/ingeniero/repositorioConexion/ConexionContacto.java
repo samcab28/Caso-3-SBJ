@@ -58,6 +58,8 @@ public class ConexionContacto {
     }
 
     public void cargarContactos() {
+        listaContactos.clear();
+
         FindIterable<Document> documentos = collection.find();
         MongoCursor<Document> cursor = documentos.iterator();
 
@@ -135,5 +137,7 @@ public class ConexionContacto {
         }
 
         collection.updateOne(filtro, new Document("$set", update));
+
+        cargarContactos();
     }
 }

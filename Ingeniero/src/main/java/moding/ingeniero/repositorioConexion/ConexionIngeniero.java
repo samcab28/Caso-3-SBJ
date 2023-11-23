@@ -59,6 +59,8 @@ public class ConexionIngeniero {
     }
 
     public void cargarIngenieros() {
+        listaIngenieros.clear();
+
         FindIterable<Document> documentos = collection.find();
         MongoCursor<Document> cursor = documentos.iterator();
 
@@ -125,7 +127,7 @@ public class ConexionIngeniero {
 
         // Realizar la actualización en la base de datos
         collection.updateOne(filtro, new Document("$set", update));
-
+        cargarIngenieros();
     }
 
 

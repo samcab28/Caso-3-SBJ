@@ -58,6 +58,8 @@ public class ConexionInnovacion {
     }
 
     public void cargarInnovaciones() {
+        listaInnovaciones.clear(); // Limpiar la lista antes de cargar las innovaciones desde la base de datos
+
         FindIterable<Document> documentos = collection.find();
         MongoCursor<Document> cursor = documentos.iterator();
 
@@ -73,6 +75,7 @@ public class ConexionInnovacion {
             listaInnovaciones.add(innovacion);
         }
     }
+
 
     public void eliminarInnovacion(String nombreInnovacion) {
         Document filter = new Document("nombre", nombreInnovacion);
@@ -121,10 +124,12 @@ public class ConexionInnovacion {
         }
 
         if (!nuevoCostoInnovacion.isEmpty()) {
-            update.append("costo", nuevoCostoInnovacion);
+            update.append("costo", Double.parseDouble(nuevoCostoInnovacion));
             System.out.println("Se modificó costo a: " + nuevoCostoInnovacion);
         }
 
         collection.updateOne(filtro, new Document("$set", update));
+
+        cargarInnovaciones();
     }
 }

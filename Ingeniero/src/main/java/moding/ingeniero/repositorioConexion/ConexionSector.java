@@ -50,6 +50,7 @@ public class ConexionSector {
 
     // Metods
     public void cargarSectores() {
+        listaSectores.clear();
         FindIterable<Document> documentos = collection.find();
         MongoCursor<Document> cursor = documentos.iterator();
 
@@ -140,6 +141,7 @@ public class ConexionSector {
 
         // Realizar la actualización en la base de datos
         collection.updateOne(filtro, new Document("$set", update));
+        cargarSectores();
     }
 
 }

@@ -1,4 +1,4 @@
-package moding.ingeniero.modelo;
+package moding.ingeniero.modelo.sector;
 
 
 import org.springframework.data.annotation.Id;

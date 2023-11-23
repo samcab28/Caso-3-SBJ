@@ -1,4 +1,6 @@
-package moding.ingeniero.modelo;
+package moding.ingeniero.modelo.contacto;
+
+import moding.ingeniero.modelo.contacto.Contacto;
 
 import java.util.Vector;
 

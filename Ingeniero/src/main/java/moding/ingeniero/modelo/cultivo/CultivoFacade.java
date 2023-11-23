@@ -1,5 +1,7 @@
-package moding.ingeniero.modelo;
+package moding.ingeniero.modelo.cultivo;
 
+
+import moding.ingeniero.modelo.cultivo.Cultivo;
 
 import java.util.Vector;
 

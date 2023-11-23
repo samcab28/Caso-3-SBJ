@@ -1,6 +1,10 @@
 package moding.ingeniero.manejoVentana;
 
-import moding.ingeniero.modelo.*;
+import moding.ingeniero.modelo.contacto.Contacto;
+import moding.ingeniero.modelo.cultivo.Cultivo;
+import moding.ingeniero.modelo.ingeniero.Ingeniero;
+import moding.ingeniero.modelo.innovacion.Innovacion;
+import moding.ingeniero.modelo.sector.Sector;
 import moding.ingeniero.repositorioConexion.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

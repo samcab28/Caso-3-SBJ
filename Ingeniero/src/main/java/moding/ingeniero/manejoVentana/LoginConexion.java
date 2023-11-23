@@ -1,7 +1,7 @@
 package moding.ingeniero.manejoVentana;
 
 import moding.ingeniero.controller.IngenieroController;
-import moding.ingeniero.modelo.Ingeniero;
+import moding.ingeniero.modelo.ingeniero.Ingeniero;
 import moding.ingeniero.repositorioConexion.ConexionIngeniero;
 import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
 import org.springframework.beans.factory.annotation.Autowired;

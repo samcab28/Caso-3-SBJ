@@ -1,7 +1,7 @@
 package moding.ingeniero.controller;
 
 import moding.ingeniero.controller.modificacionRequest.ModificacionCultivoRequest;
-import moding.ingeniero.modelo.Cultivo;
+import moding.ingeniero.modelo.cultivo.Cultivo;
 import moding.ingeniero.repositorioConexion.ConexionCultivo;
 import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
 

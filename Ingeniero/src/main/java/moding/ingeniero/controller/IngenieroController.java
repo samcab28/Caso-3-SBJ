@@ -1,10 +1,8 @@
 package moding.ingeniero.controller;
 
 import moding.ingeniero.controller.modificacionRequest.ModificacionIngenieroRequest;
-import moding.ingeniero.controller.modificacionRequest.ModificacionSectorRequest;
-import moding.ingeniero.modelo.Ingeniero;
+import moding.ingeniero.modelo.ingeniero.Ingeniero;
 import moding.ingeniero.repositorioConexion.ConexionIngeniero;
-import moding.ingeniero.repositorioConexion.ConexionSector;
 import moding.ingeniero.repositorioConexion.MongoDataBaseConnection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

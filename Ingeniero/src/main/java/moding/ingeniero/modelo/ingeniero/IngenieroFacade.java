@@ -1,5 +1,7 @@
-package moding.ingeniero.modelo;
+package moding.ingeniero.modelo.ingeniero;
 
+
+import moding.ingeniero.modelo.ingeniero.Ingeniero;
 
 import java.util.Vector;
 

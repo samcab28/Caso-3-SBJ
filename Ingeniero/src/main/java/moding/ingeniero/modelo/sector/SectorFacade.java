@@ -1,5 +1,7 @@
-package moding.ingeniero.modelo;
+package moding.ingeniero.modelo.sector;
 
+
+import moding.ingeniero.modelo.sector.Sector;
 
 import java.util.Vector;
 

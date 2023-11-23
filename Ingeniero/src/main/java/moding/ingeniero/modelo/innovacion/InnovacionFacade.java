@@ -1,4 +1,6 @@
-package moding.ingeniero.modelo;
+package moding.ingeniero.modelo.innovacion;
+
+import moding.ingeniero.modelo.innovacion.Innovacion;
 
 import java.util.Vector;
 

@@ -5,7 +5,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import moding.ingeniero.modelo.Ingeniero;
+import moding.ingeniero.modelo.ingeniero.Ingeniero;
 import org.bson.Document;
 
 import java.util.UUID;

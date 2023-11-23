@@ -2,7 +2,7 @@ package moding.ingeniero.repositorioConexion;
 
 import java.util.Vector;
 
-import moding.ingeniero.modelo.Sector;
+import moding.ingeniero.modelo.sector.Sector;
 import org.bson.Document;
 
 import com.mongodb.client.FindIterable;

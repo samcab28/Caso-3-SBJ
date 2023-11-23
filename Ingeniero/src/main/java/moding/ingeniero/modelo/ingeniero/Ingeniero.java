@@ -1,4 +1,4 @@
-package moding.ingeniero.modelo;
+package moding.ingeniero.modelo.ingeniero;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -52,6 +52,7 @@ public class ConexionSector {
 
     // Metods
     public void cargarSectores() {
+        listaSectores.clear();
         FindIterable<Document> documentos = collection.find();
         MongoCursor<Document> cursor = documentos.iterator();
 
@@ -59,13 +60,18 @@ public class ConexionSector {
             Document documento = cursor.next();
             Sector sector = new Sector(
                     documento.getString("nombre"),
-                    documento.getInteger("lluviaMediaAnual"),
-                    documento.getInteger("temperaturaMedia"),
-                    documento.getInteger("promedioLluvias"),
-                    documento.getInteger("duracionPeriodoSeco"));
+                    getIntegerFromDocument(documento, "lluviaMediaAnual"),
+                    getIntegerFromDocument(documento, "temperaturaMedia"),
+                    getIntegerFromDocument(documento, "promedioLluvias"),
+                    getIntegerFromDocument(documento, "duracionPeriodoSeco"));
 
             //System.out.println(cultivo.getNombre());
             listaSectores.add(sector);
         }
+    }
+
+    private int getIntegerFromDocument(Document document, String fieldName) {
+        Number number = (Number) document.get(fieldName);
+        return (number != null) ? number.intValue() : 0; // or handle null as needed
     }
 }
